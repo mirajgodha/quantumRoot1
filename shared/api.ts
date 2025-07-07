@@ -10,3 +10,45 @@
 export interface DemoResponse {
   message: string;
 }
+
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  duration: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  price: number;
+  image?: string;
+  tags: string[];
+  instructor: string;
+  rating: number;
+  students: number;
+  featured?: boolean;
+}
+
+export interface CourseCategory {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  courseCount: number;
+}
+
+export interface CoursesResponse {
+  courses: Course[];
+  categories: CourseCategory[];
+  total: number;
+}
+
+export interface CreateCourseRequest {
+  title: string;
+  description: string;
+  category: string;
+  duration: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  price: number;
+  image?: string;
+  tags: string[];
+  instructor: string;
+}
