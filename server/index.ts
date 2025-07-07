@@ -1,6 +1,11 @@
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import {
+  handleGetCourses,
+  handleCreateCourse,
+  handleGetFeaturedCourses,
+} from "./routes/courses";
 
 export function createServer() {
   const app = express();
@@ -16,6 +21,11 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Courses API routes
+  app.get("/api/courses", handleGetCourses);
+  app.post("/api/courses", handleCreateCourse);
+  app.get("/api/courses/featured", handleGetFeaturedCourses);
 
   return app;
 }
