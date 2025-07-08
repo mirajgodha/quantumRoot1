@@ -249,11 +249,14 @@ export default function Index() {
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
               Master Tech Skills with
               <br />
               <span className="text-yellow-300">Hands-On Training</span>
             </h1>
+            <div className="text-lg md:text-xl font-medium text-purple-200 mb-6 italic">
+              "Grow from the root, scale to quantum"
+            </div>
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
               Courses in Coding, Robotics, Cloud, Data & More
             </p>
