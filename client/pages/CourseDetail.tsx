@@ -165,7 +165,7 @@ export default function CourseDetail() {
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-gray-900">
-                TechSkill Academy
+                QuantumRoot
               </span>
             </Link>
             <nav className="hidden md:flex items-center space-x-8">
@@ -194,14 +194,6 @@ export default function CourseDetail() {
                 Contact
               </Link>
             </nav>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" asChild>
-                <Link to="/login">Login</Link>
-              </Button>
-              <Button asChild className="bg-brand-500 hover:bg-brand-600">
-                <Link to="/signup">Sign Up</Link>
-              </Button>
-            </div>
           </div>
         </div>
       </header>

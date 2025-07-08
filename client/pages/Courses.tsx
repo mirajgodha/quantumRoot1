@@ -309,7 +309,7 @@ export default function Courses() {
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                TechSkill Academy
+                QuantumRoot
               </span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
@@ -334,14 +334,6 @@ export default function Courses() {
               >
                 Contact
               </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" asChild>
-                <Link to="/login">Sign In</Link>
-              </Button>
-              <Button asChild>
-                <Link to="/signup">Get Started</Link>
-              </Button>
             </div>
           </div>
         </div>
