@@ -195,7 +195,7 @@ export default function Index() {
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-gray-900">
-                TechSkill Academy
+                QuantumRoot
               </span>
             </Link>
 
@@ -232,20 +232,6 @@ export default function Index() {
                 Contact
               </Link>
             </nav>
-
-            {/* Auth Buttons */}
-            <div className="flex items-center space-x-4">
-              <Button
-                variant="outline"
-                asChild
-                className="border-brand-500 text-brand-600 hover:bg-brand-50"
-              >
-                <Link to="/login">Login</Link>
-              </Button>
-              <Button asChild className="bg-brand-500 hover:bg-brand-600">
-                <Link to="/signup">Sign Up</Link>
-              </Button>
-            </div>
           </div>
         </div>
       </header>
@@ -277,8 +263,9 @@ export default function Index() {
                 size="lg"
                 variant="secondary"
                 className="h-14 px-8 text-lg font-semibold bg-yellow-400 text-gray-900 hover:bg-yellow-300"
+                asChild
               >
-                Browse Courses
+                <Link to="/courses">Browse Courses</Link>
               </Button>
             </div>
           </div>
@@ -336,17 +323,22 @@ export default function Index() {
                       {course.students.toLocaleString()}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="space-y-3">
                     <div className="text-2xl font-bold text-brand-600">
                       ₹{course.price}
                     </div>
-                    <div className="flex gap-2">
-                      <Button size="sm" variant="outline" className="text-xs">
-                        View Details
+                    <div className="flex gap-2 w-full">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-xs flex-1"
+                        asChild
+                      >
+                        <Link to={`/courses/${course.id}`}>View Details</Link>
                       </Button>
                       <Button
                         size="sm"
-                        className="text-xs bg-brand-500 hover:bg-brand-600"
+                        className="text-xs bg-brand-500 hover:bg-brand-600 flex-1"
                       >
                         Enroll Now
                       </Button>
@@ -364,7 +356,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose TechSkill Academy?
+              Why Choose QuantumRoot?
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -636,7 +628,7 @@ export default function Index() {
                 <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-600 rounded-lg flex items-center justify-center">
                   <GraduationCap className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold">TechSkill Academy</span>
+                <span className="text-xl font-bold">QuantumRoot</span>
               </div>
               <p className="text-gray-400 mb-4">
                 Empowering professionals with cutting-edge technology skills for
@@ -732,7 +724,7 @@ export default function Index() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 TechSkill Academy. All rights reserved.</p>
+            <p>&copy; 2024 QuantumRoot. All rights reserved.</p>
           </div>
         </div>
       </footer>
