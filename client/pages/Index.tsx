@@ -9,278 +9,324 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
-  Brain,
-  Database,
-  Cloud,
-  Code,
-  Users,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  GraduationCap,
+  Search,
   Star,
   Clock,
+  Users,
   Award,
   BookOpen,
-  TrendingUp,
-  ChevronRight,
+  Code,
+  Cloud,
+  Database,
+  Brain,
+  Cpu,
+  CheckCircle,
   Play,
+  Quote,
+  MessageCircle,
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Youtube,
 } from "lucide-react";
-import { Course, CourseCategory } from "@shared/api";
+import { Course } from "@shared/api";
 
 export default function Index() {
-  const [featuredCourses, setFeaturedCourses] = useState<Course[]>([]);
-  const [categories, setCategories] = useState<CourseCategory[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [enquiryForm, setEnquiryForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    course: "",
+    message: "",
+  });
 
-  useEffect(() => {
-    // Mock data for demonstration - in real app this would come from API
-    setFeaturedCourses([
-      {
-        id: "1",
-        title: "Generative AI & Large Language Models",
-        description:
-          "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
-        category: "Generative AI",
-        duration: "8 weeks",
-        difficulty: "Intermediate",
-        price: 299,
-        tags: ["OpenAI", "LangChain", "Python", "Neural Networks"],
-        instructor: "Dr. Sarah Chen",
-        rating: 4.9,
-        students: 2847,
-        featured: true,
-      },
-      {
-        id: "2",
-        title: "Apache Spark for Big Data Processing",
-        description:
-          "Learn distributed computing and big data processing with Apache Spark, PySpark, and real-world projects.",
-        category: "Big Data",
-        duration: "6 weeks",
-        difficulty: "Advanced",
-        price: 399,
-        tags: ["Spark", "PySpark", "Scala", "Hadoop"],
-        instructor: "Mark Rodriguez",
-        rating: 4.8,
-        students: 1923,
-        featured: true,
-      },
-      {
-        id: "3",
-        title: "MongoDB & NoSQL Database Design",
-        description:
-          "Master NoSQL databases with MongoDB, data modeling, indexing, and scaling for modern applications.",
-        category: "NoSQL",
-        duration: "4 weeks",
-        difficulty: "Beginner",
-        price: 199,
-        tags: ["MongoDB", "NoSQL", "Database Design", "Aggregation"],
-        instructor: "Jennifer Park",
-        rating: 4.7,
-        students: 3421,
-        featured: true,
-      },
-    ]);
+  const featuredCourses: Course[] = [
+    {
+      id: "1",
+      title: "Python for Beginners",
+      description:
+        "Learn Python programming from scratch with hands-on projects and real-world applications.",
+      category: "Programming",
+      duration: "8 weeks",
+      difficulty: "Beginner",
+      price: 199,
+      image: "/api/placeholder/400/250",
+      tags: ["Python", "Programming", "Beginner"],
+      instructor: "Dr. Rajesh Kumar",
+      rating: 4.8,
+      students: 12500,
+      featured: true,
+    },
+    {
+      id: "2",
+      title: "Cloud Computing with AWS",
+      description:
+        "Master AWS cloud services and become a certified cloud architect with practical labs.",
+      category: "Cloud",
+      duration: "12 weeks",
+      difficulty: "Intermediate",
+      price: 399,
+      image: "/api/placeholder/400/250",
+      tags: ["AWS", "Cloud", "DevOps"],
+      instructor: "Priya Sharma",
+      rating: 4.9,
+      students: 8900,
+      featured: true,
+    },
+    {
+      id: "3",
+      title: "Data Science & Analytics",
+      description:
+        "Complete data science bootcamp covering Python, R, machine learning, and data visualization.",
+      category: "Data Science",
+      duration: "16 weeks",
+      difficulty: "Advanced",
+      price: 599,
+      image: "/api/placeholder/400/250",
+      tags: ["Data Science", "Python", "ML"],
+      instructor: "Dr. Amit Patel",
+      rating: 4.7,
+      students: 15600,
+      featured: true,
+    },
+    {
+      id: "4",
+      title: "Full Stack Web Development",
+      description:
+        "Build modern web applications with React, Node.js, and MongoDB from scratch.",
+      category: "Programming",
+      duration: "20 weeks",
+      difficulty: "Intermediate",
+      price: 499,
+      image: "/api/placeholder/400/250",
+      tags: ["React", "Node.js", "MongoDB"],
+      instructor: "Neha Gupta",
+      rating: 4.8,
+      students: 11200,
+      featured: true,
+    },
+  ];
 
-    setCategories([
-      {
-        id: "genai",
-        name: "Generative AI",
-        description: "AI, Machine Learning, LLMs",
-        icon: "🧠",
-        courseCount: 12,
-      },
-      {
-        id: "bigdata",
-        name: "Big Data",
-        description: "Spark, Hadoop, Processing",
-        icon: "📊",
-        courseCount: 8,
-      },
-      {
-        id: "nosql",
-        name: "NoSQL",
-        description: "MongoDB, Cassandra, Redis",
-        icon: "🗄️",
-        courseCount: 15,
-      },
-      {
-        id: "search",
-        name: "Search & Analytics",
-        description: "Elasticsearch, Kibana",
-        icon: "🔍",
-        courseCount: 6,
-      },
-      {
-        id: "dataeng",
-        name: "Data Engineering",
-        description: "Pipelines, ETL, Architecture",
-        icon: "⚙️",
-        courseCount: 10,
-      },
-      {
-        id: "cloud",
-        name: "Cloud Platforms",
-        description: "AWS, Azure, GCP",
-        icon: "☁️",
-        courseCount: 14,
-      },
-    ]);
-  }, []);
+  const testimonials = [
+    {
+      name: "Rahul Verma",
+      role: "Data Engineer at TCS",
+      image: "/api/placeholder/80/80",
+      rating: 5,
+      review:
+        "The data science course helped me transition from a manual tester to a data engineer. The practical approach and mentor support was excellent.",
+    },
+    {
+      name: "Priya Singh",
+      role: "Cloud Architect at Infosys",
+      image: "/api/placeholder/80/80",
+      rating: 5,
+      review:
+        "AWS certification course was comprehensive and well-structured. Got placed as a cloud architect within 3 months of completion.",
+    },
+    {
+      name: "Arjun Krishnan",
+      role: "Full Stack Developer at Wipro",
+      image: "/api/placeholder/80/80",
+      rating: 5,
+      review:
+        "The full-stack development course gave me the confidence to work on complex projects. Highly recommend for career growth.",
+    },
+  ];
+
+  const corporateClients = [
+    { name: "TCS", logo: "/api/placeholder/120/60" },
+    { name: "Infosys", logo: "/api/placeholder/120/60" },
+    { name: "Wipro", logo: "/api/placeholder/120/60" },
+    { name: "Accenture", logo: "/api/placeholder/120/60" },
+    { name: "Cognizant", logo: "/api/placeholder/120/60" },
+    { name: "Capgemini", logo: "/api/placeholder/120/60" },
+  ];
+
+  const handleEnquirySubmit = () => {
+    // Handle form submission
+    console.log("Enquiry submitted:", enquiryForm);
+    setIsEnquiryOpen(false);
+    setEnquiryForm({ name: "", email: "", phone: "", course: "", message: "" });
+    // Show success toast
+    alert("Thank you for your enquiry! We'll get back to you soon.");
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
-      {/* Navigation */}
-      <nav className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-600 rounded-lg flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-600 rounded-lg flex items-center justify-center">
+                <GraduationCap className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold text-gray-900">
                 TechSkill Academy
               </span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
+            </Link>
+
+            {/* Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
               <Link
                 to="/"
-                className="text-foreground hover:text-brand-600 transition-colors"
+                className="text-brand-600 font-medium hover:text-brand-700 transition-colors"
               >
                 Home
               </Link>
               <Link
                 to="/courses"
-                className="text-foreground hover:text-brand-600 transition-colors"
+                className="text-gray-700 hover:text-brand-600 transition-colors"
               >
                 Courses
               </Link>
               <Link
+                to="/live-classes"
+                className="text-gray-700 hover:text-brand-600 transition-colors"
+              >
+                Live Classes
+              </Link>
+              <Link
                 to="/about"
-                className="text-foreground hover:text-brand-600 transition-colors"
+                className="text-gray-700 hover:text-brand-600 transition-colors"
               >
                 About
               </Link>
               <Link
                 to="/contact"
-                className="text-foreground hover:text-brand-600 transition-colors"
+                className="text-gray-700 hover:text-brand-600 transition-colors"
               >
                 Contact
               </Link>
-            </div>
+            </nav>
+
+            {/* Auth Buttons */}
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" asChild>
-                <Link to="/login">Sign In</Link>
+              <Button
+                variant="outline"
+                asChild
+                className="border-brand-500 text-brand-600 hover:bg-brand-50"
+              >
+                <Link to="/login">Login</Link>
               </Button>
-              <Button asChild>
-                <Link to="/signup">Get Started</Link>
+              <Button asChild className="bg-brand-500 hover:bg-brand-600">
+                <Link to="/signup">Sign Up</Link>
               </Button>
             </div>
           </div>
         </div>
-      </nav>
+      </header>
 
       {/* Hero Section */}
-      <section className="pt-20 pb-32 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative bg-gradient-to-br from-brand-500 via-brand-600 to-blue-700 text-white py-20">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            <Badge className="mb-6 bg-brand-100 text-brand-700 hover:bg-brand-200">
-              🚀 New AI & Machine Learning Courses Available
-            </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8">
-              Master the{" "}
-              <span className="bg-gradient-to-r from-brand-500 via-brand-600 to-purple-600 bg-clip-text text-transparent">
-                Future of Tech
-              </span>{" "}
-              with Expert Training
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Master Tech Skills with
+              <br />
+              <span className="text-yellow-300">Hands-On Training</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed">
-              Learn cutting-edge technologies like Generative AI, Big Data,
-              NoSQL databases, and cloud platforms with hands-on projects and
-              industry experts.
+            <p className="text-xl md:text-2xl mb-8 text-blue-100">
+              Courses in Coding, Robotics, Cloud, Data & More
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
+              <div className="relative flex-1 w-full sm:w-auto">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Input
+                  placeholder="Search Courses..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-12 h-14 text-lg bg-white text-gray-900 border-0"
+                />
+              </div>
               <Button
                 size="lg"
-                className="text-lg px-8 py-6 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700"
-                asChild
+                variant="secondary"
+                className="h-14 px-8 text-lg font-semibold bg-yellow-400 text-gray-900 hover:bg-yellow-300"
               >
-                <Link to="/courses">
-                  Explore Courses <ChevronRight className="ml-2 w-5 h-5" />
-                </Link>
+                Browse Courses
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                <Play className="mr-2 w-5 h-5" />
-                Watch Demo
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 bg-white border-y">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-brand-600 mb-2">
-                50+
-              </div>
-              <div className="text-muted-foreground">Expert Courses</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-brand-600 mb-2">
-                15K+
-              </div>
-              <div className="text-muted-foreground">Students Trained</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-brand-600 mb-2">
-                95%
-              </div>
-              <div className="text-muted-foreground">Success Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-brand-600 mb-2">
-                4.9
-              </div>
-              <div className="text-muted-foreground">Average Rating</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Courses */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Featured Courses
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Start your journey with our most popular and highly-rated courses
+            <p className="text-xl text-gray-600">
+              Start your journey with our most popular courses
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredCourses.map((course) => (
               <Card
                 key={course.id}
-                className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-brand-200"
+                className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg"
               >
-                <CardHeader className="pb-4">
+                <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-200 rounded-t-lg flex items-center justify-center">
+                  <BookOpen className="w-12 h-12 text-brand-600" />
+                </div>
+                <CardHeader className="pb-3">
                   <div className="flex items-center justify-between mb-2">
-                    <Badge variant="secondary">{course.category}</Badge>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
+                    <Badge
+                      variant="secondary"
+                      className="bg-brand-100 text-brand-700"
+                    >
+                      {course.category}
+                    </Badge>
+                    <div className="flex items-center text-sm text-yellow-500">
+                      <Star className="w-4 h-4 fill-current mr-1" />
                       {course.rating}
                     </div>
                   </div>
-                  <CardTitle className="text-xl group-hover:text-brand-600 transition-colors">
+                  <CardTitle className="text-lg group-hover:text-brand-600 transition-colors">
                     {course.title}
                   </CardTitle>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-sm text-gray-600">
                     {course.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
                     <div className="flex items-center">
                       <Clock className="w-4 h-4 mr-1" />
                       {course.duration}
@@ -290,25 +336,21 @@ export default function Index() {
                       {course.students.toLocaleString()}
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {course.tags.slice(0, 3).map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
                   <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-2xl font-bold text-brand-600">
-                        ${course.price}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        by {course.instructor}
-                      </div>
+                    <div className="text-2xl font-bold text-brand-600">
+                      ₹{course.price}
                     </div>
-                    <Button className="bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700">
-                      Enroll Now
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="outline" className="text-xs">
+                        View Details
+                      </Button>
+                      <Button
+                        size="sm"
+                        className="text-xs bg-brand-500 hover:bg-brand-600"
+                      >
+                        Enroll Now
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -317,88 +359,282 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-20 bg-gradient-to-r from-brand-50 to-tech-50">
+      {/* Why Choose Us */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose TechSkill Academy?
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Code className="w-8 h-8 text-brand-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Hands-on Projects</h3>
+              <p className="text-gray-600">
+                Learn by building real-world projects with industry mentors
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-brand-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                Top Industry Mentors
+              </h3>
+              <p className="text-gray-600">
+                Learn from experts working at top companies
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-brand-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Placement Support</h3>
+              <p className="text-gray-600">
+                Get job assistance and interview preparation
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-8 h-8 text-brand-600" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Flexible Schedule</h3>
+              <p className="text-gray-600">
+                Weekend and weekday batches available
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Course Categories */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Course Categories
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Explore our comprehensive curriculum across cutting-edge
-              technology domains
+            <p className="text-xl text-gray-600">
+              Explore courses across different technology domains
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category) => (
+          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {[
+              { name: "Programming", icon: Code, count: 25 },
+              { name: "Robotics", icon: Cpu, count: 12 },
+              { name: "Cloud", icon: Cloud, count: 18 },
+              { name: "Data Engineering", icon: Database, count: 15 },
+              { name: "AI/ML", icon: Brain, count: 20 },
+              { name: "DevOps", icon: Award, count: 10 },
+            ].map((category) => (
               <Card
-                key={category.id}
-                className="group hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105"
+                key={category.name}
+                className="text-center p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group"
               >
-                <CardHeader className="text-center">
-                  <div className="text-4xl mb-4">{category.icon}</div>
-                  <CardTitle className="text-xl group-hover:text-brand-600 transition-colors">
-                    {category.name}
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {category.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="text-center">
-                  <div className="text-sm text-muted-foreground mb-4">
-                    {category.courseCount} courses available
-                  </div>
-                  <Button
-                    variant="outline"
-                    className="w-full group-hover:bg-brand-500 group-hover:text-white transition-colors"
-                  >
-                    Explore Courses
-                  </Button>
-                </CardContent>
+                <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-500 transition-colors">
+                  <category.icon className="w-8 h-8 text-brand-600 group-hover:text-white" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{category.name}</h3>
+                <p className="text-sm text-gray-600">
+                  {category.count} courses
+                </p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-brand-600 to-brand-700 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Transform Your Career?
+      {/* Testimonials */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Student Success Stories
+            </h2>
+            <p className="text-xl text-gray-600">
+              Hear from our graduates who transformed their careers
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="p-6 shadow-lg border-0">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-400 to-brand-600 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-white font-semibold">
+                      {testimonial.name[0]}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                  </div>
+                </div>
+                <div className="flex mb-3">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-4 h-4 text-yellow-400 fill-current"
+                    />
+                  ))}
+                </div>
+                <p className="text-gray-700 italic">"{testimonial.review}"</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Corporate Clients */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+              Trusted by Professionals at
+            </h2>
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center opacity-60">
+              {corporateClients.map((client, index) => (
+                <div key={index} className="flex items-center justify-center">
+                  <div className="w-24 h-12 bg-gray-300 rounded flex items-center justify-center">
+                    <span className="text-xs font-semibold text-gray-600">
+                      {client.name}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Drop Enquiry Section */}
+      <section className="py-16 bg-brand-600 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Start Your Journey?
           </h2>
           <p className="text-xl mb-8 text-brand-100">
-            Join thousands of professionals who have accelerated their careers
-            with our expert-led training programs.
+            Get personalized course recommendations and career guidance
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              variant="secondary"
-              className="text-lg px-8 py-6"
-              asChild
-            >
-              <Link to="/courses">Browse All Courses</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-lg px-8 py-6 bg-transparent border-white text-white hover:bg-white hover:text-brand-600"
-            >
-              Talk to an Expert
-            </Button>
-          </div>
+          <Dialog open={isEnquiryOpen} onOpenChange={setIsEnquiryOpen}>
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                variant="secondary"
+                className="bg-white text-brand-600 hover:bg-gray-100"
+              >
+                Drop Us an Enquiry
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle>Drop Us an Enquiry</DialogTitle>
+                <DialogDescription>
+                  Fill out the form below and our experts will get back to you.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    id="name"
+                    value={enquiryForm.name}
+                    onChange={(e) =>
+                      setEnquiryForm({ ...enquiryForm, name: e.target.value })
+                    }
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={enquiryForm.email}
+                    onChange={(e) =>
+                      setEnquiryForm({ ...enquiryForm, email: e.target.value })
+                    }
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="phone">Phone</Label>
+                  <Input
+                    id="phone"
+                    value={enquiryForm.phone}
+                    onChange={(e) =>
+                      setEnquiryForm({ ...enquiryForm, phone: e.target.value })
+                    }
+                    placeholder="Your phone number"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="course">Course Interested In</Label>
+                  <Select
+                    value={enquiryForm.course}
+                    onValueChange={(value) =>
+                      setEnquiryForm({ ...enquiryForm, course: value })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a course" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="python">
+                        Python for Beginners
+                      </SelectItem>
+                      <SelectItem value="aws">
+                        Cloud Computing with AWS
+                      </SelectItem>
+                      <SelectItem value="data-science">
+                        Data Science & Analytics
+                      </SelectItem>
+                      <SelectItem value="fullstack">
+                        Full Stack Web Development
+                      </SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea
+                    id="message"
+                    value={enquiryForm.message}
+                    onChange={(e) =>
+                      setEnquiryForm({
+                        ...enquiryForm,
+                        message: e.target.value,
+                      })
+                    }
+                    placeholder="Any specific questions or requirements?"
+                    rows={3}
+                  />
+                </div>
+                <Button
+                  onClick={handleEnquirySubmit}
+                  className="w-full bg-brand-500 hover:bg-brand-600"
+                >
+                  Submit Enquiry
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-tech-900 text-white py-16">
+      <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
+              <div className="flex items-center space-x-3 mb-4">
                 <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-600 rounded-lg flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-white" />
+                  <GraduationCap className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-xl font-bold">TechSkill Academy</span>
               </div>
@@ -406,46 +642,15 @@ export default function Index() {
                 Empowering professionals with cutting-edge technology skills for
                 the future workplace.
               </p>
+              <div className="flex space-x-4">
+                <Facebook className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+                <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+                <Linkedin className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+                <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
+              </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Courses</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link
-                    to="/courses/ai"
-                    className="hover:text-white transition-colors"
-                  >
-                    Generative AI
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/courses/data"
-                    className="hover:text-white transition-colors"
-                  >
-                    Data Engineering
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/courses/nosql"
-                    className="hover:text-white transition-colors"
-                  >
-                    NoSQL Databases
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/courses/cloud"
-                    className="hover:text-white transition-colors"
-                  >
-                    Cloud Platforms
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Company</h3>
+              <h3 className="font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link
@@ -457,18 +662,10 @@ export default function Index() {
                 </li>
                 <li>
                   <Link
-                    to="/instructors"
+                    to="/courses"
                     className="hover:text-white transition-colors"
                   >
-                    Instructors
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/careers"
-                    className="hover:text-white transition-colors"
-                  >
-                    Careers
+                    All Courses
                   </Link>
                 </li>
                 <li>
@@ -479,19 +676,19 @@ export default function Index() {
                     Contact
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="/careers"
+                    className="hover:text-white transition-colors"
+                  >
+                    Careers
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Support</h3>
+              <h3 className="font-semibold mb-4">Legal</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link
-                    to="/help"
-                    className="hover:text-white transition-colors"
-                  >
-                    Help Center
-                  </Link>
-                </li>
                 <li>
                   <Link
                     to="/privacy"
@@ -508,14 +705,70 @@ export default function Index() {
                     Terms of Service
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="/refund"
+                    className="hover:text-white transition-colors"
+                  >
+                    Refund Policy
+                  </Link>
+                </li>
               </ul>
             </div>
+            <div>
+              <h3 className="font-semibold mb-4">Newsletter</h3>
+              <p className="text-gray-400 mb-4">
+                Stay updated with our latest courses and offers
+              </p>
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Enter your email"
+                  className="bg-gray-800 border-gray-700 text-white"
+                />
+                <Button className="bg-brand-500 hover:bg-brand-600">
+                  Subscribe
+                </Button>
+              </div>
+            </div>
           </div>
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2024 TechSkill Academy. All rights reserved.</p>
           </div>
         </div>
       </footer>
+
+      {/* Floating Chat Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              size="lg"
+              className="rounded-full w-14 h-14 bg-brand-500 hover:bg-brand-600 shadow-lg"
+            >
+              <MessageCircle className="w-6 h-6" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Need Help?</DialogTitle>
+              <DialogDescription>
+                Chat with our experts for course guidance and support.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="text-center py-8">
+              <p className="text-gray-600 mb-4">
+                Our chat support is coming soon!
+              </p>
+              <Button
+                onClick={() => setIsEnquiryOpen(true)}
+                className="bg-brand-500 hover:bg-brand-600"
+              >
+                Drop an Enquiry Instead
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
     </div>
   );
 }
