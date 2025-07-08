@@ -20,7 +20,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 225 15% 15%;
 
-    --primary: 210 100% 50%;
+    --primary: 258 89% 66%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 210 40% 96%;
@@ -37,7 +37,7 @@
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 210 100% 50%;
+    --ring: 258 89% 66%;
 
     --radius: 0.5rem;
 
@@ -50,18 +50,18 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Brand Colors - Blue Edureka Theme */
-    --brand-50: 210 100% 97%;
-    --brand-100: 210 100% 94%;
-    --brand-200: 210 100% 87%;
-    --brand-300: 210 100% 78%;
-    --brand-400: 210 100% 66%;
-    --brand-500: 210 100% 50%;
-    --brand-600: 210 100% 45%;
-    --brand-700: 210 100% 40%;
-    --brand-800: 210 100% 35%;
-    --brand-900: 210 100% 25%;
-    --brand-950: 210 100% 15%;
+    /* Brand Colors - Modern Purple-Blue Tech Theme */
+    --brand-50: 258 100% 98%;
+    --brand-100: 258 100% 95%;
+    --brand-200: 258 100% 89%;
+    --brand-300: 258 100% 82%;
+    --brand-400: 258 89% 75%;
+    --brand-500: 258 89% 66%;
+    --brand-600: 258 89% 58%;
+    --brand-700: 258 89% 50%;
+    --brand-800: 258 89% 42%;
+    --brand-900: 258 89% 34%;
+    --brand-950: 258 89% 20%;
 
     /* Tech/Secondary Colors - Modern Blue-Gray */
     --tech-50: 210 40% 98%;
@@ -91,7 +91,7 @@
     --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 100% 50%;
+    --primary: 258 89% 66%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 215 27.9% 16.9%;
