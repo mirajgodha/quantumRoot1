@@ -166,12 +166,18 @@ export default function Index() {
   ];
 
   const corporateClients = [
-    { name: "TCS", logo: "/api/placeholder/120/60" },
     { name: "Infosys", logo: "/api/placeholder/120/60" },
-    { name: "Wipro", logo: "/api/placeholder/120/60" },
+    { name: "TCS", logo: "/api/placeholder/120/60" },
     { name: "Accenture", logo: "/api/placeholder/120/60" },
-    { name: "Cognizant", logo: "/api/placeholder/120/60" },
-    { name: "Capgemini", logo: "/api/placeholder/120/60" },
+    { name: "Ericsson", logo: "/api/placeholder/120/60" },
+    { name: "Etisalat Dubai", logo: "/api/placeholder/120/60" },
+    { name: "UHG", logo: "/api/placeholder/120/60" },
+    { name: "Airtel", logo: "/api/placeholder/120/60" },
+    { name: "Verizon", logo: "/api/placeholder/120/60" },
+    { name: "Mindtree", logo: "/api/placeholder/120/60" },
+    { name: "Incedo", logo: "/api/placeholder/120/60" },
+    { name: "SwissGulf Partners", logo: "/api/placeholder/120/60" },
+    { name: "Ceva Logistics", logo: "/api/placeholder/120/60" },
   ];
 
   const handleEnquirySubmit = () => {
@@ -289,8 +295,20 @@ export default function Index() {
                 key={course.id}
                 className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg"
               >
-                <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-200 rounded-t-lg flex items-center justify-center">
-                  <BookOpen className="w-12 h-12 text-brand-600" />
+                <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-200 rounded-t-lg flex items-center justify-center relative overflow-hidden">
+                  {course.category === "Programming" && (
+                    <Code className="w-16 h-16 text-brand-600" />
+                  )}
+                  {course.category === "Cloud" && (
+                    <Cloud className="w-16 h-16 text-brand-600" />
+                  )}
+                  {course.category === "Data Science" && (
+                    <Database className="w-16 h-16 text-brand-600" />
+                  )}
+                  {!["Programming", "Cloud", "Data Science"].includes(
+                    course.category,
+                  ) && <BookOpen className="w-16 h-16 text-brand-600" />}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between mb-2">
@@ -488,14 +506,15 @@ export default function Index() {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
               Trusted by Professionals at
             </h2>
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center opacity-60">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center opacity-70">
               {corporateClients.map((client, index) => (
-                <div key={index} className="flex items-center justify-center">
-                  <div className="w-24 h-12 bg-gray-300 rounded flex items-center justify-center">
-                    <span className="text-xs font-semibold text-gray-600">
-                      {client.name}
-                    </span>
-                  </div>
+                <div
+                  key={index}
+                  className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <span className="text-sm font-medium text-gray-700 text-center">
+                    {client.name}
+                  </span>
                 </div>
               ))}
             </div>
