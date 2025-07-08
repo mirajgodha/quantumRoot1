@@ -60,8 +60,8 @@ export default function CourseDetail() {
     category: "Programming",
     duration: "8 weeks",
     difficulty: "Beginner",
-    price: 199,
-    originalPrice: 299,
+    price: 19,999,
+    originalPrice: 29,999,
     rating: 4.8,
     students: 12500,
     instructor: {
