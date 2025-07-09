@@ -685,7 +685,10 @@ export default function Courses() {
                       by {course.instructor}
                     </div>
                   </div>
-                  <Button className="bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700">
+                  <Button
+                    className="bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700"
+                    onClick={() => openEnrollmentModal(course.title)}
+                  >
                     Enroll Now
                   </Button>
                 </div>
