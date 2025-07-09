@@ -79,6 +79,10 @@ export default function Index() {
     classType: "online",
     courseName: "",
   });
+  const [validationErrors, setValidationErrors] = useState({
+    email: "",
+    phone: "",
+  });
 
   const featuredCourses: Course[] = [
     {
@@ -278,7 +282,34 @@ export default function Index() {
     alert("Thank you for your enquiry! We'll get back to you soon.");
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const phoneRegex = /^[+]?[\d\s\-\(\)]{10,15}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ""));
+  };
+
   const handleEnrollmentSubmit = async () => {
+    // Validate form
+    const errors = {
+      email: !validateEmail(enrollmentForm.email)
+        ? "Please enter a valid email address"
+        : "",
+      phone: !validatePhone(enrollmentForm.phone)
+        ? "Please enter a valid phone number (10-15 digits)"
+        : "",
+    };
+
+    setValidationErrors(errors);
+
+    // Check if there are any validation errors
+    if (errors.email || errors.phone) {
+      return;
+    }
+
     // Handle enrollment form submission
     const enrollmentData = {
       ...enrollmentForm,
@@ -310,6 +341,7 @@ export default function Index() {
         classType: "online",
         courseName: "",
       });
+      setValidationErrors({ email: "", phone: "" });
       setSelectedCourse("");
 
       alert(
@@ -827,15 +859,24 @@ export default function Index() {
                 id="enrollEmail"
                 type="email"
                 value={enrollmentForm.email}
-                onChange={(e) =>
+                onChange={(e) => {
                   setEnrollmentForm({
                     ...enrollmentForm,
                     email: e.target.value,
-                  })
-                }
+                  });
+                  if (validationErrors.email) {
+                    setValidationErrors({ ...validationErrors, email: "" });
+                  }
+                }}
                 placeholder="your.email@example.com"
                 required
+                className={validationErrors.email ? "border-red-500" : ""}
               />
+              {validationErrors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {validationErrors.email}
+                </p>
+              )}
             </div>
             <div>
               <Label htmlFor="enrollPhone">Phone Number *</Label>
@@ -843,15 +884,24 @@ export default function Index() {
                 id="enrollPhone"
                 type="tel"
                 value={enrollmentForm.phone}
-                onChange={(e) =>
+                onChange={(e) => {
                   setEnrollmentForm({
                     ...enrollmentForm,
                     phone: e.target.value,
-                  })
-                }
+                  });
+                  if (validationErrors.phone) {
+                    setValidationErrors({ ...validationErrors, phone: "" });
+                  }
+                }}
                 placeholder="+91 9876543210"
                 required
+                className={validationErrors.phone ? "border-red-500" : ""}
               />
+              {validationErrors.phone && (
+                <p className="text-red-500 text-sm mt-1">
+                  {validationErrors.phone}
+                </p>
+              )}
             </div>
             <div>
               <Label htmlFor="classType">Preferred Class Type *</Label>
@@ -890,7 +940,9 @@ export default function Index() {
               disabled={
                 !enrollmentForm.name ||
                 !enrollmentForm.email ||
-                !enrollmentForm.phone
+                !enrollmentForm.phone ||
+                !validateEmail(enrollmentForm.email) ||
+                !validatePhone(enrollmentForm.phone)
               }
             >
               Submit Enrollment
