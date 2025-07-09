@@ -48,14 +48,6 @@ export default function LiveClasses() {
                 Contact
               </Link>
             </nav>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" asChild>
-                <Link to="/login">Login</Link>
-              </Button>
-              <Button asChild className="bg-brand-500 hover:bg-brand-600">
-                <Link to="/signup">Sign Up</Link>
-              </Button>
-            </div>
           </div>
         </div>
       </header>
