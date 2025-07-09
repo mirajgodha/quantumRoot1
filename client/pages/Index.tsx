@@ -170,18 +170,51 @@ export default function Index() {
   ];
 
   const corporateClients = [
-    { name: "Infosys", logo: "/api/placeholder/120/60" },
-    { name: "TCS", logo: "/api/placeholder/120/60" },
-    { name: "Accenture", logo: "/api/placeholder/120/60" },
-    { name: "Ericsson", logo: "/api/placeholder/120/60" },
-    { name: "Etisalat Dubai", logo: "/api/placeholder/120/60" },
-    { name: "UHG", logo: "/api/placeholder/120/60" },
-    { name: "Airtel", logo: "/api/placeholder/120/60" },
-    { name: "Verizon", logo: "/api/placeholder/120/60" },
-    { name: "Mindtree", logo: "/api/placeholder/120/60" },
-    { name: "Incedo", logo: "/api/placeholder/120/60" },
-    { name: "SwissGulf Partners", logo: "/api/placeholder/120/60" },
-    { name: "Ceva Logistics", logo: "/api/placeholder/120/60" },
+    {
+      name: "Infosys",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Infosys-Logo.png",
+    },
+    {
+      name: "TCS",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/TCS-Logo.png",
+    },
+    {
+      name: "Accenture",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Accenture-Logo.png",
+    },
+    {
+      name: "Ericsson",
+      logo: "https://www.logo.wine/a/logo/Ericsson/Ericsson-Logo.wine.svg",
+    },
+    {
+      name: "Etisalat",
+      logo: "https://logos-world.net/wp-content/uploads/2023/01/Etisalat-Logo.png",
+    },
+    {
+      name: "UnitedHealth",
+      logo: "https://logos-world.net/wp-content/uploads/2021/02/UnitedHealth-Group-Logo.png",
+    },
+    {
+      name: "Airtel",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Airtel-Logo.png",
+    },
+    {
+      name: "Verizon",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Verizon-Logo.png",
+    },
+    {
+      name: "Mindtree",
+      logo: "https://logos-world.net/wp-content/uploads/2022/04/Mindtree-Logo.png",
+    },
+    {
+      name: "Incedo",
+      logo: "https://media.licdn.com/dms/image/C4D0BAQGQs8VaK9vC1w/company-logo_200_200/0/1630528240871/incedoinc_logo?e=2147483647&v=beta&t=_-0xZx6XQg7HHw4eBvJgQ1-n3zJGz6JvZKP_FhN6TwU",
+    },
+    { name: "SwissGulf", logo: "https://www.swissgulf.com/images/logo.png" },
+    {
+      name: "CEVA Logistics",
+      logo: "https://logos-world.net/wp-content/uploads/2022/01/CEVA-Logistics-Logo.png",
+    },
   ];
 
   const handleEnquirySubmit = () => {
@@ -522,13 +555,23 @@ export default function Index() {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
               Trusted by Professionals at
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center opacity-70">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
               {corporateClients.map((client, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  className="flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 grayscale hover:grayscale-0"
                 >
-                  <span className="text-sm font-medium text-gray-700 text-center">
+                  <img
+                    src={client.logo}
+                    alt={`${client.name} logo`}
+                    className="max-w-full max-h-12 object-contain"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                      e.currentTarget.nextElementSibling!.style.display =
+                        "block";
+                    }}
+                  />
+                  <span className="text-sm font-medium text-gray-700 text-center hidden">
                     {client.name}
                   </span>
                 </div>
