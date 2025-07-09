@@ -81,7 +81,8 @@ export default function Index() {
       duration: "12 weeks",
       difficulty: "Advanced",
       price: 29999,
-      image: "/api/placeholder/400/250",
+      image:
+        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
       tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
       instructor: "Dr. Sarah Chen",
       rating: 4.9,
@@ -97,7 +98,8 @@ export default function Index() {
       duration: "10 weeks",
       difficulty: "Intermediate",
       price: 39999,
-      image: "/api/placeholder/400/250",
+      image:
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop&crop=center",
       tags: ["Apache Spark", "PySpark", "Big Data", "Scala"],
       instructor: "Mark Rodriguez",
       rating: 4.8,
@@ -113,7 +115,8 @@ export default function Index() {
       duration: "8 weeks",
       difficulty: "Advanced",
       price: 59999,
-      image: "/api/placeholder/400/250",
+      image:
+        "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop&crop=center",
       tags: ["Apache Cassandra", "NoSQL", "Distributed Systems", "CQL"],
       instructor: "Dr. Amit Patel",
       rating: 4.7,
@@ -129,9 +132,10 @@ export default function Index() {
       duration: "6 weeks",
       difficulty: "Intermediate",
       price: 49999,
-      image: "/api/placeholder/400/250",
-      tags: ["React", "Node.js", "MongoDB"],
-      instructor: "Neha Gupta",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center",
+      tags: ["Elasticsearch", "Kibana", "Logstash", "Search"],
+      instructor: "Maria Santos",
       rating: 4.8,
       students: 11200,
       featured: true,
