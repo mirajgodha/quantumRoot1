@@ -597,7 +597,7 @@ export default function Courses() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="price">Price ($)</Label>
+                      <Label htmlFor="price">Price (₹)</Label>
                       <Input
                         id="price"
                         type="number"
@@ -711,7 +711,7 @@ export default function Courses() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-2xl font-bold text-brand-600">
-                      ${course.price}
+                      ₹{course.price}
                     </div>
                     <div className="text-sm text-muted-foreground">
                       by {course.instructor}
