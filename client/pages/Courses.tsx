@@ -348,6 +348,12 @@ export default function Courses() {
                 Courses
               </Link>
               <Link
+                to="/live-classes"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Live Classes
+              </Link>
+              <Link
                 to="/about"
                 className="text-foreground hover:text-brand-600 transition-colors"
               >
