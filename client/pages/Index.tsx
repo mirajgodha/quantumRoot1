@@ -146,26 +146,74 @@ export default function Index() {
     {
       name: "Rahul Verma",
       role: "Data Engineer at TCS",
-      image: "/api/placeholder/80/80",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
       rating: 5,
       review:
-        "The data science course helped me transition from a manual tester to a data engineer. The practical approach and mentor support was excellent.",
+        "The Generative AI course completely transformed my career. Learning about LLMs and ChatGPT integration helped me land my dream job in AI development.",
     },
     {
       name: "Priya Singh",
-      role: "Cloud Architect at Infosys",
-      image: "/api/placeholder/80/80",
+      role: "Database Architect at Infosys",
+      image:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b743?w=80&h=80&fit=crop&crop=face",
       rating: 5,
       review:
-        "AWS certification course was comprehensive and well-structured. Got placed as a cloud architect within 3 months of completion.",
+        "Apache Cassandra course was incredibly detailed with hands-on projects. The distributed systems concepts are now clear to me and I'm leading database architecture at my company.",
     },
     {
       name: "Arjun Krishnan",
-      role: "Full Stack Developer at Wipro",
-      image: "/api/placeholder/80/80",
+      role: "Search Engineer at Wipro",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
       rating: 5,
       review:
-        "The full-stack development course gave me the confidence to work on complex projects. Highly recommend for career growth.",
+        "Elasticsearch course gave me deep insights into search analytics. The real-world projects helped me implement enterprise search solutions successfully.",
+    },
+    {
+      name: "Sneha Patel",
+      role: "AI Engineer at Accenture",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
+      rating: 5,
+      review:
+        "The Generative AI & LLM course exceeded my expectations. Building real AI applications and understanding transformer models was a game-changer for my career.",
+    },
+    {
+      name: "Vikram Kumar",
+      role: "Data Architect at UHG",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face",
+      rating: 5,
+      review:
+        "Data Architecture course provided comprehensive knowledge on designing scalable data systems. The MongoDB and Cassandra modules were particularly valuable.",
+    },
+    {
+      name: "Anitha Raj",
+      role: "NoSQL Developer at Mindtree",
+      image:
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face",
+      rating: 5,
+      review:
+        "MongoDB course was fantastic! From basics to advanced aggregation pipelines, everything was covered with practical examples. Got promoted within 6 months.",
+    },
+    {
+      name: "Ravi Sharma",
+      role: "Big Data Engineer at Verizon",
+      image:
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face",
+      rating: 5,
+      review:
+        "Apache Spark course helped me master big data processing. The PySpark modules and real-time analytics projects were excellent preparation for industry work.",
+    },
+    {
+      name: "Meera Joshi",
+      role: "Search Analyst at Incedo",
+      image:
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=face",
+      rating: 5,
+      review:
+        "Elasticsearch & Search Analytics course provided deep expertise in building search engines. The Kibana visualizations and Logstash configurations were very practical.",
     },
   ];
 
@@ -512,15 +560,15 @@ export default function Index() {
               Hear from our graduates who transformed their careers
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {testimonials.map((testimonial, index) => (
               <Card key={index} className="p-6 shadow-lg border-0">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-brand-400 to-brand-600 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-white font-semibold">
-                      {testimonial.name[0]}
-                    </span>
-                  </div>
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                  />
                   <div>
                     <h4 className="font-semibold text-gray-900">
                       {testimonial.name}
@@ -548,7 +596,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
-              Trusted by Professionals at
+              Corporate Clients
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
               {corporateClients.map((client, index) => (
