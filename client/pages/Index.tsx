@@ -63,12 +63,21 @@ import { Course } from "@shared/api";
 export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [enquiryForm, setEnquiryForm] = useState({
     name: "",
     email: "",
     phone: "",
     course: "",
     message: "",
+  });
+  const [enrollmentForm, setEnrollmentForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    classType: "online",
+    courseName: "",
   });
 
   const featuredCourses: Course[] = [
@@ -269,6 +278,55 @@ export default function Index() {
     alert("Thank you for your enquiry! We'll get back to you soon.");
   };
 
+  const handleEnrollmentSubmit = async () => {
+    // Handle enrollment form submission
+    const enrollmentData = {
+      ...enrollmentForm,
+      courseName: selectedCourse,
+      submittedAt: new Date().toISOString(),
+    };
+
+    try {
+      // In a real application, you would send this to your backend or email service
+      // For now, we'll simulate the email sending
+      console.log("Enrollment data:", enrollmentData);
+
+      // Here you would integrate with EmailJS or your backend API
+      // Example with EmailJS (you'd need to set this up):
+      // await emailjs.send('your_service_id', 'your_template_id', {
+      //   to_email: 'mirajgodha@gmail.com',
+      //   student_name: enrollmentData.name,
+      //   student_email: enrollmentData.email,
+      //   student_phone: enrollmentData.phone,
+      //   course_name: enrollmentData.courseName,
+      //   class_type: enrollmentData.classType,
+      // });
+
+      setIsEnrollmentOpen(false);
+      setEnrollmentForm({
+        name: "",
+        email: "",
+        phone: "",
+        classType: "online",
+        courseName: "",
+      });
+      setSelectedCourse("");
+
+      alert(
+        `Thank you for enrolling in ${selectedCourse}! We'll contact you soon at ${enrollmentData.email}.`,
+      );
+    } catch (error) {
+      console.error("Error submitting enrollment:", error);
+      alert("There was an error submitting your enrollment. Please try again.");
+    }
+  };
+
+  const openEnrollmentModal = (courseName: string) => {
+    setSelectedCourse(courseName);
+    setEnrollmentForm((prev) => ({ ...prev, courseName }));
+    setIsEnrollmentOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -449,6 +507,7 @@ export default function Index() {
                       <Button
                         size="sm"
                         className="text-xs bg-brand-500 hover:bg-brand-600 flex-1"
+                        onClick={() => openEnrollmentModal(course.title)}
                       >
                         Enroll Now
                       </Button>
@@ -739,6 +798,110 @@ export default function Index() {
           </Dialog>
         </div>
       </section>
+
+      {/* Enrollment Modal */}
+      <Dialog open={isEnrollmentOpen} onOpenChange={setIsEnrollmentOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Enroll in Course</DialogTitle>
+            <DialogDescription>
+              Complete your enrollment for: <strong>{selectedCourse}</strong>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="enrollName">Full Name *</Label>
+              <Input
+                id="enrollName"
+                value={enrollmentForm.name}
+                onChange={(e) =>
+                  setEnrollmentForm({ ...enrollmentForm, name: e.target.value })
+                }
+                placeholder="Your full name"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="enrollEmail">Email Address *</Label>
+              <Input
+                id="enrollEmail"
+                type="email"
+                value={enrollmentForm.email}
+                onChange={(e) =>
+                  setEnrollmentForm({
+                    ...enrollmentForm,
+                    email: e.target.value,
+                  })
+                }
+                placeholder="your.email@example.com"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="enrollPhone">Phone Number *</Label>
+              <Input
+                id="enrollPhone"
+                type="tel"
+                value={enrollmentForm.phone}
+                onChange={(e) =>
+                  setEnrollmentForm({
+                    ...enrollmentForm,
+                    phone: e.target.value,
+                  })
+                }
+                placeholder="+91 9876543210"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="classType">Preferred Class Type *</Label>
+              <Select
+                value={enrollmentForm.classType}
+                onValueChange={(value) =>
+                  setEnrollmentForm({ ...enrollmentForm, classType: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select class type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="online">Online Classes</SelectItem>
+                  <SelectItem value="offline">Offline Classes</SelectItem>
+                  <SelectItem value="hybrid">
+                    Hybrid (Online + Offline)
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold text-gray-900 mb-2">
+                Course Details:
+              </h4>
+              <p className="text-sm text-gray-600">
+                <strong>Course:</strong> {selectedCourse}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Contact Email:</strong> mirajgodha@gmail.com
+              </p>
+            </div>
+            <Button
+              onClick={handleEnrollmentSubmit}
+              className="w-full bg-brand-500 hover:bg-brand-600"
+              disabled={
+                !enrollmentForm.name ||
+                !enrollmentForm.email ||
+                !enrollmentForm.phone
+              }
+            >
+              Submit Enrollment
+            </Button>
+            <p className="text-xs text-gray-500 text-center">
+              By submitting this form, you agree to be contacted by our team
+              regarding your enrollment.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
