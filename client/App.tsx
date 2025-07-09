@@ -19,7 +19,7 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename="/quantumRoot1">
         <TooltipProvider>
           <Routes>
             <Route path="/" element={<Index />} />
