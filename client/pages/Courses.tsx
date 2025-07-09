@@ -299,7 +299,34 @@ export default function Courses() {
     setIsAddCourseOpen(false);
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const phoneRegex = /^[+]?[\d\s\-\(\)]{10,15}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ""));
+  };
+
   const handleEnrollmentSubmit = async () => {
+    // Validate form
+    const errors = {
+      email: !validateEmail(enrollmentForm.email)
+        ? "Please enter a valid email address"
+        : "",
+      phone: !validatePhone(enrollmentForm.phone)
+        ? "Please enter a valid phone number (10-15 digits)"
+        : "",
+    };
+
+    setValidationErrors(errors);
+
+    // Check if there are any validation errors
+    if (errors.email || errors.phone) {
+      return;
+    }
+
     const enrollmentData = {
       ...enrollmentForm,
       courseName: selectedCourse,
@@ -317,6 +344,7 @@ export default function Courses() {
         classType: "online",
         courseName: "",
       });
+      setValidationErrors({ email: "", phone: "" });
       setSelectedCourse("");
 
       alert(
