@@ -67,6 +67,10 @@ export default function Courses() {
     classType: "online",
     courseName: "",
   });
+  const [validationErrors, setValidationErrors] = useState({
+    email: "",
+    phone: "",
+  });
 
   useEffect(() => {
     // Mock data - in real app this would come from API
