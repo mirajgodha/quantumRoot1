@@ -27,6 +27,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   GraduationCap,
   Star,
   Clock,
@@ -310,7 +317,10 @@ export default function CourseDetail() {
                       33% OFF
                     </Badge>
                   </div>
-                  <Button className="w-full mb-3 bg-brand-500 hover:bg-brand-600">
+                  <Button
+                    className="w-full mb-3 bg-brand-500 hover:bg-brand-600"
+                    onClick={openEnrollmentModal}
+                  >
                     Enroll Now
                   </Button>
                   <Dialog open={isEnquiryOpen} onOpenChange={setIsEnquiryOpen}>
