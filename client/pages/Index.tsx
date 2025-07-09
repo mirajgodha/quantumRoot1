@@ -171,49 +171,44 @@ export default function Index() {
 
   const corporateClients = [
     {
-      name: "Infosys",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Infosys-Logo.png",
-    },
-    {
-      name: "TCS",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/TCS-Logo.png",
-    },
-    {
       name: "Accenture",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Accenture-Logo.png",
-    },
-    {
-      name: "Ericsson",
-      logo: "https://www.logo.wine/a/logo/Ericsson/Ericsson-Logo.wine.svg",
-    },
-    {
-      name: "Etisalat",
-      logo: "https://logos-world.net/wp-content/uploads/2023/01/Etisalat-Logo.png",
-    },
-    {
-      name: "UnitedHealth",
-      logo: "https://logos-world.net/wp-content/uploads/2021/02/UnitedHealth-Group-Logo.png",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff8fd57f3e22146669b60b75e9bd7ed9d?format=webp&width=800",
     },
     {
       name: "Airtel",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Airtel-Logo.png",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2F1ecc9182c8244d918e03d2a525acd730?format=webp&width=800",
     },
     {
-      name: "Verizon",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Verizon-Logo.png",
+      name: "CEVA Logistics",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Fd91ce59c05f94233920e80f8cac1b398?format=webp&width=800",
     },
     {
-      name: "Mindtree",
-      logo: "https://logos-world.net/wp-content/uploads/2022/04/Mindtree-Logo.png",
+      name: "Etisalat",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Fb31bafd1e3674f5fa694f2e3e83eea84?format=webp&width=800",
     },
     {
       name: "Incedo",
-      logo: "https://media.licdn.com/dms/image/C4D0BAQGQs8VaK9vC1w/company-logo_200_200/0/1630528240871/incedoinc_logo?e=2147483647&v=beta&t=_-0xZx6XQg7HHw4eBvJgQ1-n3zJGz6JvZKP_FhN6TwU",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2F0e1d63706fd64eb1abe6ffcd75be6c7b?format=webp&width=800",
     },
-    { name: "SwissGulf", logo: "https://www.swissgulf.com/images/logo.png" },
     {
-      name: "CEVA Logistics",
-      logo: "https://logos-world.net/wp-content/uploads/2022/01/CEVA-Logistics-Logo.png",
+      name: "Infosys",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2F0dd010d6a2114dc487cad1ce8fa546cf?format=webp&width=800",
+    },
+    {
+      name: "SwissGulf Partners",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Fb707d7cc14864fc184ea4d646dc74f9a?format=webp&width=800",
+    },
+    {
+      name: "TCS",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Fe2f0d18b63fc44ad8138c74ef40d3edc?format=webp&width=800",
+    },
+    {
+      name: "UnitedHealth Group",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff46782ca8aca424091933a1459fab0f9?format=webp&width=800",
+    },
+    {
+      name: "Verizon",
+      logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2F19c8f306bb1048d3be79c70ea8372057?format=webp&width=800",
     },
   ];
 
