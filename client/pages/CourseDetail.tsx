@@ -184,6 +184,12 @@ export default function CourseDetail() {
                 Courses
               </Link>
               <Link
+                to="/live-classes"
+                className="text-gray-700 hover:text-brand-600 transition-colors"
+              >
+                Live Classes
+              </Link>
+              <Link
                 to="/about"
                 className="text-gray-700 hover:text-brand-600 transition-colors"
               >
