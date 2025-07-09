@@ -52,17 +52,112 @@ export default function About() {
       </nav>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-8">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold mb-6">
             About{" "}
             <span className="bg-gradient-to-r from-brand-500 to-brand-600 bg-clip-text text-transparent">
               QuantumRoot
             </span>
           </h1>
-          <p className="text-xl text-muted-foreground">
-            Coming soon - Learn more about our mission to empower professionals
-            with cutting-edge technology skills.
+          <p className="text-xl text-brand-600 font-medium italic mb-8">
+            "Grow from the root, scale to quantum"
           </p>
+        </div>
+
+        <div className="prose prose-lg max-w-none">
+          <div className="bg-background rounded-2xl p-8 shadow-lg border mb-8">
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              At QuantumRoot, we believe true learning begins at the root — with
+              strong fundamentals — and grows into quantum leaps of expertise.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-background rounded-2xl p-6 shadow-lg border">
+              <h2 className="text-2xl font-semibold mb-4 text-brand-600">
+                Our Journey
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                With over <strong>12 years of experience</strong> in tech
+                education, we've trained <strong>1,100+ students</strong> across
+                the globe under our former brand Design Pathshala. Now reborn as
+                QuantumRoot, we're doubling down on our mission: to make
+                cutting-edge tech skills accessible, practical, and
+                industry-ready.
+              </p>
+            </div>
+
+            <div className="bg-background rounded-2xl p-6 shadow-lg border">
+              <h2 className="text-2xl font-semibold mb-4 text-brand-600">
+                World-Class Faculty
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Our programs are led by seasoned professionals from top global
+                companies like{" "}
+                <strong>Airtel, Apple, Amazon, Meta, Oracle</strong>, and more.
+                These aren't just trainers — they're engineers, architects, and
+                leaders who've built real systems in the real world.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-brand-50 to-tech-50 rounded-2xl p-8 mb-8">
+            <h2 className="text-2xl font-semibold mb-6 text-center text-brand-600">
+              Who We Serve
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="w-8 h-8 text-brand-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">IT Professionals</h3>
+                <p className="text-muted-foreground">
+                  Looking to reskill or upskill in cutting-edge technologies
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-tech-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="w-8 h-8 text-tech-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">College Students</h3>
+                <p className="text-muted-foreground">
+                  Wanting a strong launchpad into tech careers
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-background rounded-2xl p-8 shadow-lg border mb-8">
+            <h2 className="text-2xl font-semibold mb-4 text-brand-600">
+              Our Approach
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              From basics to advanced — we teach{" "}
+              <strong>hands-on, real-world projects</strong>, not just theory.
+              Our methodology focuses on building practical skills that
+              translate directly to workplace success.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              While we help you become job-ready and support placement through
+              our industry network, we do not guarantee job offers. Our focus is
+              on building lasting skill, confidence, and capability.
+            </p>
+          </div>
+
+          <div className="text-center bg-gradient-to-r from-brand-500 to-brand-600 rounded-2xl p-8 text-white">
+            <h2 className="text-2xl font-semibold mb-4">
+              Ready to Transform Your Career?
+            </h2>
+            <p className="text-lg opacity-90 mb-6">
+              Let's build your future, the right way.
+            </p>
+            <Link
+              to="/courses"
+              className="inline-block bg-white text-brand-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
+              Explore Our Courses
+            </Link>
+          </div>
         </div>
       </div>
     </div>
