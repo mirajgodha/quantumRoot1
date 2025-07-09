@@ -44,11 +44,19 @@ import {
 export default function CourseDetail() {
   const { courseId } = useParams();
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
   const [enquiryForm, setEnquiryForm] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
+  });
+  const [enrollmentForm, setEnrollmentForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    classType: "online",
+    courseName: "",
   });
 
   // Mock course data - in real app this would come from API
@@ -152,6 +160,39 @@ export default function CourseDetail() {
     setIsEnquiryOpen(false);
     setEnquiryForm({ name: "", email: "", phone: "", message: "" });
     alert("Thank you for your enquiry! We'll get back to you soon.");
+  };
+
+  const handleEnrollmentSubmit = async () => {
+    const enrollmentData = {
+      ...enrollmentForm,
+      courseName: course.title,
+      submittedAt: new Date().toISOString(),
+    };
+
+    try {
+      console.log("Enrollment data:", enrollmentData);
+
+      setIsEnrollmentOpen(false);
+      setEnrollmentForm({
+        name: "",
+        email: "",
+        phone: "",
+        classType: "online",
+        courseName: "",
+      });
+
+      alert(
+        `Thank you for enrolling in ${course.title}! We'll contact you soon at ${enrollmentData.email}.`,
+      );
+    } catch (error) {
+      console.error("Error submitting enrollment:", error);
+      alert("There was an error submitting your enrollment. Please try again.");
+    }
+  };
+
+  const openEnrollmentModal = () => {
+    setEnrollmentForm((prev) => ({ ...prev, courseName: course.title }));
+    setIsEnrollmentOpen(true);
   };
 
   return (
