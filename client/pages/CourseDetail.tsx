@@ -173,7 +173,34 @@ export default function CourseDetail() {
     alert("Thank you for your enquiry! We'll get back to you soon.");
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const phoneRegex = /^[+]?[\d\s\-\(\)]{10,15}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ""));
+  };
+
   const handleEnrollmentSubmit = async () => {
+    // Validate form
+    const errors = {
+      email: !validateEmail(enrollmentForm.email)
+        ? "Please enter a valid email address"
+        : "",
+      phone: !validatePhone(enrollmentForm.phone)
+        ? "Please enter a valid phone number (10-15 digits)"
+        : "",
+    };
+
+    setValidationErrors(errors);
+
+    // Check if there are any validation errors
+    if (errors.email || errors.phone) {
+      return;
+    }
+
     const enrollmentData = {
       ...enrollmentForm,
       courseName: course.title,
@@ -191,6 +218,7 @@ export default function CourseDetail() {
         classType: "online",
         courseName: "",
       });
+      setValidationErrors({ email: "", phone: "" });
 
       alert(
         `Thank you for enrolling in ${course.title}! We'll contact you soon at ${enrollmentData.email}.`,
