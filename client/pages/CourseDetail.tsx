@@ -65,6 +65,10 @@ export default function CourseDetail() {
     classType: "online",
     courseName: "",
   });
+  const [validationErrors, setValidationErrors] = useState({
+    email: "",
+    phone: "",
+  });
 
   // Mock course data - in real app this would come from API
   const course = {
