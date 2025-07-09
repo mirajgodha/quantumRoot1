@@ -48,6 +48,8 @@ export default function Courses() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [isAddCourseOpen, setIsAddCourseOpen] = useState(false);
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [newCourse, setNewCourse] = useState<CreateCourseRequest>({
     title: "",
     description: "",
@@ -57,6 +59,13 @@ export default function Courses() {
     price: 0,
     tags: [],
     instructor: "",
+  });
+  const [enrollmentForm, setEnrollmentForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    classType: "online",
+    courseName: "",
   });
 
   useEffect(() => {
@@ -284,6 +293,41 @@ export default function Courses() {
       instructor: "",
     });
     setIsAddCourseOpen(false);
+  };
+
+  const handleEnrollmentSubmit = async () => {
+    const enrollmentData = {
+      ...enrollmentForm,
+      courseName: selectedCourse,
+      submittedAt: new Date().toISOString(),
+    };
+
+    try {
+      console.log("Enrollment data:", enrollmentData);
+
+      setIsEnrollmentOpen(false);
+      setEnrollmentForm({
+        name: "",
+        email: "",
+        phone: "",
+        classType: "online",
+        courseName: "",
+      });
+      setSelectedCourse("");
+
+      alert(
+        `Thank you for enrolling in ${selectedCourse}! We'll contact you soon at ${enrollmentData.email}.`,
+      );
+    } catch (error) {
+      console.error("Error submitting enrollment:", error);
+      alert("There was an error submitting your enrollment. Please try again.");
+    }
+  };
+
+  const openEnrollmentModal = (courseName: string) => {
+    setSelectedCourse(courseName);
+    setEnrollmentForm((prev) => ({ ...prev, courseName }));
+    setIsEnrollmentOpen(true);
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -660,6 +704,110 @@ export default function Courses() {
           </div>
         )}
       </div>
+
+      {/* Enrollment Modal */}
+      <Dialog open={isEnrollmentOpen} onOpenChange={setIsEnrollmentOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Enroll in Course</DialogTitle>
+            <DialogDescription>
+              Complete your enrollment for: <strong>{selectedCourse}</strong>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="enrollName">Full Name *</Label>
+              <Input
+                id="enrollName"
+                value={enrollmentForm.name}
+                onChange={(e) =>
+                  setEnrollmentForm({ ...enrollmentForm, name: e.target.value })
+                }
+                placeholder="Your full name"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="enrollEmail">Email Address *</Label>
+              <Input
+                id="enrollEmail"
+                type="email"
+                value={enrollmentForm.email}
+                onChange={(e) =>
+                  setEnrollmentForm({
+                    ...enrollmentForm,
+                    email: e.target.value,
+                  })
+                }
+                placeholder="your.email@example.com"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="enrollPhone">Phone Number *</Label>
+              <Input
+                id="enrollPhone"
+                type="tel"
+                value={enrollmentForm.phone}
+                onChange={(e) =>
+                  setEnrollmentForm({
+                    ...enrollmentForm,
+                    phone: e.target.value,
+                  })
+                }
+                placeholder="+91 9876543210"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="classType">Preferred Class Type *</Label>
+              <Select
+                value={enrollmentForm.classType}
+                onValueChange={(value) =>
+                  setEnrollmentForm({ ...enrollmentForm, classType: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select class type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="online">Online Classes</SelectItem>
+                  <SelectItem value="offline">Offline Classes</SelectItem>
+                  <SelectItem value="hybrid">
+                    Hybrid (Online + Offline)
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold text-gray-900 mb-2">
+                Course Details:
+              </h4>
+              <p className="text-sm text-gray-600">
+                <strong>Course:</strong> {selectedCourse}
+              </p>
+              <p className="text-sm text-gray-600">
+                <strong>Contact Email:</strong> mirajgodha@gmail.com
+              </p>
+            </div>
+            <Button
+              onClick={handleEnrollmentSubmit}
+              className="w-full bg-brand-500 hover:bg-brand-600"
+              disabled={
+                !enrollmentForm.name ||
+                !enrollmentForm.email ||
+                !enrollmentForm.phone
+              }
+            >
+              Submit Enrollment
+            </Button>
+            <p className="text-xs text-gray-500 text-center">
+              By submitting this form, you agree to be contacted by our team
+              regarding your enrollment.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
