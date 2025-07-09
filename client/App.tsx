@@ -22,6 +22,7 @@ const App = () => {
       <BrowserRouter basename="/quantumRoot1/">
         <TooltipProvider>
           <Routes>
+            <Route index element={<Index />} />
             <Route path="/" element={<Index />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:courseId" element={<CourseDetail />} />
