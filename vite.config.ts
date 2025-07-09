@@ -5,7 +5,7 @@ import { createServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: './', // ✅ This line is critical for GitHub Pages
+  base: '/quantumRoot1/', // ✅ This line is critical for GitHub Pages
   server: {
     host: "::",
     port: 8080,
