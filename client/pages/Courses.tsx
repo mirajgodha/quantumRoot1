@@ -608,7 +608,7 @@ export default function Courses() {
                             price: Number(e.target.value),
                           })
                         }
-                        placeholder="299"
+                        placeholder="29999"
                       />
                     </div>
                   </div>
