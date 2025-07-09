@@ -304,20 +304,27 @@ export default function Index() {
                 key={course.id}
                 className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg"
               >
-                <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-200 rounded-t-lg flex items-center justify-center relative overflow-hidden">
-                  {course.category === "Programming" && (
-                    <Code className="w-16 h-16 text-brand-600" />
-                  )}
-                  {course.category === "Cloud" && (
-                    <Cloud className="w-16 h-16 text-brand-600" />
-                  )}
-                  {course.category === "Data Science" && (
-                    <Database className="w-16 h-16 text-brand-600" />
-                  )}
-                  {!["Programming", "Cloud", "Data Science"].includes(
-                    course.category,
-                  ) && <BookOpen className="w-16 h-16 text-brand-600" />}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="aspect-video rounded-t-lg overflow-hidden relative">
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                  <div className="absolute top-3 right-3">
+                    {course.category === "Generative AI" && (
+                      <Brain className="w-6 h-6 text-white" />
+                    )}
+                    {course.category === "Big Data" && (
+                      <Database className="w-6 h-6 text-white" />
+                    )}
+                    {course.category === "NoSQL" && (
+                      <Database className="w-6 h-6 text-white" />
+                    )}
+                    {course.category === "Search & Analytics" && (
+                      <Search className="w-6 h-6 text-white" />
+                    )}
+                  </div>
                 </div>
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between mb-2">
