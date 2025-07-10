@@ -617,7 +617,7 @@ export default function Index() {
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
               { name: "Programming", icon: Code, count: 25 },
-              { name: "Robotics", icon: Cpu, count: 12 },
+              { name: "Robotics", icon: Cpu, count: 2 },
               { name: "Cloud", icon: Cloud, count: 18 },
               { name: "Data Engineering", icon: Database, count: 15 },
               { name: "AI/ML", icon: Brain, count: 20 },

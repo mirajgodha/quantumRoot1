@@ -717,12 +717,19 @@ export default function Courses() {
                       by {course.instructor}
                     </div>
                   </div>
-                  <Button
-                    className="bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700"
-                    onClick={() => openEnrollmentModal(course.title)}
-                  >
-                    Enroll Now
-                  </Button>
+                  <div className="flex flex-col gap-2">
+                    <Link to={`/courses/${course.id}`}>
+                      <Button variant="outline" className="w-full">
+                        View Details
+                      </Button>
+                    </Link>
+                    <Button
+                      className="bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700"
+                      onClick={() => openEnrollmentModal(course.title)}
+                    >
+                      Enroll Now
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

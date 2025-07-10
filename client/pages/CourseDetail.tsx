@@ -47,6 +47,7 @@ import {
   Share,
   ChevronRight,
 } from "lucide-react";
+import { Course } from "@shared/api";
 
 export default function CourseDetail() {
   const { courseId } = useParams();
@@ -70,83 +71,219 @@ export default function CourseDetail() {
     phone: "",
   });
 
-  // Mock course data - in real app this would come from API
+  // Mock courses data - same as in Courses.tsx for consistency
+  const mockCourses = [
+    {
+      id: "1",
+      title: "Generative AI & Large Language Models",
+      description:
+        "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
+      category: "Generative AI",
+      duration: "12 weeks",
+      difficulty: "Advanced" as const,
+      price: 29999,
+      image:
+        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
+      tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
+      instructor: "Dr. Sarah Chen",
+      rating: 4.9,
+      students: 12500,
+      featured: true,
+    },
+    {
+      id: "2",
+      title: "Apache Spark for Big Data Processing",
+      description:
+        "Learn distributed computing and big data processing with Apache Spark, PySpark, and real-world projects.",
+      category: "Big Data",
+      duration: "10 weeks",
+      difficulty: "Intermediate" as const,
+      price: 39999,
+      image:
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop&crop=center",
+      tags: ["Apache Spark", "PySpark", "Big Data", "Scala"],
+      instructor: "Mark Rodriguez",
+      rating: 4.8,
+      students: 8900,
+      featured: true,
+    },
+    {
+      id: "3",
+      title: "Apache Cassandra for Distributed Systems",
+      description:
+        "Master distributed NoSQL databases with Cassandra for high-availability applications and scalable data solutions.",
+      category: "NoSQL",
+      duration: "8 weeks",
+      difficulty: "Advanced" as const,
+      price: 59999,
+      image:
+        "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop&crop=center",
+      tags: ["Apache Cassandra", "NoSQL", "Distributed Systems", "CQL"],
+      instructor: "Dr. Amit Patel",
+      rating: 4.7,
+      students: 15600,
+      featured: true,
+    },
+    {
+      id: "4",
+      title: "Elasticsearch & Search Analytics",
+      description:
+        "Learn to build powerful search engines and analytics platforms with Elasticsearch, Kibana, and Logstash.",
+      category: "Search & Analytics",
+      duration: "6 weeks",
+      difficulty: "Intermediate" as const,
+      price: 49999,
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center",
+      tags: ["Elasticsearch", "Kibana", "Logstash", "Search"],
+      instructor: "Maria Santos",
+      rating: 4.8,
+      students: 11200,
+      featured: true,
+    },
+    {
+      id: "5",
+      title: "Machine Learning with Python",
+      description:
+        "Complete machine learning course covering algorithms, model training, and deployment with scikit-learn.",
+      category: "Machine Learning",
+      duration: "10 weeks",
+      difficulty: "Intermediate" as const,
+      price: 34999,
+      image:
+        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop&crop=center",
+      tags: ["Python", "scikit-learn", "TensorFlow", "Pandas"],
+      instructor: "Dr. Alex Kumar",
+      rating: 4.8,
+      students: 4567,
+    },
+    {
+      id: "6",
+      title: "Data Engineering with Apache Airflow",
+      description:
+        "Build robust data pipelines and workflows using Apache Airflow and modern data engineering practices.",
+      category: "Data Engineering",
+      duration: "7 weeks",
+      difficulty: "Intermediate" as const,
+      price: 37999,
+      image:
+        "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&h=250&fit=crop&crop=center",
+      tags: ["Airflow", "ETL", "Python", "Data Pipelines"],
+      instructor: "Lisa Wang",
+      rating: 4.7,
+      students: 2134,
+    },
+    {
+      id: "7",
+      title: "Hadoop Ecosystem Fundamentals",
+      description:
+        "Learn the complete Hadoop ecosystem including HDFS, MapReduce, Hive, and HBase for big data processing.",
+      category: "Big Data",
+      duration: "8 weeks",
+      difficulty: "Beginner" as const,
+      price: 28999,
+      image:
+        "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=250&fit=crop&crop=center",
+      tags: ["Hadoop", "HDFS", "MapReduce", "Hive", "HBase"],
+      instructor: "David Kim",
+      rating: 4.4,
+      students: 1567,
+    },
+  ];
+
+  // Find the course by ID
+  const foundCourse = mockCourses.find((c) => c.id === courseId);
+
+  // If course not found, redirect to 404 or show error
+  if (!foundCourse) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Course Not Found
+          </h1>
+          <p className="text-gray-600 mb-6">
+            The course you're looking for doesn't exist.
+          </p>
+          <Link to="/courses" className="text-brand-600 hover:text-brand-700">
+            ← Back to Courses
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Extended course data with additional details
   const course = {
-    id: courseId || "1",
-    title: "Python for Beginners",
-    description:
-      "Learn Python programming from scratch with hands-on projects and real-world applications. This comprehensive course covers everything from basic syntax to advanced concepts like object-oriented programming, web scraping, and data analysis.",
-    category: "Programming",
-    duration: "8 weeks",
-    difficulty: "Beginner",
-    price: 19999,
-    originalPrice: 29999,
-    rating: 4.8,
-    students: 12500,
+    ...foundCourse,
+    originalPrice: Math.round(foundCourse.price * 1.5), // 50% discount
     instructor: {
-      name: "Dr. Rajesh Kumar",
-      bio: "Senior Software Engineer with 10+ years of experience at Google and Microsoft. Expert in Python, AI, and machine learning.",
+      name: foundCourse.instructor,
+      bio: "Expert instructor with years of industry experience and proven track record in training professionals.",
       image: "/api/placeholder/100/100",
     },
     whatYouLearn: [
-      "Python fundamentals and syntax",
-      "Data types, variables, and operators",
-      "Control structures and loops",
-      "Functions and modules",
-      "Object-oriented programming",
-      "File handling and data manipulation",
-      "Web scraping with BeautifulSoup",
-      "Data analysis with Pandas",
-      "Building real-world projects",
+      `Master ${foundCourse.title} fundamentals`,
+      "Hands-on practical projects",
+      "Industry best practices",
+      "Real-world applications",
+      "Advanced techniques and patterns",
+      "Performance optimization",
+      "Troubleshooting and debugging",
+      "Career development guidance",
     ],
     prerequisites: [
       "Basic computer knowledge",
-      "No prior programming experience required",
+      foundCourse.difficulty === "Beginner"
+        ? "No prior experience required"
+        : "Basic programming knowledge recommended",
       "Enthusiasm to learn",
     ],
     curriculum: [
       {
-        module: "Module 1: Python Basics",
+        module: "Module 1: Fundamentals",
         lessons: [
-          "Introduction to Python",
-          "Installing Python and IDE setup",
-          "Variables and data types",
-          "Basic operators",
+          `Introduction to ${foundCourse.title}`,
+          "Setting up development environment",
+          "Basic concepts and terminology",
+          "First hands-on exercises",
         ],
       },
       {
-        module: "Module 2: Control Structures",
+        module: "Module 2: Core Concepts",
         lessons: [
-          "Conditional statements",
-          "Loops (for and while)",
-          "Break and continue",
-          "Nested loops",
+          "Deep dive into core principles",
+          "Best practices and patterns",
+          "Common use cases",
+          "Practical applications",
         ],
       },
       {
-        module: "Module 3: Functions and Modules",
+        module: "Module 3: Advanced Topics",
         lessons: [
-          "Defining functions",
-          "Parameters and return values",
-          "Lambda functions",
-          "Modules and packages",
+          "Advanced techniques",
+          "Performance optimization",
+          "Scaling and production considerations",
+          "Integration with other tools",
         ],
       },
       {
-        module: "Module 4: Object-Oriented Programming",
+        module: "Module 4: Real-world Projects",
         lessons: [
-          "Classes and objects",
-          "Inheritance",
-          "Polymorphism",
-          "Encapsulation",
+          "Project planning and setup",
+          "Implementation and development",
+          "Testing and debugging",
+          "Deployment and monitoring",
         ],
       },
     ],
     faqs: [
       {
-        question: "Is this course suitable for complete beginners?",
+        question: `Is this ${foundCourse.title} course suitable for beginners?`,
         answer:
-          "Yes, this course is designed for complete beginners with no prior programming experience. We start from the very basics and gradually build up to more complex concepts.",
+          foundCourse.difficulty === "Beginner"
+            ? "Yes, this course is designed for complete beginners with no prior experience. We start from the very basics."
+            : "This course requires some basic knowledge. We recommend having fundamental understanding before starting.",
       },
       {
         question: "What kind of support do I get during the course?",
@@ -335,8 +472,19 @@ export default function CourseDetail() {
             <div className="lg:col-span-1">
               <Card className="bg-white text-gray-900">
                 <CardContent className="p-6">
-                  <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-200 rounded-lg flex items-center justify-center mb-4">
-                    <Play className="w-16 h-16 text-brand-600" />
+                  <div className="aspect-video bg-gradient-to-br from-brand-100 to-brand-200 rounded-lg flex items-center justify-center mb-4 relative overflow-hidden">
+                    {foundCourse.image ? (
+                      <img
+                        src={foundCourse.image}
+                        alt={foundCourse.title}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      <Play className="w-16 h-16 text-brand-600" />
+                    )}
+                    <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                      <Play className="w-16 h-16 text-white opacity-80" />
+                    </div>
                   </div>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-3xl font-bold text-brand-600">
