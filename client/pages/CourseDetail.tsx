@@ -141,7 +141,7 @@ export default function CourseDetail() {
       instructor: "Maria Santos",
       rating: 4.8,
       students: 11200,
-      featured: true,
+      
     },
     {
       id: "5",
@@ -191,6 +191,36 @@ export default function CourseDetail() {
       rating: 4.4,
       students: 1567,
     },
+    {
+    id: "8",
+    title: "Introduction to Generative AI for Business Leaders",
+    description:
+      "Master AI tools like ChatGPT, Gemini, and others to boost productivity, decision-making, and daily workflows. Learn prompt engineering from scratch and use AI to dominate office work, client projects, research, and even job hunting.",
+    category: "Generative AI",
+    duration: "6 weeks",
+    difficulty: "Beginner" as const,
+    price: 34999,
+    image:
+      "https://images.unsplash.com/photo-1685076921443-6d2d108a48e2?w=400&h=250&fit=crop&crop=center",
+    tags: [
+      "Generative AI",
+      "ChatGPT",
+      "Gemini",
+      "Prompt Engineering",
+      "AI Productivity",
+      "Job Hunting",
+      "Excel & PPT with AI",
+      "No-Code AI",
+      "AI for Research",
+      "Side Hustles",
+      "Personal Branding",
+      "Efficiency Hacks"
+    ],
+    instructor: "Sarah Iyer",
+    rating: 4.8,
+    students: 2942,
+    featured: true,
+  },
   ];
 
   // Find the course by ID
@@ -205,7 +235,7 @@ export default function CourseDetail() {
             Course Not Found
           </h1>
           <p className="text-gray-600 mb-6">
-            The course you're looking for doesn't exist.
+            Detailed course curriculum for this course will be available soon.
           </p>
           <Link to="/courses" className="text-brand-600 hover:text-brand-700">
             ← Back to Courses

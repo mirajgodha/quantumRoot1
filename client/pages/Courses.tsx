@@ -239,7 +239,7 @@ export default function Courses() {
         category: "Generative AI",
         duration: "18 hours",
         difficulty: "Beginner",
-        price: 18999,
+        price: 24999,
         image:
           "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
         tags: ["ChatGPT", "Prompt Engineering", "API", "Chatbots", "GPT-3"],
@@ -255,7 +255,7 @@ export default function Courses() {
         category: "Generative AI",
         duration: "25.5 hours",
         difficulty: "Advanced",
-        price: 7599,
+        price: 55999,
         image:
           "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
         tags: ["LLM", "RAG", "LoRA", "AI Agents", "Multi-modal"],

@@ -222,7 +222,7 @@ export default function Index() {
       name: "Priya Singh",
       role: "Database Architect at Infosys",
       image:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b743?w=80&h=80&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1617009762269-c062aaf6b3a0?w=900&auto=format&fit=crop&crop=face",
       rating: 5,
       review:
         "Apache Cassandra course was incredibly detailed with hands-on projects. The distributed systems concepts are now clear to me and I'm leading database architecture at my company.",
@@ -231,8 +231,8 @@ export default function Index() {
       name: "Arjun Krishnan",
       role: "Search Engineer at Wipro",
       image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
-      rating: 5,
+        "https://images.unsplash.com/photo-1662145349402-f78c521eccb0?w=900&auto=format&fit=crop&crop=face",
+      rating: 4,
       review:
         "Elasticsearch course gave me deep insights into search analytics. The real-world projects helped me implement enterprise search solutions successfully.",
     },
@@ -240,7 +240,7 @@ export default function Index() {
       name: "Sneha Patel",
       role: "AI Engineer at Accenture",
       image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
+        "https://plus.unsplash.com/premium_photo-1682089810582-f7b200217b67?w=900&auto=format&fit=crop&crop=face",
       rating: 5,
       review:
         "The Generative AI & LLM course exceeded my expectations. Building real AI applications and understanding transformer models was a game-changer for my career.",
@@ -250,7 +250,7 @@ export default function Index() {
       role: "Data Architect at UHG",
       image:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face",
-      rating: 5,
+      rating: 4,
       review:
         "Data Architecture course provided comprehensive knowledge on designing scalable data systems. The MongoDB and Cassandra modules were particularly valuable.",
     },
