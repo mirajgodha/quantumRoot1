@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
                 className="w-8 h-8 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
                 1. Introduction
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                QuantumRoot ("we," "our," or "us") is committed to protecting
+                Quantum Root ("we," "our," or "us") is committed to protecting
                 and respecting your privacy. This Privacy Policy explains how we
                 collect, use, disclose, and safeguard your information when you
                 visit our website, use our services, or interact with us in any
@@ -243,7 +243,7 @@ export default function PrivacyPolicy() {
               </p>
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <p className="text-gray-700">
-                  <strong>QuantumRoot</strong>
+                  <strong>Quantum Root</strong>
                   <br />
                   Email: info@quantumroot.in
                   <br />

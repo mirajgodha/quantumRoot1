@@ -178,7 +178,7 @@ export default function Contact() {
                 className="w-8 h-8 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
@@ -223,7 +223,7 @@ export default function Contact() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
           <p className="text-xl text-brand-100 max-w-2xl mx-auto">
             Get in touch with our team for course guidance, support, or any
-            questions about QuantumRoot
+            questions about Quantum Root
           </p>
         </div>
       </div>

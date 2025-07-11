@@ -15,7 +15,7 @@ export default function TermsOfService() {
                 className="w-8 h-8 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
@@ -64,7 +64,7 @@ export default function TermsOfService() {
                 1. Acceptance of Terms
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                By accessing and using QuantumRoot's website and services, you
+                By accessing and using Quantum Root's website and services, you
                 accept and agree to be bound by the terms and provision of this
                 agreement. If you do not agree to abide by the above, please do
                 not use this service.
@@ -76,7 +76,7 @@ export default function TermsOfService() {
                 2. Description of Service
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                QuantumRoot provides online and offline technology training
+                Quantum Root provides online and offline technology training
                 courses, educational content, and related services. Our services
                 include but are not limited to:
               </p>
@@ -145,7 +145,7 @@ export default function TermsOfService() {
               </h2>
               <p className="text-gray-700 leading-relaxed">
                 Our refund policy is designed to be fair to both students and
-                QuantumRoot:
+                Quantum Root:
               </p>
               <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1">
                 <li>
@@ -179,7 +179,7 @@ export default function TermsOfService() {
               <p className="text-gray-700 leading-relaxed">
                 All content, including but not limited to text, graphics,
                 videos, audio, software, and course materials, is the property
-                of QuantumRoot or its content suppliers and is protected by
+                of Quantum Root or its content suppliers and is protected by
                 copyright and other intellectual property laws.
               </p>
               <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1">
@@ -218,7 +218,7 @@ export default function TermsOfService() {
                 8. Limitation of Liability
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                QuantumRoot shall not be liable for any indirect, incidental,
+                Quantum Root shall not be liable for any indirect, incidental,
                 special, consequential, or punitive damages, including without
                 limitation, loss of profits, data, use, goodwill, or other
                 intangible losses, resulting from your use of our services.

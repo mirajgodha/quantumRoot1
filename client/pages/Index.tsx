@@ -529,9 +529,14 @@ export default function Index() {
                 alt="QuantumRoot Logo"
                 className="w-10 h-10 object-contain"
               />
-              <span className="text-2xl font-bold text-gray-900">
-                QuantumRoot
-              </span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                  Quantum Root
+                </span>
+                <span className="text-xs text-gray-600 italic -mt-1">
+                  Grow from the root, scale to quantum
+                </span>
+              </div>
             </Link>
 
             {/* Navigation */}
@@ -733,7 +738,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose QuantumRoot?
+              Why Choose Quantum Root?
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -1092,7 +1097,7 @@ export default function Index() {
                     setValidationErrors({ ...validationErrors, phone: "" });
                   }
                 }}
-                placeholder="+91 96502 19962"
+                placeholder="+91 9876543210"
                 required
                 className={validationErrors.phone ? "border-red-500" : ""}
               />
@@ -1130,7 +1135,7 @@ export default function Index() {
                 <strong>Course:</strong> {selectedCourse}
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Contact Email:</strong> info@quantumroot.in
+                <strong>Contact Email:</strong> mirajgodha@gmail.com
               </p>
             </div>
             <Button

@@ -16,8 +16,8 @@ export default function LiveClasses() {
                 alt="QuantumRoot Logo"
                 className="w-10 h-10 object-contain"
               />
-              <span className="text-2xl font-bold text-gray-900">
-                QuantumRoot
+              <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                Quantum Root
               </span>
             </Link>
             <nav className="hidden md:flex items-center space-x-8">

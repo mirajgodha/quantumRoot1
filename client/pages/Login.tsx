@@ -15,7 +15,7 @@ export default function Login() {
                 className="w-8 h-8 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
           </div>
@@ -33,7 +33,7 @@ export default function Login() {
                 className="w-8 h-8 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">

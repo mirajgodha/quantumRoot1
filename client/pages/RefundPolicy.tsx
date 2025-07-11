@@ -15,7 +15,7 @@ export default function RefundPolicy() {
                 className="w-8 h-8 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
@@ -64,7 +64,7 @@ export default function RefundPolicy() {
                 1. Overview
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                At QuantumRoot, we want you to be satisfied with your learning
+                At Quantum Root, we want you to be satisfied with your learning
                 experience. This refund policy outlines the terms and conditions
                 under which refunds are processed for our courses and services.
                 Please read this policy carefully before enrolling in any

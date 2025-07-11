@@ -281,7 +281,7 @@ export default function CourseDetail() {
                 className="w-10 h-10 object-contain"
               />
               <span className="text-2xl font-bold text-gray-900">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
             <nav className="hidden md:flex items-center space-x-8">

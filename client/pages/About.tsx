@@ -16,7 +16,7 @@ export default function About() {
                 className="w-8 h-8 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                QuantumRoot
+                Quantum Root
               </span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
@@ -57,7 +57,7 @@ export default function About() {
           <h1 className="text-4xl font-bold mb-6">
             About{" "}
             <span className="bg-gradient-to-r from-brand-500 to-brand-600 bg-clip-text text-transparent">
-              QuantumRoot
+              Quantum Root
             </span>
           </h1>
           <p className="text-xl text-brand-600 font-medium italic mb-8">
@@ -68,7 +68,7 @@ export default function About() {
         <div className="prose prose-lg max-w-none">
           <div className="bg-background rounded-2xl p-8 shadow-lg border mb-8">
             <p className="text-lg leading-relaxed text-muted-foreground">
-              At QuantumRoot, we believe true learning begins at the root — with
+              At Quantum Root, we believe true learning begins at the root — with
               strong fundamentals — and grows into quantum leaps of expertise.
             </p>
           </div>
@@ -82,7 +82,7 @@ export default function About() {
                 With over <strong>12 years of experience</strong> in tech
                 education, we've trained <strong>1,100+ students</strong> across
                 the globe under our former brand Design Pathshala. Now reborn as
-                QuantumRoot, we're doubling down on our mission: to make
+                Quantum Root, we're doubling down on our mission: to make
                 cutting-edge tech skills accessible, practical, and
                 industry-ready.
               </p>
