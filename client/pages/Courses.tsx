@@ -77,7 +77,7 @@ export default function Courses() {
     const mockCourses: Course[] = [
       {
         id: "1",
-        title: "Generative AI & Large Language Models",
+        title: "Generative AI & Large Language Models Singhal",
         description:
           "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
         category: "Generative AI",
@@ -190,6 +190,70 @@ export default function Courses() {
         instructor: "David Kim",
         rating: 4.4,
         students: 1567,
+      },
+      {
+        id: "8",
+        title: "DataBricks for Big Data Processing",
+        description:
+          "Learn DataBricks for big data processing including Databricks SQL, Databricks Delta, and Databricks ML.",
+        category: "Big Data",
+        duration: "8 weeks",
+        difficulty: "Intermediate",
+        price: 28999,
+        image:
+          "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=250&fit=crop&crop=center",
+        tags: ["Hadoop", "HDFS", "MapReduce", "Hive", "HBase"],
+        instructor: "David Kim",
+        rating: 4.4,
+        students: 1567,
+      },
+      {
+        id: "9",
+        title: "Introduction to Generative AI",
+        description:
+          "Comprehensive foundation in Generative AI covering principles, types of generative models, applications, ML algorithms, and ethical considerations with hands-on projects.",
+        category: "Generative AI",
+        duration: "200+ hours",
+        difficulty: "Beginner",
+        price: 18999,
+        image:
+          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
+        tags: ["Generative AI", "ML Algorithms", "Ethics", "Hands-on Projects"],
+        instructor: "Edureka Industry Experts",
+        rating: 4.6,
+        students: 3200,
+      },
+      {
+        id: "10",
+        title: "ChatGPT Training Course: Beginners to Advanced",
+        description:
+          "Master ChatGPT from basics to advanced applications including prompt engineering, API integration, building chatbots, and business applications.",
+        category: "Generative AI",
+        duration: "18 hours",
+        difficulty: "Beginner",
+        price: 18999,
+        image:
+          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
+        tags: ["ChatGPT", "Prompt Engineering", "API", "Chatbots", "GPT-3"],
+        instructor: "Edureka Industry Practitioners",
+        rating: 4.7,
+        students: 2850,
+      },
+      {
+        id: "11",
+        title: "LLM Engineering: Master AI, Large Language Models & Agents",
+        description:
+          "Transform into a proficient LLM engineer through building 8 practical applications covering RAG, LoRA, AI Agents, and multi-modal systems.",
+        category: "Generative AI",
+        duration: "25.5 hours",
+        difficulty: "Advanced",
+        price: 7599,
+        image:
+          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
+        tags: ["LLM", "RAG", "LoRA", "AI Agents", "Multi-modal"],
+        instructor: "Ed Donner",
+        rating: 4.8,
+        students: 1890,
       },
     ];
 

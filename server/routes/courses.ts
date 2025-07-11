@@ -18,7 +18,7 @@ const mockCourses: Course[] = [
     difficulty: "Intermediate",
     price: 299,
     tags: ["OpenAI", "LangChain", "Python", "Neural Networks"],
-    instructor: "Dr. Sarah Chen",
+    instructor: "Dr. John Doe",
     rating: 4.9,
     students: 2847,
     featured: true,

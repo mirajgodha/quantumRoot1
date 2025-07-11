@@ -85,7 +85,7 @@ export default function CourseDetail() {
       image:
         "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
       tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
-      instructor: "Dr. Sarah Chen",
+      instructor: "Dr. Rakesh Kumar",
       rating: 4.9,
       students: 12500,
       featured: true,

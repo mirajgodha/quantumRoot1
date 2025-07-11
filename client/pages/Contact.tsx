@@ -117,10 +117,10 @@ export default function Contact() {
                       Email
                     </h3>
                     <a
-                      href="mailto:roopalgodha@gmail.com"
+                      href="mailto:info@quantumroot.in"
                       className="text-brand-600 hover:text-brand-700 transition-colors"
                     >
-                      roopalgodha@gmail.com
+                      info@quantumroot.in
                     </a>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export default function Contact() {
                       href="tel:+919650219962"
                       className="text-brand-600 hover:text-brand-700 transition-colors"
                     >
-                      +91 9650219962
+                      +91 96502 19962 , +91 98188 23045
                     </a>
                   </div>
                 </div>

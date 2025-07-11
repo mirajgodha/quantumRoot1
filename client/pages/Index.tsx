@@ -97,7 +97,7 @@ export default function Index() {
       image:
         "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
       tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
-      instructor: "Dr. Sarah Chen",
+      instructor: "Dr. Mukesh Gupta",
       rating: 4.9,
       students: 12500,
       featured: true,
@@ -420,7 +420,7 @@ export default function Index() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-              Master Tech Skills with
+              Master Tech Skills with Ankur
               <br />
               <span className="text-yellow-300">Hands-On Training</span>
             </h1>
