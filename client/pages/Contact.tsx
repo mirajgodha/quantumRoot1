@@ -207,6 +207,12 @@ export default function Contact() {
                 About
               </Link>
               <Link
+                to="/blog"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
                 to="/contact"
                 className="text-brand-600 font-medium hover:text-brand-700 transition-colors"
               >

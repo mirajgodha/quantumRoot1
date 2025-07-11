@@ -530,8 +530,8 @@ export default function Index() {
                 className="w-10 h-10 object-contain"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                  Quantum Root
+                <span className="text-2xl font-bold text-gray-900">
+                  QuantumRoot
                 </span>
                 <span className="text-xs text-gray-600 italic -mt-1">
                   Grow from the root, scale to quantum
@@ -564,6 +564,12 @@ export default function Index() {
                 className="text-gray-700 hover:text-brand-600 transition-colors"
               >
                 About
+              </Link>
+              <Link
+                to="/blog"
+                className="text-gray-700 hover:text-brand-600 transition-colors"
+              >
+                Blog
               </Link>
               <Link
                 to="/contact"
@@ -738,7 +744,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Quantum Root?
+              Why Choose QuantumRoot?
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -797,12 +803,12 @@ export default function Index() {
           </div>
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
-              { name: "Programming", icon: Code, count: 25 },
+              { name: "Programming", icon: Code, count: 12 },
               { name: "Robotics", icon: Cpu, count: 2 },
-              { name: "Cloud", icon: Cloud, count: 18 },
-              { name: "Data Engineering", icon: Database, count: 15 },
-              { name: "AI/ML", icon: Brain, count: 20 },
-              { name: "DevOps", icon: Award, count: 10 },
+              { name: "Cloud", icon: Cloud, count: 6 },
+              { name: "Data Engineering", icon: Database, count: 5 },
+              { name: "AI/ML", icon: Brain, count: 3 },
+              { name: "DevOps", icon: Award, count: 1 },
             ].map((category) => (
               <Card
                 key={category.name}

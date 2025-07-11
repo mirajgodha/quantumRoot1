@@ -318,6 +318,12 @@ export default function Courses() {
                 About
               </Link>
               <Link
+                to="/blog"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
                 to="/contact"
                 className="text-foreground hover:text-brand-600 transition-colors"
               >

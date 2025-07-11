@@ -42,6 +42,12 @@ export default function About() {
                 About
               </Link>
               <Link
+                to="/blog"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
                 to="/contact"
                 className="text-foreground hover:text-brand-600 transition-colors"
               >
@@ -68,9 +74,36 @@ export default function About() {
         <div className="prose prose-lg max-w-none">
           <div className="bg-background rounded-2xl p-8 shadow-lg border mb-8">
             <p className="text-lg leading-relaxed text-muted-foreground">
-              At Quantum Root, we believe true learning begins at the root — with
-              strong fundamentals — and grows into quantum leaps of expertise.
+              At Quantum Root, we believe true learning begins at the root —
+              with strong fundamentals — and grows into quantum leaps of
+              expertise.
             </p>
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 shadow-lg border mb-8">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-shrink-0">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2F3cddc790102f4719ad62fe4143c999de?format=webp&width=800"
+                  alt="Design Pathshala Logo"
+                  className="w-24 h-24 object-contain rounded-lg shadow-md"
+                />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-semibold mb-4 text-blue-700">
+                  Our Legacy: From Design Pathshala to Quantum Root
+                </h2>
+                <p className="text-gray-700 leading-relaxed">
+                  Design Pathshala is now reborn as Quantum Root. Founded in
+                  2012 from a modest room in Indirapuram, UP, we've grown over
+                  the years into a trusted training partner for thousands of
+                  learners across the globe. Our journey has impacted working
+                  professionals from leading companies like Amazon, Facebook,
+                  and Oracle, as well as students from top institutions
+                  including IITs and MNITs.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">

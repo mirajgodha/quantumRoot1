@@ -13,10 +13,10 @@ export default function Footer() {
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800"
                 alt="QuantumRoot Logo"
-                className="w-10 h-20 object-contain mt-1"
+                className="w-8 h-8 object-contain mt-1"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">Quantum Root</span>
+                <span className="text-xl font-bold">QuantumRoot</span>
                 <span className="text-sm text-gray-400 italic -mt-1">
                   Grow from the root, scale to quantum
                 </span>
@@ -27,14 +27,10 @@ export default function Footer() {
               the future workplace.
             </p>
             <div className="flex space-x-4">
-              <Facebook
-              className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"
-              onClick={() => window.open("https://www.facebook.com/profile.php?id=100007764979096", "_blank")}
-              />
+              <Facebook className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
               <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
               <Linkedin className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-              <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" 
-              onClick={() => window.open("https://www.youtube.com/@designpathshala4807", "_blank")}/>
+              <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
             </div>
           </div>
           <div>
@@ -62,6 +58,11 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                 >
                   Live Classes
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="hover:text-white transition-colors">
+                  Blog
                 </Link>
               </li>
               <li>

@@ -43,6 +43,12 @@ export default function LiveClasses() {
                 About
               </Link>
               <Link
+                to="/blog"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
                 to="/contact"
                 className="text-gray-700 hover:text-brand-600 transition-colors"
               >
