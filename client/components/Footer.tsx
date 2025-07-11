@@ -16,7 +16,7 @@ export default function Footer() {
                 className="w-8 h-8 object-contain mt-1"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-bold">QuantumRoot</span>
+                <span className="text-xl font-bold">Quantum Root</span>
                 <span className="text-sm text-gray-400 italic -mt-1">
                   Grow from the root, scale to quantum
                 </span>

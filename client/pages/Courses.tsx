@@ -285,15 +285,20 @@ export default function Courses() {
       <nav className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800"
                 alt="QuantumRoot Logo"
-                className="w-8 h-8 object-contain"
+                className="w-10 h-10 object-contain"
               />
-              <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                Quantum Root
-              </span>
+               <div className="flex flex-col">
+                <span className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                  Quantum Root
+                </span>
+                <span className="text-xs text-gray-600 italic -mt-1">
+                  Grow from the root, scale to quantum
+                </span>
+              </div>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <Link

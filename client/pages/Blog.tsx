@@ -117,8 +117,8 @@ export default function Blog() {
                 className="w-10 h-10 object-contain"
               />
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-gray-900">
-                  QuantumRoot
+                <span className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                  Quantum Root
                 </span>
                 <span className="text-xs text-gray-600 italic -mt-1">
                   Grow from the root, scale to quantum

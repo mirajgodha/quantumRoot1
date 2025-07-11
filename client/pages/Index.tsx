@@ -530,8 +530,8 @@ export default function Index() {
                 className="w-10 h-10 object-contain"
               />
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-gray-900">
-                  QuantumRoot
+                <span className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                  Quantum Root
                 </span>
                 <span className="text-xs text-gray-600 italic -mt-1">
                   Grow from the root, scale to quantum
@@ -744,7 +744,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose QuantumRoot?
+              Why Choose Quantum Root?
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

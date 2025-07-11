@@ -81,7 +81,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "ai-ml",
     tags: ["AI", "Chatbots", "Customer Service", "Automation"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2024-01-15",
     readTime: 5,
     image:
@@ -124,7 +124,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "ai-ml",
     tags: ["LLM", "GPT", "Natural Language Processing", "AI"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2024-01-10",
     readTime: 7,
     image:
@@ -167,7 +167,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "ai-ml",
     tags: ["Generative AI", "Deep Learning", "Neural Networks", "Innovation"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2024-01-08",
     readTime: 6,
     image:
@@ -215,7 +215,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "big-data",
     tags: ["Apache Cassandra", "Performance", "Database", "NoSQL"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2024-01-05",
     readTime: 8,
     image:
@@ -263,7 +263,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "big-data",
     tags: ["MongoDB", "Data Modeling", "NoSQL", "Database Design"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2024-01-03",
     readTime: 6,
     image:
@@ -311,7 +311,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "career-development",
     tags: ["AI", "Job Search", "Career Development", "Technology"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2024-01-01",
     readTime: 5,
     image:
@@ -359,7 +359,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "productivity",
     tags: ["Generative AI", "Productivity", "Automation", "Workflow"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2023-12-28",
     readTime: 4,
     image:
@@ -407,7 +407,7 @@ export const blogPosts: BlogPost[] = [
     `,
     category: "ai-ml",
     tags: ["AI", "Education", "E-Learning", "Training"],
-    author: "QuantumRoot Editorial Team",
+    author: "Quantum Root Editorial Team",
     publishDate: "2023-12-25",
     readTime: 6,
     image:

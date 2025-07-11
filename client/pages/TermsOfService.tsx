@@ -8,11 +8,11 @@ export default function TermsOfService() {
       <nav className="border-b bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center space-x-2">
-              <img
+            <Link to="/" className="flex items-center space-x-3">
+             <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800"
                 alt="QuantumRoot Logo"
-                className="w-8 h-8 object-contain"
+                className="w-10 h-10 object-contain"
               />
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
                 Quantum Root

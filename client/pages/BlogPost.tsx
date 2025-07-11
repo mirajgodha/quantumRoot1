@@ -130,7 +130,7 @@ export default function BlogPostDetail() {
               />
               <div className="flex flex-col">
                 <span className="text-2xl font-bold text-gray-900">
-                  QuantumRoot
+                  Quantum Root
                 </span>
                 <span className="text-xs text-gray-600 italic -mt-1">
                   Grow from the root, scale to quantum
