@@ -38,6 +38,18 @@ export default function TermsOfService() {
                 About
               </Link>
               <Link
+                to="/blog"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
+                to="/careers"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Careers
+              </Link>
+              <Link
                 to="/contact"
                 className="text-gray-700 hover:text-brand-600 transition-colors"
               >

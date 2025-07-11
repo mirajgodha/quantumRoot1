@@ -154,6 +154,12 @@ export default function Blog() {
                 Blog
               </Link>
               <Link
+                to="/careers"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Careers
+              </Link>
+              <Link
                 to="/contact"
                 className="text-foreground hover:text-brand-600 transition-colors"
               >

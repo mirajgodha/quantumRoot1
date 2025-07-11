@@ -15,7 +15,7 @@ export default function About() {
                 alt="QuantumRoot Logo"
                 className="w-10 h-10 object-contain"
               />
-               <div className="flex flex-col">
+              <div className="flex flex-col">
                 <span className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
                   Quantum Root
                 </span>
@@ -51,6 +51,12 @@ export default function About() {
                 className="text-foreground hover:text-brand-600 transition-colors"
               >
                 Blog
+              </Link>
+              <Link
+                to="/careers"
+                className="text-foreground hover:text-brand-600 transition-colors"
+              >
+                Careers
               </Link>
               <Link
                 to="/contact"

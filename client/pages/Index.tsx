@@ -572,6 +572,12 @@ export default function Index() {
                 Blog
               </Link>
               <Link
+                to="/careers"
+                className="text-gray-700 hover:text-brand-600 transition-colors"
+              >
+                Careers
+              </Link>
+              <Link
                 to="/contact"
                 className="text-gray-700 hover:text-brand-600 transition-colors"
               >
@@ -744,7 +750,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Quantum Root?
+              Why Choose QuantumRoot?
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -803,12 +809,12 @@ export default function Index() {
           </div>
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
-              { name: "Programming", icon: Code, count: 12 },
+              { name: "Programming", icon: Code, count: 25 },
               { name: "Robotics", icon: Cpu, count: 2 },
-              { name: "Cloud", icon: Cloud, count: 6 },
-              { name: "Data Engineering", icon: Database, count: 5 },
-              { name: "AI/ML", icon: Brain, count: 3 },
-              { name: "DevOps", icon: Award, count: 1 },
+              { name: "Cloud", icon: Cloud, count: 18 },
+              { name: "Data Engineering", icon: Database, count: 15 },
+              { name: "AI/ML", icon: Brain, count: 20 },
+              { name: "DevOps", icon: Award, count: 10 },
             ].map((category) => (
               <Card
                 key={category.name}
