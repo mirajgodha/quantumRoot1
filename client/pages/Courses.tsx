@@ -809,7 +809,7 @@ export default function Courses() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge className="bg-green-100 text-green-800 text-xs">
-                          75% OFF
+                          55% OFF
                         </Badge>
                         <span className="text-xs text-green-600">
                           Save{" "}

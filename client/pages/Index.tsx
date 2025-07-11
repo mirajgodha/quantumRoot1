@@ -593,7 +593,7 @@ export default function Index() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-              Master Tech Skills with Ankur
+              Master Tech Skills with
               <br />
               <span className="text-yellow-300">Hands-On Training</span>
             </h1>
@@ -604,15 +604,7 @@ export default function Index() {
               Courses in Coding, Robotics, Cloud, Data & More
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
-              <div className="relative flex-1 w-full sm:w-auto">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <Input
-                  placeholder="Search Courses..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-12 h-14 text-lg bg-white text-gray-900 border-0"
-                />
-              </div>
+              
               <Button
                 size="lg"
                 variant="secondary"
@@ -711,7 +703,7 @@ export default function Index() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge className="bg-green-100 text-green-800 text-xs">
-                          75% OFF
+                          55% OFF
                         </Badge>
                         <span className="text-xs text-green-600">
                           Save{" "}

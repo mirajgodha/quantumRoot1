@@ -6,12 +6,12 @@ export interface PriceInfo {
 }
 
 /**
- * Calculate discounted price with 75% discount
+ * Calculate discounted price with 55% discount
  * @param originalPrice - The original price
  * @returns PriceInfo object with pricing details
  */
 export function calculateDiscountedPrice(originalPrice: number): PriceInfo {
-  const discountPercentage = 75;
+  const discountPercentage = 55;
   const discountedPrice = Math.round(
     originalPrice * (1 - discountPercentage / 100),
   );
