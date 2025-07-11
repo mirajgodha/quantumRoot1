@@ -13,7 +13,7 @@ const mockCategories: CourseCategory[] = [
     name: "Generative AI",
     description: "AI, Machine Learning, LLMs",
     icon: "🧠",
-    courseCount: 12,
+    courseCount: 3,
   },
   {
     id: "bigdata",
@@ -27,14 +27,14 @@ const mockCategories: CourseCategory[] = [
     name: "NoSQL",
     description: "MongoDB, Cassandra, Redis",
     icon: "🗄️",
-    courseCount: 15,
+    courseCount: 5,
   },
   {
     id: "search",
     name: "Search & Analytics",
     description: "Elasticsearch, Kibana",
     icon: "����",
-    courseCount: 6,
+    courseCount: 2,
   },
   {
     id: "dataeng",
@@ -48,7 +48,7 @@ const mockCategories: CourseCategory[] = [
     name: "Cloud Platforms",
     description: "AWS, Azure, GCP",
     icon: "☁️",
-    courseCount: 14,
+    courseCount: 4,
   },
 ];
 

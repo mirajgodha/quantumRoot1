@@ -1,5 +1,8 @@
 import { RequestHandler } from "express";
 import { EnquiryRequest, EnquiryResponse } from "@shared/api";
+import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
+dotenv.config();
 
 /**
  * Handle enquiry form submission - sends enquiry details to info@quantumroot.in
@@ -60,9 +63,11 @@ Submitted at: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
 
     // TODO: In production, integrate with an email service
     // Example with Nodemailer:
-    /*
+  
     const transporter = nodemailer.createTransporter({
-      service: 'gmail', // or your email service
+      host: 'smtp.secureserver.net',
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -76,7 +81,7 @@ Submitted at: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
       text: emailBody,
       replyTo: enquiryData.email
     });
-    */
+    
 
     // For now, log the enquiry details (in production, this would be replaced with actual email sending)
     console.log("=== NEW ENQUIRY SUBMISSION ===");
