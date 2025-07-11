@@ -1,7 +1,170 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import Footer from "@/components/Footer";
+import { ContactRequest, ContactResponse } from "@shared/api";
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+interface ValidationErrors {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
 
 export default function Contact() {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState<ValidationErrors>({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = (): boolean => {
+    const newErrors: ValidationErrors = {
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    };
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Full name is required";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters long";
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address";
+      }
+    }
+
+    // Phone validation (optional but if provided should be valid)
+    if (formData.phone.trim()) {
+      const phoneRegex = /^[+]?[\d\s\-\(\)]{10,15}$/;
+      if (!phoneRegex.test(formData.phone.replace(/\s/g, ""))) {
+        newErrors.phone = "Please enter a valid phone number";
+      }
+    }
+
+    // Subject validation
+    if (!formData.subject.trim()) {
+      newErrors.subject = "Subject is required";
+    } else if (formData.subject.trim().length < 3) {
+      newErrors.subject = "Subject must be at least 3 characters long";
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters long";
+    }
+
+    setErrors(newErrors);
+
+    // Return true if no errors
+    return !Object.values(newErrors).some((error) => error !== "");
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof ValidationErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const contactData: ContactRequest = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        subject: formData.subject.trim(),
+        message: formData.message.trim(),
+      };
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contactData),
+      });
+
+      const result: ContactResponse = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to send message");
+      }
+
+      // Success - show success message and reset form
+      alert(result.message);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+      setErrors({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert(
+        error instanceof Error
+          ? error.message
+          : "There was an error sending your message. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
       {/* Navigation */}
@@ -43,7 +206,10 @@ export default function Contact() {
               >
                 About
               </Link>
-              <Link to="/contact" className="text-brand-600 font-medium">
+              <Link
+                to="/contact"
+                className="text-brand-600 font-medium hover:text-brand-700 transition-colors"
+              >
                 Contact
               </Link>
             </div>
@@ -51,139 +217,84 @@ export default function Contact() {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-8">
-            Contact{" "}
-            <span className="bg-gradient-to-r from-brand-500 to-brand-600 bg-clip-text text-transparent">
-              Us
-            </span>
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            Get in touch with our team for support and inquiries.
+      {/* Hero Section */}
+      <div className="bg-brand-600 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+          <p className="text-xl text-brand-100 max-w-2xl mx-auto">
+            Get in touch with our team for course guidance, support, or any
+            questions about QuantumRoot
           </p>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+      {/* Contact Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                Get in Touch
-              </h2>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-brand-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Director
-                    </h3>
-                    <p className="text-gray-600">Roopal Godha</p>
-                  </div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">
+              Get in Touch
+            </h2>
+            <div className="space-y-6">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-brand-600 mt-1" />
                 </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-brand-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Email
-                    </h3>
-                    <a
-                      href="mailto:info@quantumroot.in"
-                      className="text-brand-600 hover:text-brand-700 transition-colors"
-                    >
-                      info@quantumroot.in
-                    </a>
-                  </div>
+                <div className="ml-4">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    Our Office
+                  </h3>
+                  <p className="text-gray-600">
+                    123 Tech Park, Innovation District
+                    <br />
+                    Bangalore, Karnataka 560001
+                    <br />
+                    India
+                  </p>
                 </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-brand-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Mobile
-                    </h3>
-                    <a
-                      href="tel:+919650219962"
-                      className="text-brand-600 hover:text-brand-700 transition-colors"
-                    >
-                      +91 96502 19962 , +91 98188 23045
-                    </a>
-                  </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <Phone className="w-6 h-6 text-brand-600 mt-1" />
                 </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-brand-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Location
-                    </h3>
-                    <p className="text-gray-600">
-                      Magarpatta, Pune, India - 411036
-                    </p>
-                  </div>
+                <div className="ml-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Phone</h3>
+                  <p className="text-gray-600">
+                    +91 9876543210
+                    <br />
+                    +91 8765432109
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <Mail className="w-6 h-6 text-brand-600 mt-1" />
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-lg font-semibold text-gray-900">Email</h3>
+                  <p className="text-gray-600">
+                    info@quantumroot.in
+                    <br />
+                    support@quantumroot.in
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <Clock className="w-6 h-6 text-brand-600 mt-1" />
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    Business Hours
+                  </h3>
+                  <p className="text-gray-600">
+                    Monday - Friday: 9:00 AM - 6:00 PM IST
+                    <br />
+                    Saturday: 10:00 AM - 4:00 PM IST
+                    <br />
+                    Sunday: Closed
+                  </p>
                 </div>
               </div>
             </div>
@@ -194,35 +305,55 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
               Send us a Message
             </h2>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Full Name
+                  Full Name *
                 </label>
                 <input
                   type="text"
                   id="name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 ${
+                    errors.name ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                   placeholder="Your full name"
                 />
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                )}
               </div>
+
               <div>
                 <label
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Email Address
+                  Email Address *
                 </label>
                 <input
                   type="email"
                   id="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 ${
+                    errors.email
+                      ? "border-red-500 bg-red-50"
+                      : "border-gray-300"
+                  }`}
                   placeholder="your.email@example.com"
                 />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                )}
               </div>
+
               <div>
                 <label
                   htmlFor="phone"
@@ -233,43 +364,81 @@ export default function Contact() {
                 <input
                   type="tel"
                   id="phone"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 ${
+                    errors.phone
+                      ? "border-red-500 bg-red-50"
+                      : "border-gray-300"
+                  }`}
                   placeholder="+91 9876543210"
                 />
+                {errors.phone && (
+                  <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+                )}
               </div>
+
               <div>
                 <label
                   htmlFor="subject"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Subject
+                  Subject *
                 </label>
                 <input
                   type="text"
                   id="subject"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 ${
+                    errors.subject
+                      ? "border-red-500 bg-red-50"
+                      : "border-gray-300"
+                  }`}
                   placeholder="How can we help you?"
                 />
+                {errors.subject && (
+                  <p className="mt-1 text-sm text-red-600">{errors.subject}</p>
+                )}
               </div>
+
               <div>
                 <label
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Message
+                  Message *
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 ${
+                    errors.message
+                      ? "border-red-500 bg-red-50"
+                      : "border-gray-300"
+                  }`}
                   placeholder="Tell us more about your inquiry..."
-                ></textarea>
+                />
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                )}
               </div>
+
               <button
                 type="submit"
-                className="w-full bg-brand-500 hover:bg-brand-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                disabled={isSubmitting}
+                className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors ${
+                  isSubmitting
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-brand-500 hover:bg-brand-600"
+                } text-white`}
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
@@ -291,13 +460,15 @@ export default function Contact() {
                 <p>10:00 AM - 4:00 PM IST</p>
               </div>
             </div>
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="text-gray-600 mt-4">
               We typically respond to all inquiries within 24 hours during
               business days.
             </p>
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

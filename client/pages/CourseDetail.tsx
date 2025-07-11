@@ -47,7 +47,9 @@ import {
   Share,
   ChevronRight,
 } from "lucide-react";
-import { Course } from "@shared/api";
+import { Course, EnrollmentRequest, EnrollmentResponse } from "@shared/api";
+import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
+import Footer from "@/components/Footer";
 
 export default function CourseDetail() {
   const { courseId } = useParams();
@@ -214,9 +216,10 @@ export default function CourseDetail() {
   }
 
   // Extended course data with additional details
+  const priceInfo = calculateDiscountedPrice(foundCourse.price);
   const course = {
     ...foundCourse,
-    originalPrice: Math.round(foundCourse.price * 1.5), // 50% discount
+    ...priceInfo,
     instructor: {
       name: foundCourse.instructor,
       bio: "Expert instructor with years of industry experience and proven track record in training professionals.",
@@ -338,14 +341,29 @@ export default function CourseDetail() {
       return;
     }
 
-    const enrollmentData = {
-      ...enrollmentForm,
+    const enrollmentData: EnrollmentRequest = {
+      name: enrollmentForm.name,
+      email: enrollmentForm.email,
+      phone: enrollmentForm.phone,
+      classType: enrollmentForm.classType as "online" | "offline" | "hybrid",
       courseName: course.title,
-      submittedAt: new Date().toISOString(),
     };
 
     try {
-      console.log("Enrollment data:", enrollmentData);
+      // Send enrollment data to API
+      const response = await fetch("/api/enrollment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(enrollmentData),
+      });
+
+      const result: EnrollmentResponse = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to submit enrollment");
+      }
 
       setIsEnrollmentOpen(false);
       setEnrollmentForm({
@@ -357,9 +375,7 @@ export default function CourseDetail() {
       });
       setValidationErrors({ email: "", phone: "" });
 
-      alert(
-        `Thank you for enrolling in ${course.title}! We'll contact you soon at ${enrollmentData.email}.`,
-      );
+      alert(result.message);
     } catch (error) {
       console.error("Error submitting enrollment:", error);
       alert("There was an error submitting your enrollment. Please try again.");
@@ -488,14 +504,17 @@ export default function CourseDetail() {
                   </div>
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-3xl font-bold text-brand-600">
-                      ₹{course.price}
+                      {formatPrice(course.discountedPrice)}
                     </span>
                     <span className="text-lg text-gray-500 line-through">
-                      ₹{course.originalPrice}
+                      {formatPrice(course.originalPrice)}
                     </span>
                     <Badge className="bg-green-100 text-green-800">
-                      33% OFF
+                      {course.discountPercentage}% OFF
                     </Badge>
+                  </div>
+                  <div className="text-sm text-green-600 font-medium mb-4">
+                    You save {formatPrice(course.savingsAmount)}!
                   </div>
                   <Button
                     className="w-full mb-3 bg-brand-500 hover:bg-brand-600"
@@ -840,7 +859,14 @@ export default function CourseDetail() {
                 <strong>Course:</strong> {course.title}
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Price:</strong> ₹{course.price}
+                <strong>Price:</strong> {formatPrice(course.discountedPrice)}{" "}
+                <span className="line-through text-gray-400">
+                  {formatPrice(course.originalPrice)}
+                </span>
+              </p>
+              <p className="text-sm text-green-600">
+                <strong>You Save:</strong> {formatPrice(course.savingsAmount)} (
+                {course.discountPercentage}% OFF)
               </p>
               <p className="text-sm text-gray-600">
                 <strong>Duration:</strong> {course.duration}
@@ -867,6 +893,7 @@ export default function CourseDetail() {
           </div>
         </DialogContent>
       </Dialog>
+      <Footer />
     </div>
   );
 }

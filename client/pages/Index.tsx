@@ -58,13 +58,35 @@ import {
   Linkedin,
   Youtube,
 } from "lucide-react";
-import { Course } from "@shared/api";
+import {
+  Course,
+  EnrollmentRequest,
+  EnrollmentResponse,
+  EnquiryRequest,
+  EnquiryResponse,
+} from "@shared/api";
+import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
+import {
+  InfiniteScrollTicker,
+  type TestimonialItem,
+} from "@/components/ui/infinite-scroll-ticker";
+import {
+  CorporateClientsTicker,
+  type CorporateClient,
+} from "@/components/ui/corporate-clients-ticker";
+import Footer from "@/components/Footer";
+import { useAnalytics, useTimeTracking } from "@/hooks/use-analytics";
 
 export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState("");
+  const [isChatPopupOpen, setIsChatPopupOpen] = useState(false);
+
+  // Analytics hooks
+  const analytics = useAnalytics();
+  useTimeTracking("homepage");
   const [enquiryForm, setEnquiryForm] = useState({
     name: "",
     email: "",
@@ -83,6 +105,37 @@ export default function Index() {
     email: "",
     phone: "",
   });
+  const [enquiryErrors, setEnquiryErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    course: "",
+    message: "",
+  });
+  const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
+
+  // Chat popup timer and session management
+  useEffect(() => {
+    const SESSION_KEY = "quantumroot_chat_popup_shown";
+    const POPUP_DELAY = 2 * 60 * 1000; // 2 minutes in milliseconds
+
+    // Check if popup has already been shown in this session
+    const hasPopupBeenShown = sessionStorage.getItem(SESSION_KEY);
+
+    if (!hasPopupBeenShown) {
+      // Set timer to show popup after 2 minutes
+      const timer = setTimeout(() => {
+        setIsChatPopupOpen(true);
+        // Mark as shown in session storage
+        sessionStorage.setItem(SESSION_KEY, "true");
+      }, POPUP_DELAY);
+
+      // Cleanup timer on component unmount
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, []);
 
   const featuredCourses: Course[] = [
     {
@@ -273,13 +326,124 @@ export default function Index() {
     },
   ];
 
-  const handleEnquirySubmit = () => {
-    // Handle form submission
-    console.log("Enquiry submitted:", enquiryForm);
-    setIsEnquiryOpen(false);
-    setEnquiryForm({ name: "", email: "", phone: "", course: "", message: "" });
-    // Show success toast
-    alert("Thank you for your enquiry! We'll get back to you soon.");
+  const handleEnquirySubmit = async () => {
+    // Reset previous errors
+    setEnquiryErrors({
+      name: "",
+      email: "",
+      phone: "",
+      course: "",
+      message: "",
+    });
+
+    // Validate form
+    const newErrors = {
+      name: "",
+      email: "",
+      phone: "",
+      course: "",
+      message: "",
+    };
+
+    // Name validation
+    if (!enquiryForm.name.trim()) {
+      newErrors.name = "Full name is required";
+    } else if (enquiryForm.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters long";
+    }
+
+    // Email validation
+    if (!enquiryForm.email.trim()) {
+      newErrors.email = "Email address is required";
+    } else if (!validateEmail(enquiryForm.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Phone validation
+    if (!enquiryForm.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!validatePhone(enquiryForm.phone)) {
+      newErrors.phone = "Please enter a valid phone number (10-15 digits)";
+    }
+
+    // Course validation
+    if (!enquiryForm.course) {
+      newErrors.course = "Please select a course you're interested in";
+    }
+
+    // Message validation
+    if (!enquiryForm.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (enquiryForm.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters long";
+    }
+
+    // Check if there are any validation errors
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) {
+      setEnquiryErrors(newErrors);
+      return;
+    }
+
+    setIsSubmittingEnquiry(true);
+
+    try {
+      const enquiryData: EnquiryRequest = {
+        name: enquiryForm.name.trim(),
+        email: enquiryForm.email.trim(),
+        phone: enquiryForm.phone.trim(),
+        course: enquiryForm.course,
+        message: enquiryForm.message.trim(),
+      };
+
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(enquiryData),
+      });
+
+      const result: EnquiryResponse = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to submit enquiry");
+      }
+
+      // Success - show success message and reset form
+      analytics.trackFormSubmission("enquiry");
+      analytics.trackEvent(
+        "enquiry_submitted",
+        "engagement",
+        enquiryData.course,
+      );
+
+      setIsEnquiryOpen(false);
+      setEnquiryForm({
+        name: "",
+        email: "",
+        phone: "",
+        course: "",
+        message: "",
+      });
+      setEnquiryErrors({
+        name: "",
+        email: "",
+        phone: "",
+        course: "",
+        message: "",
+      });
+      alert(result.message);
+    } catch (error) {
+      console.error("Error submitting enquiry:", error);
+      alert(
+        error instanceof Error
+          ? error.message
+          : "There was an error submitting your enquiry. Please try again.",
+      );
+    } finally {
+      setIsSubmittingEnquiry(false);
+    }
   };
 
   const validateEmail = (email: string) => {
@@ -311,27 +475,38 @@ export default function Index() {
     }
 
     // Handle enrollment form submission
-    const enrollmentData = {
-      ...enrollmentForm,
+    const enrollmentData: EnrollmentRequest = {
+      name: enrollmentForm.name,
+      email: enrollmentForm.email,
+      phone: enrollmentForm.phone,
+      classType: enrollmentForm.classType as "online" | "offline" | "hybrid",
       courseName: selectedCourse,
-      submittedAt: new Date().toISOString(),
     };
 
     try {
-      // In a real application, you would send this to your backend or email service
-      // For now, we'll simulate the email sending
-      console.log("Enrollment data:", enrollmentData);
+      // Send enrollment data to API
+      const response = await fetch("/api/enrollment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(enrollmentData),
+      });
 
-      // Here you would integrate with EmailJS or your backend API
-      // Example with EmailJS (you'd need to set this up):
-      // await emailjs.send('your_service_id', 'your_template_id', {
-      //   to_email: 'mirajgodha@gmail.com',
-      //   student_name: enrollmentData.name,
-      //   student_email: enrollmentData.email,
-      //   student_phone: enrollmentData.phone,
-      //   course_name: enrollmentData.courseName,
-      //   class_type: enrollmentData.classType,
-      // });
+      const result: EnrollmentResponse = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to submit enrollment");
+      }
+
+      // Track successful enrollment
+      analytics.trackFormSubmission("enrollment");
+      analytics.trackCourseEnrollment(enrollmentData.courseName, 0); // Price can be added if available
+      analytics.trackEvent(
+        "enrollment_submitted",
+        "conversion",
+        enrollmentData.courseName,
+      );
 
       setIsEnrollmentOpen(false);
       setEnrollmentForm({
@@ -344,9 +519,7 @@ export default function Index() {
       setValidationErrors({ email: "", phone: "" });
       setSelectedCourse("");
 
-      alert(
-        `Thank you for enrolling in ${selectedCourse}! We'll contact you soon at ${enrollmentData.email}.`,
-      );
+      alert(result.message);
     } catch (error) {
       console.error("Error submitting enrollment:", error);
       alert("There was an error submitting your enrollment. Please try again.");
@@ -524,8 +697,30 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <div className="text-2xl font-bold text-brand-600">
-                      ₹{course.price}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <div className="text-2xl font-bold text-brand-600">
+                          {formatPrice(
+                            calculateDiscountedPrice(course.price)
+                              .discountedPrice,
+                          )}
+                        </div>
+                        <div className="text-lg text-gray-400 line-through">
+                          {formatPrice(course.price)}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge className="bg-green-100 text-green-800 text-xs">
+                          75% OFF
+                        </Badge>
+                        <span className="text-xs text-green-600">
+                          Save{" "}
+                          {formatPrice(
+                            calculateDiscountedPrice(course.price)
+                              .savingsAmount,
+                          )}
+                        </span>
+                      </div>
                     </div>
                     <div className="flex gap-2 w-full">
                       <Button
@@ -647,72 +842,41 @@ export default function Index() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Student Success Stories
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 mb-8">
               Hear from our graduates who transformed their careers
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 shadow-lg border-0">
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-gray-900">
-                      {testimonial.name}
-                    </h4>
-                    <p className="text-sm text-gray-600">{testimonial.role}</p>
-                  </div>
-                </div>
-                <div className="flex mb-3">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 text-yellow-400 fill-current"
-                    />
-                  ))}
-                </div>
-                <p className="text-gray-700 italic">"{testimonial.review}"</p>
-              </Card>
-            ))}
-          </div>
         </div>
+
+        {/* Infinite Scroll Ticker */}
+        <InfiniteScrollTicker
+          items={testimonials as TestimonialItem[]}
+          speed="medium"
+          pauseOnHover={true}
+          className="py-8"
+        />
       </section>
 
       {/* Corporate Clients */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
               Corporate Clients
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
-              {corporateClients.map((client, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 grayscale hover:grayscale-0"
-                >
-                  <img
-                    src={client.logo}
-                    alt={`${client.name} logo`}
-                    className="max-w-full max-h-12 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.nextElementSibling!.style.display =
-                        "block";
-                    }}
-                  />
-                  <span className="text-sm font-medium text-gray-700 text-center hidden">
-                    {client.name}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <p className="text-lg text-gray-600 mb-8">
+              Trusted by leading organizations worldwide
+            </p>
           </div>
         </div>
+
+        {/* Infinite Scroll Ticker for Corporate Clients */}
+        <CorporateClientsTicker
+          clients={corporateClients as CorporateClient[]}
+          speed="medium"
+          pauseOnHover={true}
+          className="py-8"
+        />
       </section>
 
       {/* Drop Enquiry Section */}
@@ -743,87 +907,157 @@ export default function Index() {
               </DialogHeader>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">Full Name *</Label>
                   <Input
                     id="name"
                     value={enquiryForm.name}
-                    onChange={(e) =>
-                      setEnquiryForm({ ...enquiryForm, name: e.target.value })
-                    }
+                    onChange={(e) => {
+                      setEnquiryForm({ ...enquiryForm, name: e.target.value });
+                      if (enquiryErrors.name) {
+                        setEnquiryErrors({ ...enquiryErrors, name: "" });
+                      }
+                    }}
                     placeholder="Your full name"
+                    className={
+                      enquiryErrors.name ? "border-red-500 bg-red-50" : ""
+                    }
                   />
+                  {enquiryErrors.name && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {enquiryErrors.name}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">Email *</Label>
                   <Input
                     id="email"
                     type="email"
                     value={enquiryForm.email}
-                    onChange={(e) =>
-                      setEnquiryForm({ ...enquiryForm, email: e.target.value })
-                    }
+                    onChange={(e) => {
+                      setEnquiryForm({ ...enquiryForm, email: e.target.value });
+                      if (enquiryErrors.email) {
+                        setEnquiryErrors({ ...enquiryErrors, email: "" });
+                      }
+                    }}
                     placeholder="your.email@example.com"
+                    className={
+                      enquiryErrors.email ? "border-red-500 bg-red-50" : ""
+                    }
                   />
+                  {enquiryErrors.email && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {enquiryErrors.email}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="phone">Phone</Label>
+                  <Label htmlFor="phone">Phone *</Label>
                   <Input
                     id="phone"
                     value={enquiryForm.phone}
-                    onChange={(e) =>
-                      setEnquiryForm({ ...enquiryForm, phone: e.target.value })
-                    }
+                    onChange={(e) => {
+                      setEnquiryForm({ ...enquiryForm, phone: e.target.value });
+                      if (enquiryErrors.phone) {
+                        setEnquiryErrors({ ...enquiryErrors, phone: "" });
+                      }
+                    }}
                     placeholder="Your phone number"
+                    className={
+                      enquiryErrors.phone ? "border-red-500 bg-red-50" : ""
+                    }
                   />
+                  {enquiryErrors.phone && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {enquiryErrors.phone}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="course">Course Interested In</Label>
+                  <Label htmlFor="course">Course Interested In *</Label>
                   <Select
                     value={enquiryForm.course}
-                    onValueChange={(value) =>
-                      setEnquiryForm({ ...enquiryForm, course: value })
-                    }
+                    onValueChange={(value) => {
+                      setEnquiryForm({ ...enquiryForm, course: value });
+                      if (enquiryErrors.course) {
+                        setEnquiryErrors({ ...enquiryErrors, course: "" });
+                      }
+                    }}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger
+                      className={
+                        enquiryErrors.course ? "border-red-500 bg-red-50" : ""
+                      }
+                    >
                       <SelectValue placeholder="Select a course" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="python">
-                        Python for Beginners
+                      <SelectItem value="Generative AI & Large Language Models">
+                        Generative AI & Large Language Models
                       </SelectItem>
-                      <SelectItem value="aws">
-                        Cloud Computing with AWS
+                      <SelectItem value="Apache Spark for Big Data Processing">
+                        Apache Spark for Big Data Processing
                       </SelectItem>
-                      <SelectItem value="data-science">
-                        Data Science & Analytics
+                      <SelectItem value="Apache Cassandra for Distributed Systems">
+                        Apache Cassandra for Distributed Systems
                       </SelectItem>
-                      <SelectItem value="fullstack">
-                        Full Stack Web Development
+                      <SelectItem value="Elasticsearch & Search Analytics">
+                        Elasticsearch & Search Analytics
+                      </SelectItem>
+                      <SelectItem value="Machine Learning with Python">
+                        Machine Learning with Python
+                      </SelectItem>
+                      <SelectItem value="Data Engineering with Apache Airflow">
+                        Data Engineering with Apache Airflow
+                      </SelectItem>
+                      <SelectItem value="Hadoop Ecosystem Fundamentals">
+                        Hadoop Ecosystem Fundamentals
                       </SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
+                  {enquiryErrors.course && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {enquiryErrors.course}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message">Message *</Label>
                   <Textarea
                     id="message"
                     value={enquiryForm.message}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setEnquiryForm({
                         ...enquiryForm,
                         message: e.target.value,
-                      })
-                    }
+                      });
+                      if (enquiryErrors.message) {
+                        setEnquiryErrors({ ...enquiryErrors, message: "" });
+                      }
+                    }}
                     placeholder="Any specific questions or requirements?"
                     rows={3}
+                    className={
+                      enquiryErrors.message ? "border-red-500 bg-red-50" : ""
+                    }
                   />
+                  {enquiryErrors.message && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {enquiryErrors.message}
+                    </p>
+                  )}
                 </div>
                 <Button
                   onClick={handleEnquirySubmit}
-                  className="w-full bg-brand-500 hover:bg-brand-600"
+                  disabled={isSubmittingEnquiry}
+                  className={`w-full ${
+                    isSubmittingEnquiry
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-brand-500 hover:bg-brand-600"
+                  }`}
                 >
-                  Submit Enquiry
+                  {isSubmittingEnquiry ? "Submitting..." : "Submit Enquiry"}
                 </Button>
               </div>
             </DialogContent>
@@ -955,121 +1189,11 @@ export default function Index() {
         </DialogContent>
       </Dialog>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800"
-                  alt="QuantumRoot Logo"
-                  className="w-8 h-8 object-contain"
-                />
-                <span className="text-xl font-bold">QuantumRoot</span>
-              </div>
-              <p className="text-gray-400 mb-4">
-                Empowering professionals with cutting-edge technology skills for
-                the future workplace.
-              </p>
-              <div className="flex space-x-4">
-                <Facebook className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
-                <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
-                <Linkedin className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
-                <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
-              </div>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link
-                    to="/about"
-                    className="hover:text-white transition-colors"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/courses"
-                    className="hover:text-white transition-colors"
-                  >
-                    All Courses
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact"
-                    className="hover:text-white transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/careers"
-                    className="hover:text-white transition-colors"
-                  >
-                    Careers
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link
-                    to="/privacy"
-                    className="hover:text-white transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/terms"
-                    className="hover:text-white transition-colors"
-                  >
-                    Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/refund"
-                    className="hover:text-white transition-colors"
-                  >
-                    Refund Policy
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Newsletter</h3>
-              <p className="text-gray-400 mb-4">
-                Stay updated with our latest courses and offers
-              </p>
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Enter your email"
-                  className="bg-gray-800 border-gray-700 text-white"
-                />
-                <Button className="bg-brand-500 hover:bg-brand-600">
-                  Subscribe
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 QuantumRoot. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Floating Chat Button */}
       <div className="fixed bottom-6 right-6 z-50">
-        <Dialog>
+        <Dialog open={isChatPopupOpen} onOpenChange={setIsChatPopupOpen}>
           <DialogTrigger asChild>
             <Button
               size="lg"

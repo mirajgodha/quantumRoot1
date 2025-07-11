@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BookOpen } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function About() {
   return (
@@ -160,6 +161,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

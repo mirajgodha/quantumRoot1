@@ -6,6 +6,9 @@ import {
   handleCreateCourse,
   handleGetFeaturedCourses,
 } from "./routes/courses";
+import { handleEnrollmentSubmit } from "./routes/enrollment";
+import { handleContactSubmit } from "./routes/contact";
+import { handleEnquirySubmit } from "./routes/enquiry";
 
 export function createServer() {
   const app = express();
@@ -26,6 +29,15 @@ export function createServer() {
   app.get("/api/courses", handleGetCourses);
   app.post("/api/courses", handleCreateCourse);
   app.get("/api/courses/featured", handleGetFeaturedCourses);
+
+  // Enrollment API routes
+  app.post("/api/enrollment", handleEnrollmentSubmit);
+
+  // Contact API routes
+  app.post("/api/contact", handleContactSubmit);
+
+  // Enquiry API routes
+  app.post("/api/enquiry", handleEnquirySubmit);
 
   return app;
 }

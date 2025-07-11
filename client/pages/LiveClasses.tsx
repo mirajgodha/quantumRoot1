@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { GraduationCap, Calendar, Video, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Footer from "@/components/Footer";
 
 export default function LiveClasses() {
   return (
@@ -92,6 +93,7 @@ export default function LiveClasses() {
           </Button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -38,7 +38,15 @@ import {
   DollarSign,
   Award,
 } from "lucide-react";
-import { Course, CourseCategory, CreateCourseRequest } from "@shared/api";
+import {
+  Course,
+  CourseCategory,
+  CreateCourseRequest,
+  EnrollmentRequest,
+  EnrollmentResponse,
+} from "@shared/api";
+import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
+import Footer from "@/components/Footer";
 
 export default function Courses() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -391,14 +399,29 @@ export default function Courses() {
       return;
     }
 
-    const enrollmentData = {
-      ...enrollmentForm,
+    const enrollmentData: EnrollmentRequest = {
+      name: enrollmentForm.name,
+      email: enrollmentForm.email,
+      phone: enrollmentForm.phone,
+      classType: enrollmentForm.classType as "online" | "offline" | "hybrid",
       courseName: selectedCourse,
-      submittedAt: new Date().toISOString(),
     };
 
     try {
-      console.log("Enrollment data:", enrollmentData);
+      // Send enrollment data to API
+      const response = await fetch("/api/enrollment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(enrollmentData),
+      });
+
+      const result: EnrollmentResponse = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to submit enrollment");
+      }
 
       setIsEnrollmentOpen(false);
       setEnrollmentForm({
@@ -411,9 +434,7 @@ export default function Courses() {
       setValidationErrors({ email: "", phone: "" });
       setSelectedCourse("");
 
-      alert(
-        `Thank you for enrolling in ${selectedCourse}! We'll contact you soon at ${enrollmentData.email}.`,
-      );
+      alert(result.message);
     } catch (error) {
       console.error("Error submitting enrollment:", error);
       alert("There was an error submitting your enrollment. Please try again.");
@@ -774,10 +795,32 @@ export default function Courses() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-2xl font-bold text-brand-600">
-                      ₹{course.price}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <div className="text-2xl font-bold text-brand-600">
+                          {formatPrice(
+                            calculateDiscountedPrice(course.price)
+                              .discountedPrice,
+                          )}
+                        </div>
+                        <div className="text-lg text-gray-400 line-through">
+                          {formatPrice(course.price)}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge className="bg-green-100 text-green-800 text-xs">
+                          75% OFF
+                        </Badge>
+                        <span className="text-xs text-green-600">
+                          Save{" "}
+                          {formatPrice(
+                            calculateDiscountedPrice(course.price)
+                              .savingsAmount,
+                          )}
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-sm text-muted-foreground mt-1">
                       by {course.instructor}
                     </div>
                   </div>
@@ -914,6 +957,7 @@ export default function Courses() {
           </div>
         </DialogContent>
       </Dialog>
+      <Footer />
     </div>
   );
 }

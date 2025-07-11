@@ -52,3 +52,43 @@ export interface CreateCourseRequest {
   tags: string[];
   instructor: string;
 }
+
+export interface EnrollmentRequest {
+  name: string;
+  email: string;
+  phone: string;
+  classType: "online" | "offline" | "hybrid";
+  courseName: string;
+  message?: string;
+}
+
+export interface EnrollmentResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface ContactRequest {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+export interface ContactResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface EnquiryRequest {
+  name: string;
+  email: string;
+  phone: string;
+  course: string;
+  message: string;
+}
+
+export interface EnquiryResponse {
+  success: boolean;
+  message: string;
+}
