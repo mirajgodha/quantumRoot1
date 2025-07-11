@@ -74,6 +74,7 @@ import {
   CorporateClientsTicker,
   type CorporateClient,
 } from "@/components/ui/corporate-clients-ticker";
+import { CourseCarousel } from "@/components/ui/course-carousel";
 import Footer from "@/components/Footer";
 import { useAnalytics, useTimeTracking } from "@/hooks/use-analytics";
 
@@ -83,6 +84,7 @@ export default function Index() {
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [isChatPopupOpen, setIsChatPopupOpen] = useState(false);
+  const [featuredCourses, setFeaturedCourses] = useState<Course[]>([]);
 
   // Analytics hooks
   const analytics = useAnalytics();
@@ -137,76 +139,58 @@ export default function Index() {
     }
   }, []);
 
-  const featuredCourses: Course[] = [
-    {
-      id: "1",
-      title: "Generative AI & Large Language Models",
-      description:
-        "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
-      category: "Generative AI",
-      duration: "12 weeks",
-      difficulty: "Advanced",
-      price: 29999,
-      image:
-        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
-      tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
-      instructor: "Dr. Mukesh Gupta",
-      rating: 4.9,
-      students: 12500,
-      featured: true,
-    },
-    {
-      id: "2",
-      title: "Apache Spark for Big Data Processing",
-      description:
-        "Learn distributed computing and big data processing with Apache Spark, PySpark, and real-world projects.",
-      category: "Big Data",
-      duration: "10 weeks",
-      difficulty: "Intermediate",
-      price: 39999,
-      image:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop&crop=center",
-      tags: ["Apache Spark", "PySpark", "Big Data", "Scala"],
-      instructor: "Mark Rodriguez",
-      rating: 4.8,
-      students: 8900,
-      featured: true,
-    },
-    {
-      id: "3",
-      title: "Apache Cassandra for Distributed Systems",
-      description:
-        "Master distributed NoSQL databases with Cassandra for high-availability applications and scalable data solutions.",
-      category: "NoSQL",
-      duration: "8 weeks",
-      difficulty: "Advanced",
-      price: 59999,
-      image:
-        "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop&crop=center",
-      tags: ["Apache Cassandra", "NoSQL", "Distributed Systems", "CQL"],
-      instructor: "Dr. Amit Patel",
-      rating: 4.7,
-      students: 15600,
-      featured: true,
-    },
-    {
-      id: "4",
-      title: "Elasticsearch & Search Analytics",
-      description:
-        "Learn to build powerful search engines and analytics platforms with Elasticsearch, Kibana, and Logstash.",
-      category: "Search & Analytics",
-      duration: "6 weeks",
-      difficulty: "Intermediate",
-      price: 49999,
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center",
-      tags: ["Elasticsearch", "Kibana", "Logstash", "Search"],
-      instructor: "Maria Santos",
-      rating: 4.8,
-      students: 11200,
-      featured: true,
-    },
-  ];
+  // Fetch featured courses from API
+  useEffect(() => {
+    const fetchFeaturedCourses = async () => {
+      try {
+        // Try to use a clean fetch API call
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
+        const response = await fetch("/api/courses/featured", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+        console.log("API Response status:", response.status);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Featured courses data:", data);
+
+        if (data.courses && Array.isArray(data.courses)) {
+          setFeaturedCourses(data.courses);
+          console.log(
+            `Successfully loaded ${data.courses.length} featured courses`,
+          );
+          return;
+        }
+      } catch (error) {
+        console.error("Error fetching featured courses:", error);
+      }
+
+      // Fallback: load courses directly from shared data
+      console.log("Using fallback: loading courses from shared data");
+      try {
+        const { mockCourses } = await import("@shared/courseData");
+        const featured = mockCourses.filter((course) => course.featured);
+        setFeaturedCourses(featured);
+        console.log(`Fallback: loaded ${featured.length} featured courses`);
+      } catch (importError) {
+        console.error("Error importing shared data:", importError);
+        setFeaturedCourses([]);
+      }
+    };
+
+    fetchFeaturedCourses();
+  }, []);
 
   const testimonials = [
     {
@@ -604,7 +588,6 @@ export default function Index() {
               Courses in Coding, Robotics, Cloud, Data & More
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
-              
               <Button
                 size="lg"
                 variant="secondary"
@@ -629,7 +612,13 @@ export default function Index() {
               Start your journey with our most popular courses
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <CourseCarousel
+            autoRotate={true}
+            autoRotateInterval={4000}
+            itemsToShow={4}
+            gap={32}
+            className="w-full"
+          >
             {featuredCourses.map((course) => (
               <Card
                 key={course.id}
@@ -735,7 +724,7 @@ export default function Index() {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </CourseCarousel>
         </div>
       </section>
 
@@ -984,27 +973,11 @@ export default function Index() {
                       <SelectValue placeholder="Select a course" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Generative AI & Large Language Models">
-                        Generative AI & Large Language Models
-                      </SelectItem>
-                      <SelectItem value="Apache Spark for Big Data Processing">
-                        Apache Spark for Big Data Processing
-                      </SelectItem>
-                      <SelectItem value="Apache Cassandra for Distributed Systems">
-                        Apache Cassandra for Distributed Systems
-                      </SelectItem>
-                      <SelectItem value="Elasticsearch & Search Analytics">
-                        Elasticsearch & Search Analytics
-                      </SelectItem>
-                      <SelectItem value="Machine Learning with Python">
-                        Machine Learning with Python
-                      </SelectItem>
-                      <SelectItem value="Data Engineering with Apache Airflow">
-                        Data Engineering with Apache Airflow
-                      </SelectItem>
-                      <SelectItem value="Hadoop Ecosystem Fundamentals">
-                        Hadoop Ecosystem Fundamentals
-                      </SelectItem>
+                      {featuredCourses.map((course) => (
+                        <SelectItem key={course.id} value={course.title}>
+                          {course.title}
+                        </SelectItem>
+                      ))}
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
@@ -1119,7 +1092,7 @@ export default function Index() {
                     setValidationErrors({ ...validationErrors, phone: "" });
                   }
                 }}
-                placeholder="+91 9876543210"
+                placeholder="+91 96502 19962"
                 required
                 className={validationErrors.phone ? "border-red-500" : ""}
               />
@@ -1157,7 +1130,7 @@ export default function Index() {
                 <strong>Course:</strong> {selectedCourse}
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Contact Email:</strong> mirajgodha@gmail.com
+                <strong>Contact Email:</strong> info@quantumroot.in
               </p>
             </div>
             <Button

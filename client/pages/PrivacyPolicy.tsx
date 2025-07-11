@@ -247,7 +247,7 @@ export default function PrivacyPolicy() {
                   <br />
                   Email: info@quantumroot.in
                   <br />
-                  Phone: +91 9876543210
+                  Phone: +91 96502 19962
                 </p>
               </div>
             </section>

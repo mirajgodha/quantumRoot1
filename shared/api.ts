@@ -11,6 +11,11 @@ export interface DemoResponse {
   message: string;
 }
 
+export interface CurriculumModule {
+  module: string;
+  lessons: string[];
+}
+
 export interface Course {
   id: string;
   title: string;
@@ -25,6 +30,7 @@ export interface Course {
   rating: number;
   students: number;
   featured?: boolean;
+  curriculum?: CurriculumModule[];
 }
 
 export interface CourseCategory {

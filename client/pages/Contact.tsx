@@ -246,9 +246,9 @@ export default function Contact() {
                     Our Office
                   </h3>
                   <p className="text-gray-600">
-                    123 Tech Park, Innovation District
+                    Magarpatta
                     <br />
-                    Bangalore, Karnataka 560001
+                    Pune, Maharastra 411036
                     <br />
                     India
                   </p>
@@ -261,9 +261,9 @@ export default function Contact() {
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-900">Phone</h3>
                   <p className="text-gray-600">
-                    +91 9876543210
+                    +91 96502 19962
                     <br />
-                    +91 8765432109
+                    +91 98188 23045
                   </p>
                 </div>
               </div>
@@ -289,11 +289,11 @@ export default function Contact() {
                     Business Hours
                   </h3>
                   <p className="text-gray-600">
-                    Monday - Friday: 9:00 AM - 6:00 PM IST
+                    Monday - Friday: 9:00 AM - 7:00 PM IST
                     <br />
                     Saturday: 10:00 AM - 4:00 PM IST
                     <br />
-                    Sunday: Closed
+                    Sunday: 10:00 AM - 3:00 PM IST
                   </p>
                 </div>
               </div>
@@ -372,7 +372,7 @@ export default function Contact() {
                       ? "border-red-500 bg-red-50"
                       : "border-gray-300"
                   }`}
-                  placeholder="+91 9876543210"
+                  placeholder="+91 96502 19962"
                 />
                 {errors.phone && (
                   <p className="mt-1 text-sm text-red-600">{errors.phone}</p>

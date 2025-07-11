@@ -5,55 +5,7 @@ import {
   CourseCategory,
   CreateCourseRequest,
 } from "@shared/api";
-
-// Mock data - in a real app this would come from a database
-const mockCourses: Course[] = [
-  {
-    id: "1",
-    title: "Generative AI & Large Language Models",
-    description:
-      "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
-    category: "Generative AI",
-    duration: "8 weeks",
-    difficulty: "Intermediate",
-    price: 299,
-    tags: ["OpenAI", "LangChain", "Python", "Neural Networks"],
-    instructor: "Dr. John Doe",
-    rating: 4.9,
-    students: 2847,
-    featured: true,
-  },
-  {
-    id: "2",
-    title: "Apache Spark for Big Data Processing",
-    description:
-      "Learn distributed computing and big data processing with Apache Spark, PySpark, and real-world projects.",
-    category: "Big Data",
-    duration: "6 weeks",
-    difficulty: "Advanced",
-    price: 399,
-    tags: ["Spark", "PySpark", "Scala", "Hadoop"],
-    instructor: "Mark Rodriguez",
-    rating: 4.8,
-    students: 1923,
-    featured: true,
-  },
-  {
-    id: "3",
-    title: "MongoDB & NoSQL Database Design",
-    description:
-      "Master NoSQL databases with MongoDB, data modeling, indexing, and scaling for modern applications.",
-    category: "NoSQL",
-    duration: "4 weeks",
-    difficulty: "Beginner",
-    price: 199,
-    tags: ["MongoDB", "NoSQL", "Database Design", "Aggregation"],
-    instructor: "Jennifer Park",
-    rating: 4.7,
-    students: 3421,
-    featured: true,
-  },
-];
+import { mockCourses } from "../../shared/courseData";
 
 const mockCategories: CourseCategory[] = [
   {
@@ -81,7 +33,7 @@ const mockCategories: CourseCategory[] = [
     id: "search",
     name: "Search & Analytics",
     description: "Elasticsearch, Kibana",
-    icon: "🔍",
+    icon: "����",
     courseCount: 6,
   },
   {
@@ -121,8 +73,8 @@ export const handleCreateCourse: RequestHandler = (req, res) => {
       students: 0,
     };
 
-    mockCourses.push(newCourse);
-
+    // Note: In a real app, this would persist to a database
+    // For now, we're just returning the created course without modifying the shared data
     res.status(201).json(newCourse);
   } catch (error) {
     res.status(400).json({ error: "Invalid course data" });
@@ -130,6 +82,8 @@ export const handleCreateCourse: RequestHandler = (req, res) => {
 };
 
 export const handleGetFeaturedCourses: RequestHandler = (req, res) => {
+  console.log("[Express] handleGetFeaturedCourses called");
   const featuredCourses = mockCourses.filter((course) => course.featured);
+  console.log(`[Express] Found ${featuredCourses.length} featured courses`);
   res.json({ courses: featuredCourses });
 };

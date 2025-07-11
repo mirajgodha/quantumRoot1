@@ -48,6 +48,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Course, EnrollmentRequest, EnrollmentResponse } from "@shared/api";
+import { mockCourses } from "@shared/courseData";
 import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
 import Footer from "@/components/Footer";
 
@@ -73,157 +74,7 @@ export default function CourseDetail() {
     phone: "",
   });
 
-  // Mock courses data - same as in Courses.tsx for consistency
-  const mockCourses = [
-    {
-      id: "1",
-      title: "Generative AI & Large Language Models",
-      description:
-        "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
-      category: "Generative AI",
-      duration: "12 weeks",
-      difficulty: "Advanced" as const,
-      price: 29999,
-      image:
-        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
-      tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
-      instructor: "Dr. Rakesh Kumar",
-      rating: 4.9,
-      students: 12500,
-      featured: true,
-    },
-    {
-      id: "2",
-      title: "Apache Spark for Big Data Processing",
-      description:
-        "Learn distributed computing and big data processing with Apache Spark, PySpark, and real-world projects.",
-      category: "Big Data",
-      duration: "10 weeks",
-      difficulty: "Intermediate" as const,
-      price: 39999,
-      image:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop&crop=center",
-      tags: ["Apache Spark", "PySpark", "Big Data", "Scala"],
-      instructor: "Mark Rodriguez",
-      rating: 4.8,
-      students: 8900,
-      featured: true,
-    },
-    {
-      id: "3",
-      title: "Apache Cassandra for Distributed Systems",
-      description:
-        "Master distributed NoSQL databases with Cassandra for high-availability applications and scalable data solutions.",
-      category: "NoSQL",
-      duration: "8 weeks",
-      difficulty: "Advanced" as const,
-      price: 59999,
-      image:
-        "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop&crop=center",
-      tags: ["Apache Cassandra", "NoSQL", "Distributed Systems", "CQL"],
-      instructor: "Dr. Amit Patel",
-      rating: 4.7,
-      students: 15600,
-      featured: true,
-    },
-    {
-      id: "4",
-      title: "Elasticsearch & Search Analytics",
-      description:
-        "Learn to build powerful search engines and analytics platforms with Elasticsearch, Kibana, and Logstash.",
-      category: "Search & Analytics",
-      duration: "6 weeks",
-      difficulty: "Intermediate" as const,
-      price: 49999,
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center",
-      tags: ["Elasticsearch", "Kibana", "Logstash", "Search"],
-      instructor: "Maria Santos",
-      rating: 4.8,
-      students: 11200,
-      
-    },
-    {
-      id: "5",
-      title: "Machine Learning with Python",
-      description:
-        "Complete machine learning course covering algorithms, model training, and deployment with scikit-learn.",
-      category: "Machine Learning",
-      duration: "10 weeks",
-      difficulty: "Intermediate" as const,
-      price: 34999,
-      image:
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop&crop=center",
-      tags: ["Python", "scikit-learn", "TensorFlow", "Pandas"],
-      instructor: "Dr. Alex Kumar",
-      rating: 4.8,
-      students: 4567,
-    },
-    {
-      id: "6",
-      title: "Data Engineering with Apache Airflow",
-      description:
-        "Build robust data pipelines and workflows using Apache Airflow and modern data engineering practices.",
-      category: "Data Engineering",
-      duration: "7 weeks",
-      difficulty: "Intermediate" as const,
-      price: 37999,
-      image:
-        "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&h=250&fit=crop&crop=center",
-      tags: ["Airflow", "ETL", "Python", "Data Pipelines"],
-      instructor: "Lisa Wang",
-      rating: 4.7,
-      students: 2134,
-    },
-    {
-      id: "7",
-      title: "Hadoop Ecosystem Fundamentals",
-      description:
-        "Learn the complete Hadoop ecosystem including HDFS, MapReduce, Hive, and HBase for big data processing.",
-      category: "Big Data",
-      duration: "8 weeks",
-      difficulty: "Beginner" as const,
-      price: 28999,
-      image:
-        "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=250&fit=crop&crop=center",
-      tags: ["Hadoop", "HDFS", "MapReduce", "Hive", "HBase"],
-      instructor: "David Kim",
-      rating: 4.4,
-      students: 1567,
-    },
-    {
-    id: "8",
-    title: "Introduction to Generative AI for Business Leaders",
-    description:
-      "Master AI tools like ChatGPT, Gemini, and others to boost productivity, decision-making, and daily workflows. Learn prompt engineering from scratch and use AI to dominate office work, client projects, research, and even job hunting.",
-    category: "Generative AI",
-    duration: "6 weeks",
-    difficulty: "Beginner" as const,
-    price: 34999,
-    image:
-      "https://images.unsplash.com/photo-1685076921443-6d2d108a48e2?w=400&h=250&fit=crop&crop=center",
-    tags: [
-      "Generative AI",
-      "ChatGPT",
-      "Gemini",
-      "Prompt Engineering",
-      "AI Productivity",
-      "Job Hunting",
-      "Excel & PPT with AI",
-      "No-Code AI",
-      "AI for Research",
-      "Side Hustles",
-      "Personal Branding",
-      "Efficiency Hacks"
-    ],
-    instructor: "Sarah Iyer",
-    rating: 4.8,
-    students: 2942,
-    featured: true,
-  },
-  ];
-
-  // Find the course by ID
+  // Find the course by ID from shared mock data
   const foundCourse = mockCourses.find((c) => c.id === courseId);
 
   // If course not found, redirect to 404 or show error
@@ -235,7 +86,7 @@ export default function CourseDetail() {
             Course Not Found
           </h1>
           <p className="text-gray-600 mb-6">
-            Detailed course curriculum for this course will be available soon.
+            The requested course could not be found.
           </p>
           <Link to="/courses" className="text-brand-600 hover:text-brand-700">
             ← Back to Courses
@@ -272,7 +123,7 @@ export default function CourseDetail() {
         : "Basic programming knowledge recommended",
       "Enthusiasm to learn",
     ],
-    curriculum: [
+    curriculum: foundCourse.curriculum || [
       {
         module: "Module 1: Fundamentals",
         lessons: [
@@ -764,11 +615,11 @@ export default function CourseDetail() {
                   <CardContent className="space-y-3">
                     <div className="flex items-center">
                       <Clock className="w-5 h-5 text-gray-500 mr-3" />
-                      <span>8 weeks duration</span>
+                      <span>{course.duration} duration</span>
                     </div>
                     <div className="flex items-center">
                       <BookOpen className="w-5 h-5 text-gray-500 mr-3" />
-                      <span>50+ lessons</span>
+                      <span>{course.curriculum.length} modules</span>
                     </div>
                     <div className="flex items-center">
                       <Download className="w-5 h-5 text-gray-500 mr-3" />
@@ -857,7 +708,7 @@ export default function CourseDetail() {
                     phone: e.target.value,
                   })
                 }
-                placeholder="+91 9876543210"
+                placeholder="+91 96502 19962"
                 required
               />
             </div>
@@ -902,7 +753,7 @@ export default function CourseDetail() {
                 <strong>Duration:</strong> {course.duration}
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Contact Email:</strong> mirajgodha@gmail.com
+                <strong>Contact Email:</strong> info@quantumroot.in
               </p>
             </div>
             <Button

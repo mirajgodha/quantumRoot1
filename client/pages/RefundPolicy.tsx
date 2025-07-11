@@ -353,7 +353,7 @@ export default function RefundPolicy() {
                   <br />
                   Email: refunds@quantumroot.in
                   <br />
-                  Phone: +91 9876543210
+                  Phone: +91 96502 19962
                   <br />
                   Business Hours: Monday-Friday, 9 AM - 6 PM IST
                 </p>

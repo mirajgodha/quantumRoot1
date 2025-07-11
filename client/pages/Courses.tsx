@@ -45,6 +45,7 @@ import {
   EnrollmentRequest,
   EnrollmentResponse,
 } from "@shared/api";
+import { mockCourses } from "@shared/courseData";
 import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
 import Footer from "@/components/Footer";
 
@@ -81,189 +82,9 @@ export default function Courses() {
   });
 
   useEffect(() => {
-    // Mock data - in real app this would come from API
-    const mockCourses: Course[] = [
-      {
-        id: "1",
-        title: "Generative AI & Large Language Models Singhal",
-        description:
-          "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
-        category: "Generative AI",
-        duration: "12 weeks",
-        difficulty: "Advanced",
-        price: 29999,
-        image:
-          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
-        tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
-        instructor: "Dr. Sarah Chen",
-        rating: 4.9,
-        students: 12500,
-        featured: true,
-      },
-      {
-        id: "2",
-        title: "Apache Spark for Big Data Processing",
-        description:
-          "Learn distributed computing and big data processing with Apache Spark, PySpark, and real-world projects.",
-        category: "Big Data",
-        duration: "10 weeks",
-        difficulty: "Intermediate",
-        price: 39999,
-        image:
-          "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop&crop=center",
-        tags: ["Apache Spark", "PySpark", "Big Data", "Scala"],
-        instructor: "Mark Rodriguez",
-        rating: 4.8,
-        students: 8900,
-        featured: true,
-      },
-      {
-        id: "3",
-        title: "Apache Cassandra for Distributed Systems",
-        description:
-          "Master distributed NoSQL databases with Cassandra for high-availability applications and scalable data solutions.",
-        category: "NoSQL",
-        duration: "8 weeks",
-        difficulty: "Advanced",
-        price: 59999,
-        image:
-          "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop&crop=center",
-        tags: ["Apache Cassandra", "NoSQL", "Distributed Systems", "CQL"],
-        instructor: "Dr. Amit Patel",
-        rating: 4.7,
-        students: 15600,
-        featured: true,
-      },
-      {
-        id: "4",
-        title: "Elasticsearch & Search Analytics",
-        description:
-          "Learn to build powerful search engines and analytics platforms with Elasticsearch, Kibana, and Logstash.",
-        category: "Search & Analytics",
-        duration: "6 weeks",
-        difficulty: "Intermediate",
-        price: 49999,
-        image:
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center",
-        tags: ["Elasticsearch", "Kibana", "Logstash", "Search"],
-        instructor: "Maria Santos",
-        rating: 4.8,
-        students: 11200,
-        featured: true,
-      },
-      {
-        id: "5",
-        title: "Machine Learning with Python",
-        description:
-          "Complete machine learning course covering algorithms, model training, and deployment with scikit-learn.",
-        category: "Machine Learning",
-        duration: "10 weeks",
-        difficulty: "Intermediate",
-        price: 34999,
-        image:
-          "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop&crop=center",
-        tags: ["Python", "scikit-learn", "TensorFlow", "Pandas"],
-        instructor: "Dr. Alex Kumar",
-        rating: 4.8,
-        students: 4567,
-      },
-      {
-        id: "6",
-        title: "Data Engineering with Apache Airflow",
-        description:
-          "Build robust data pipelines and workflows using Apache Airflow and modern data engineering practices.",
-        category: "Data Engineering",
-        duration: "7 weeks",
-        difficulty: "Intermediate",
-        price: 37999,
-        image:
-          "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&h=250&fit=crop&crop=center",
-        tags: ["Airflow", "ETL", "Python", "Data Pipelines"],
-        instructor: "Lisa Wang",
-        rating: 4.7,
-        students: 2134,
-      },
-      {
-        id: "7",
-        title: "Hadoop Ecosystem Fundamentals",
-        description:
-          "Learn the complete Hadoop ecosystem including HDFS, MapReduce, Hive, and HBase for big data processing.",
-        category: "Big Data",
-        duration: "8 weeks",
-        difficulty: "Beginner",
-        price: 28999,
-        image:
-          "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=250&fit=crop&crop=center",
-        tags: ["Hadoop", "HDFS", "MapReduce", "Hive", "HBase"],
-        instructor: "David Kim",
-        rating: 4.4,
-        students: 1567,
-      },
-      {
-        id: "8",
-        title: "DataBricks for Big Data Processing",
-        description:
-          "Learn DataBricks for big data processing including Databricks SQL, Databricks Delta, and Databricks ML.",
-        category: "Big Data",
-        duration: "8 weeks",
-        difficulty: "Intermediate",
-        price: 28999,
-        image:
-          "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=250&fit=crop&crop=center",
-        tags: ["Hadoop", "HDFS", "MapReduce", "Hive", "HBase"],
-        instructor: "David Kim",
-        rating: 4.4,
-        students: 1567,
-      },
-      {
-        id: "9",
-        title: "Introduction to Generative AI",
-        description:
-          "Comprehensive foundation in Generative AI covering principles, types of generative models, applications, ML algorithms, and ethical considerations with hands-on projects.",
-        category: "Generative AI",
-        duration: "200+ hours",
-        difficulty: "Beginner",
-        price: 18999,
-        image:
-          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
-        tags: ["Generative AI", "ML Algorithms", "Ethics", "Hands-on Projects"],
-        instructor: "Edureka Industry Experts",
-        rating: 4.6,
-        students: 3200,
-      },
-      {
-        id: "10",
-        title: "ChatGPT Training Course: Beginners to Advanced",
-        description:
-          "Master ChatGPT from basics to advanced applications including prompt engineering, API integration, building chatbots, and business applications.",
-        category: "Generative AI",
-        duration: "18 hours",
-        difficulty: "Beginner",
-        price: 24999,
-        image:
-          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
-        tags: ["ChatGPT", "Prompt Engineering", "API", "Chatbots", "GPT-3"],
-        instructor: "Edureka Industry Practitioners",
-        rating: 4.7,
-        students: 2850,
-      },
-      {
-        id: "11",
-        title: "LLM Engineering: Master AI, Large Language Models & Agents",
-        description:
-          "Transform into a proficient LLM engineer through building 8 practical applications covering RAG, LoRA, AI Agents, and multi-modal systems.",
-        category: "Generative AI",
-        duration: "25.5 hours",
-        difficulty: "Advanced",
-        price: 55999,
-        image:
-          "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
-        tags: ["LLM", "RAG", "LoRA", "AI Agents", "Multi-modal"],
-        instructor: "Ed Donner",
-        rating: 4.8,
-        students: 1890,
-      },
-    ];
+    // Use shared mock data
+    setCourses(mockCourses);
+    setFilteredCourses(mockCourses);
 
     const mockCategories: CourseCategory[] = [
       {
@@ -310,8 +131,6 @@ export default function Courses() {
       },
     ];
 
-    setCourses(mockCourses);
-    setFilteredCourses(mockCourses);
     setCategories(mockCategories);
   }, []);
 
@@ -904,7 +723,7 @@ export default function Courses() {
                     phone: e.target.value,
                   })
                 }
-                placeholder="+91 9876543210"
+                placeholder="+91 96502 19962"
                 required
               />
             </div>
@@ -936,7 +755,7 @@ export default function Courses() {
                 <strong>Course:</strong> {selectedCourse}
               </p>
               <p className="text-sm text-gray-600">
-                <strong>Contact Email:</strong> mirajgodha@gmail.com
+                <strong>Contact Email:</strong> info@quantumroot.in
               </p>
             </div>
             <Button
