@@ -3,13 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
-    <script type="module" crossorigin src="./assets/index-FEVk-Jcc.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DTXjogy6.css">
+    <title>Quantum Root - Technology Training & Courses</title>
+    <meta
+      name="description"
+      content="QuantumRoot offers cutting-edge technology training courses in AI, Big Data, Machine Learning, and more. Transform your career with our expert-led programs."
+    />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-5RDGXWDXFZ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      // Replace GA_MEASUREMENT_ID with your actual Google Analytics Measurement ID
+      gtag("config", "G-5RDGXWDXFZ", {
+        page_title: "QuantumRoot",
+        page_location: window.location.href,
+        send_page_view: true,
+      });
+    </script>
+
+    <!--<script type="module" crossorigin src="/client/App.tsx"></script>-->
+    <script type="module" src="/client/main.tsx"></script> 
   </head>
 
   <body>
     <div id="root"></div>
-
   </body>
 </html>

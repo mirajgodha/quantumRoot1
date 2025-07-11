@@ -1,6 +1,6 @@
 {
   "devCommand": "npm run dev",
-  "serverUrl": "http://localhost:8080/quantumRoot1/",
+  "serverUrl": "http://localhost:8080/quantumRoot1",
   "commitMode": "commits",
   "isLocal": true,
   "allowedCommands": [
