@@ -19,9 +19,7 @@
     "start": "node dist/server/node-build.mjs",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
-    "typecheck": "tsc",
-    "predeploy": "npm run build:client",
-    "deploy": "gh-pages -d dist/spa"
+    "typecheck": "tsc"
   },
   "dependencies": {
     "express": "^4.18.2",
