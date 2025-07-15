@@ -58,7 +58,7 @@ Submitted at: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
 
     try {
       const transporter = nodemailer.createTransport({
-        host: "smtp.secureserver.net",
+        host: "smtpout.secureserver.net",
         port: 465,
         secure: true,
         auth: {
