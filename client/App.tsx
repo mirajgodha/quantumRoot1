@@ -40,7 +40,7 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="/quantumRoot1">
+      <BrowserRouter basename="/">
         <TooltipProvider>
           <AnalyticsWrapper>
             <Routes>
