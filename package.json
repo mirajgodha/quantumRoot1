@@ -21,7 +21,8 @@
     "format.fix": "prettier --write .",
     "typecheck": "tsc",
     "predeploy": "npm run build:client",
-    "deploy": "gh-pages -d dist/spa"
+    "deploy": "gh-pages -d dist/spa",
+    "preview": "vite preview"
   },
   "dependencies": {
     "dotenv": "^17.2.0",
