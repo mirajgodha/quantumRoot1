@@ -15,15 +15,42 @@ export function createServer() {
 
   // Middleware
   app.use(cors());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
 
-  // Add logging middleware
+  // Add logging middleware before body parsing
   app.use((req, res, next) => {
     if (req.path.startsWith("/api/")) {
       console.log(`[Express] ${req.method} ${req.path}`);
     }
     next();
+  });
+
+  // Middleware to handle body parsing conflicts with Vite
+  app.use((req, res, next) => {
+    // Check if body is already parsed (by Vite or other middleware)
+    // This handles cases where body might be undefined, null, or an empty object
+    if (req.body !== undefined && req.body !== null) {
+      if (req.path.startsWith("/api/")) {
+        console.log(
+          `[Express] Body already parsed:`,
+          typeof req.body,
+          Object.keys(req.body || {}),
+        );
+      }
+      return next();
+    }
+
+    if (req.path.startsWith("/api/")) {
+      console.log(`[Express] Parsing body for ${req.method} ${req.path}`);
+    }
+
+    // Parse the body with Express
+    express.json({ limit: "10mb" })(req, res, (err) => {
+      if (err) {
+        console.error(`[Express] JSON parsing error:`, err);
+        return next(err);
+      }
+      express.urlencoded({ extended: true, limit: "10mb" })(req, res, next);
+    });
   });
 
   // Example API routes

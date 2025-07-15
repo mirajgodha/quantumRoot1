@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { ContactRequest, ContactResponse } from "@shared/api";
-import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
+import dotenv from "dotenv";
+import nodemailer from "nodemailer";
 dotenv.config();
 
 /**
@@ -60,26 +60,35 @@ Submitted at: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
     `.trim();
 
     // TODO: In production, integrate with an email service
-    // Example with Nodemailer:
+    // Example with Nodemailer (temporarily disabled for debugging):
 
-    const transporter = nodemailer.createTransporter({
-      host: 'smtp.secureserver.net',
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
+    try {
+      const transporter = nodemailer.createTransport({
+        host: "smtp.secureserver.net",
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: 'info@quantumroot.in',
-      subject: emailSubject,
-      text: emailBody,
-      replyTo: contactData.email
-    });
-    
+      // Temporarily comment out actual email sending for debugging
+      // await transporter.sendMail({
+      //   from: process.env.EMAIL_USER,
+      //   to: "info@quantumroot.in",
+      //   subject: emailSubject,
+      //   text: emailBody,
+      //   replyTo: contactData.email,
+      // });
+
+      console.log(
+        "[Email] Would send email with nodemailer (disabled for debugging)",
+      );
+    } catch (emailError) {
+      console.error("[Email] Error setting up nodemailer:", emailError);
+      // Don't throw - continue with logging for now
+    }
 
     // For now, log the contact details (in production, this would be replaced with actual email sending)
     console.log("=== NEW CONTACT FORM SUBMISSION ===");

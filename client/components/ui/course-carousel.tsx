@@ -167,25 +167,14 @@ export function CourseCarousel({
       {autoRotate && isPlaying && !isHovered && (
         <div className="w-full bg-gray-200 rounded-full h-1 mt-4 overflow-hidden">
           <div
-            className="bg-brand-600 h-1 rounded-full transition-all ease-linear"
+            className="bg-brand-600 h-1 rounded-full"
             style={{
               width: "100%",
-              animation: `progress ${autoRotateInterval}ms linear infinite`,
+              animation: `carousel-progress ${autoRotateInterval}ms linear infinite`,
             }}
           />
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes progress {
-          from {
-            width: 0%;
-          }
-          to {
-            width: 100%;
-          }
-        }
-      `}</style>
     </div>
   );
 }

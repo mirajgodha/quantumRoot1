@@ -167,4 +167,13 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  @keyframes carousel-progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
 }
