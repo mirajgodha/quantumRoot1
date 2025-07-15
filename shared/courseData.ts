@@ -2,6 +2,92 @@ import { Course } from "./api";
 
 export const mockCourses: Course[] = [
   {
+    id: "8",
+    title: "Introduction to Generative AI for Business Leaders",
+    description:
+      "Master AI tools like ChatGPT, Gemini, and more to boost productivity. Use AI to excel at office work, projects, research, and job hunting.",
+    category: "Generative AI",
+    duration: "5 weeks",
+    difficulty: "Beginner",
+    price: 34999,
+    image:
+      "https://plus.unsplash.com/premium_photo-1725907643701-9ba38affe7bb?w=400&h=250&fit=crop&crop=center",
+    tags: [
+      "Generative AI",
+      "ChatGPT",
+      "Gemini",
+      "Prompt Engineering",
+      "AI Productivity",
+      "Job Hunting",
+      "Excel & PPT with AI",
+      "No-Code AI",
+      "AI for Research",
+      "Side Hustles",
+      "Personal Branding",
+      "Efficiency Hacks",
+    ],
+    instructor: "Miraj Godha",
+    bio: "Ex-Oracle | RBS | Apple | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
+    rating: 4.8,
+    students: 1500,
+    featured: true,
+    curriculum: [
+      {
+        module: "Module 1: AI Fundamentals for Business",
+        lessons: [
+          "Understanding generative AI and its business applications",
+          "Overview of popular AI tools: ChatGPT, Gemini, Claude, and more",
+          "Setting up and getting started with AI platforms",
+          "Basic prompt writing and AI interaction principles",
+        ],
+      },
+      {
+        module: "Module 2: Prompt Engineering Mastery",
+        lessons: [
+          "The science of effective prompt engineering",
+          "Advanced prompting techniques and frameworks",
+          "Context setting and role-based prompting",
+          "Prompt chaining and multi-step reasoning",
+        ],
+      },
+      {
+        module: "Module 3: AI for Productivity and Office Work",
+        lessons: [
+          "Email writing and communication with AI",
+          "Creating presentations and documents with AI assistance",
+          "Excel automation and data analysis using AI",
+          "Meeting summaries and note-taking optimization",
+        ],
+      },
+      {
+        module: "Module 4: AI for Research and Analysis",
+        lessons: [
+          "Research methodology with AI assistance",
+          "Market analysis and competitive intelligence",
+          "Content creation and ideation processes",
+          "Fact-checking and information verification",
+        ],
+      },
+      {
+        module: "Module 5: AI for Career and Business Growth",
+        lessons: [
+          "Resume optimization and job hunting with AI",
+          "Personal branding and LinkedIn content creation",
+          "Client proposal writing and project management",
+          "Identifying and developing AI-powered side hustles",
+        ],
+      },
+      {
+        module: "Module 6: Advanced Applications and Future Trends",
+        lessons: [
+          "No-code AI tools and automation platforms",
+          "Building simple AI-powered workflows",
+          "Ethics and responsible AI usage in business",
+          "Staying updated with AI trends and opportunities",
+        ],
+      },
+    ],
+  },{
     id: "1",
     title: "Generative AI & Large Language Models",
     description:
@@ -9,13 +95,14 @@ export const mockCourses: Course[] = [
     category: "Generative AI",
     duration: "12 weeks",
     difficulty: "Advanced",
-    price: 29999,
+    price: 59999,
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop&crop=center",
     tags: ["OpenAI", "LLM", "GPT", "AI", "Machine Learning"],
     instructor: "Dr. Rakesh Kumar",
+    bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
     rating: 4.9,
-    students: 12500,
+    students: 1250,
     featured: true,
     curriculum: [
       {
@@ -84,11 +171,12 @@ export const mockCourses: Course[] = [
     difficulty: "Intermediate",
     price: 39999,
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=250&fit=crop&crop=center",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRf6onpCieunkDS2lVEKNhs2nOyLZD6fH-rw&s?w=400&h=250&fit=crop&crop=center",
     tags: ["Apache Spark", "PySpark", "Big Data", "Scala"],
     instructor: "Mark Rodriguez",
+    bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
     rating: 4.8,
-    students: 8900,
+    students: 890,
     featured: true,
     curriculum: [
       {
@@ -157,9 +245,10 @@ export const mockCourses: Course[] = [
     difficulty: "Advanced",
     price: 59999,
     image:
-      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop&crop=center",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIBKumrresBVx1fDmiP6FbbZFR0e4fi49KNA&s?w=400&h=250&fit=crop&crop=center",
     tags: ["Apache Cassandra", "NoSQL", "Distributed Systems", "CQL"],
-    instructor: "Dr. Amit Patel",
+    instructor: "Raj Jain",
+    bio:"IITin | Ex-Apple | Oracle | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
     rating: 4.7,
     students: 15600,
     featured: true,
@@ -232,10 +321,11 @@ export const mockCourses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop&crop=center",
     tags: ["Elasticsearch", "Kibana", "Logstash", "Search"],
-    instructor: "Maria Santos",
+    instructor: "Raj Jain",
+    bio:"IITin | Ex-Apple | Oracle | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
     rating: 4.8,
-    students: 11200,
-    featured: false,
+    students: 112,
+    featured: true,
     curriculum: [
       {
         module: "Module 1: Introduction to Elasticsearch",
@@ -301,13 +391,14 @@ export const mockCourses: Course[] = [
     category: "Machine Learning",
     duration: "10 weeks",
     difficulty: "Beginner",
-    price: 18999,
+    price: 24999,
     image:
       "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=250&fit=crop&crop=center",
     tags: ["Python", "scikit-learn", "TensorFlow", "Pandas"],
     instructor: "Dr. Alex Kumar",
+    bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
     rating: 4.8,
-    students: 4567,
+    students: 456,
     curriculum: [
       {
         module: "Module 1: Python for Data Science",
@@ -378,8 +469,9 @@ export const mockCourses: Course[] = [
       "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&h=250&fit=crop&crop=center",
     tags: ["Airflow", "ETL", "Python", "Data Pipelines"],
     instructor: "Lisa Wang",
+    bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
     rating: 4.7,
-    students: 2134,
+    students: 213,
     curriculum: [
       {
         module: "Module 1: Data Engineering Fundamentals",
@@ -450,8 +542,9 @@ export const mockCourses: Course[] = [
       "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=250&fit=crop&crop=center",
     tags: ["Hadoop", "HDFS", "MapReduce", "Hive", "HBase"],
     instructor: "David Kim",
+    bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
     rating: 4.4,
-    students: 1567,
+    students: 156,
     curriculum: [
       {
         module: "Module 1: Big Data and Hadoop Introduction",
@@ -509,92 +602,7 @@ export const mockCourses: Course[] = [
       },
     ],
   },
-  {
-    id: "8",
-    title: "Introduction to Generative AI for Business Leaders",
-    description:
-      "Master AI tools like ChatGPT, Gemini, and more to boost productivity. Use AI to excel at office work, projects, research, and job hunting.",
-    category: "Generative AI",
-    duration: "6 weeks",
-    difficulty: "Beginner",
-    price: 34999,
-    image:
-      "https://plus.unsplash.com/premium_photo-1725907643701-9ba38affe7bb?w=400&h=250&fit=crop&crop=center",
-    tags: [
-      "Generative AI",
-      "ChatGPT",
-      "Gemini",
-      "Prompt Engineering",
-      "AI Productivity",
-      "Job Hunting",
-      "Excel & PPT with AI",
-      "No-Code AI",
-      "AI for Research",
-      "Side Hustles",
-      "Personal Branding",
-      "Efficiency Hacks",
-    ],
-    instructor: "Sarah Iyer",
-    rating: 4.8,
-    students: 2942,
-    featured: true,
-    curriculum: [
-      {
-        module: "Module 1: AI Fundamentals for Business",
-        lessons: [
-          "Understanding generative AI and its business applications",
-          "Overview of popular AI tools: ChatGPT, Gemini, Claude, and more",
-          "Setting up and getting started with AI platforms",
-          "Basic prompt writing and AI interaction principles",
-        ],
-      },
-      {
-        module: "Module 2: Prompt Engineering Mastery",
-        lessons: [
-          "The science of effective prompt engineering",
-          "Advanced prompting techniques and frameworks",
-          "Context setting and role-based prompting",
-          "Prompt chaining and multi-step reasoning",
-        ],
-      },
-      {
-        module: "Module 3: AI for Productivity and Office Work",
-        lessons: [
-          "Email writing and communication with AI",
-          "Creating presentations and documents with AI assistance",
-          "Excel automation and data analysis using AI",
-          "Meeting summaries and note-taking optimization",
-        ],
-      },
-      {
-        module: "Module 4: AI for Research and Analysis",
-        lessons: [
-          "Research methodology with AI assistance",
-          "Market analysis and competitive intelligence",
-          "Content creation and ideation processes",
-          "Fact-checking and information verification",
-        ],
-      },
-      {
-        module: "Module 5: AI for Career and Business Growth",
-        lessons: [
-          "Resume optimization and job hunting with AI",
-          "Personal branding and LinkedIn content creation",
-          "Client proposal writing and project management",
-          "Identifying and developing AI-powered side hustles",
-        ],
-      },
-      {
-        module: "Module 6: Advanced Applications and Future Trends",
-        lessons: [
-          "No-code AI tools and automation platforms",
-          "Building simple AI-powered workflows",
-          "Ethics and responsible AI usage in business",
-          "Staying updated with AI trends and opportunities",
-        ],
-      },
-    ],
-  },
+  
   {
   id: "9",
   title: "Big Data – Advanced Spark Course",
@@ -621,8 +629,9 @@ export const mockCourses: Course[] = [
     "SBT"
   ],
   instructor: "Raj Jain",
+  bio:"IITin | Ex-Apple | Oracle | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
   rating: 4.6,
-  students: 1804,
+  students: 180,
   featured: false,
   curriculum: [
     {
@@ -742,8 +751,9 @@ export const mockCourses: Course[] = [
     "ETL Pipelines"
   ],
   instructor: "Raj Jain",
+  bio:"IITin | Ex-Apple | Oracle | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
   rating: 4.7,
-  students: 1784,
+  students: 178,
   featured: false,
   curriculum: [
     {
@@ -845,7 +855,7 @@ export const mockCourses: Course[] = [
   category: "Big Data",
   duration: "4 weeks",
   difficulty: "Intermediate",
-  price: 24999,
+  price: 30000,
   image:
     "https://dbdb.io/media/logos/trino.png?w=400&h=250&fit=crop&crop=center",
   tags: [
@@ -861,8 +871,9 @@ export const mockCourses: Course[] = [
     "Distributed SQL"
   ],
   instructor: "Ravi Mehta",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.7,
-  students: 1014,
+  students: 101,
   featured: false,
   curriculum: [
     {
@@ -924,7 +935,7 @@ export const mockCourses: Course[] = [
   category: "Big Data",
   duration: "5 weeks",
   difficulty: "Intermediate",
-  price: 27999,
+  price: 30000,
   image:
     "https://i.postimg.cc/pL0sXhjd/Apache-Beams.png?w=400&h=250&fit=crop&crop=center",
   tags: [
@@ -940,8 +951,9 @@ export const mockCourses: Course[] = [
     "Real-Time Analytics"
   ],
   instructor: "Ankur Bansal",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.6,
-  students: 1765,
+  students: 176,
   featured: false,
   curriculum: [
     {
@@ -1029,8 +1041,9 @@ export const mockCourses: Course[] = [
     "SQL Analytics"
   ],
   instructor: "Aniket Mehra",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.7,
-  students: 1326,
+  students: 132,
   featured: false,
   curriculum: [
     {
@@ -1102,8 +1115,9 @@ export const mockCourses: Course[] = [
     "DevOps Tools"
   ],
   instructor: "Amit Kaushik",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.6,
-  students: 1748,
+  students: 174,
   featured: false,
   curriculum: [
     {
@@ -1198,8 +1212,9 @@ export const mockCourses: Course[] = [
     "Data Engineering"
   ],
   instructor: "Raj Jain",
+  bio:"IITin | Ex-Apple | Oracle | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
   rating: 4.7,
-  students: 2012,
+  students: 201,
   featured: false,
   curriculum: [
     {
@@ -1311,7 +1326,7 @@ export const mockCourses: Course[] = [
   category: "Business Intelligence",
   duration: "3 weeks",
   difficulty: "Intermediate",
-  price: 18999,
+  price: 30000,
   image:
     "https://yt3.googleusercontent.com/46J5M53CFE1sJKFA4P7e-qE_FG0GL24gXD7mmJkrRnJHYDYQLQcHA8VW2mkmiecaA9OEfaOO6w=s160-c-k-c0x00ffffff-no-rj?w=400&h=250&fit=crop&crop=center",
   tags: [
@@ -1327,8 +1342,9 @@ export const mockCourses: Course[] = [
     "Google Cloud"
   ],
   instructor: "Sakshi Iyer",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.6,
-  students: 1297,
+  students: 129,
   featured: false,
   curriculum: [
     {
@@ -1396,13 +1412,13 @@ export const mockCourses: Course[] = [
 },
 {
   id: "17",
-  title: "Machine Learning with Python",
+  title: "Machine Learning with Python (Intermediate)",
   description:
     "A comprehensive hands-on course covering end-to-end machine learning workflows using Python, from data prep and classical ML to deep learning with CNNs. Build real-world projects using scikit-learn, XGBoost, and TensorFlow/Keras.",
   category: "Machine Learning",
   duration: "5 weeks",
   difficulty: "Intermediate",
-  price: 24999,
+  price: 40000,
   image:
     "https://images.unsplash.com/photo-1581092160613-3e7b1e509f3a?q=80&w=400&h=250&fit=crop",
   tags: [
@@ -1422,8 +1438,9 @@ export const mockCourses: Course[] = [
     "Computer Vision"
   ],
   instructor: "Ravi Kumar",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.7,
-  students: 2814,
+  students: 281,
   featured: false,
   curriculum: [
     {
@@ -1552,8 +1569,9 @@ export const mockCourses: Course[] = [
     "Consensus"
   ],
   instructor: "Ravi Kumar",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.8,
-  students: 1976,
+  students: 197,
   featured: false,
   curriculum: [
     {
@@ -1670,8 +1688,9 @@ export const mockCourses: Course[] = [
     "Data Modeling"
   ],
   instructor: "Firoj Atar",
+  bio:"Expert instructor with years of industry experience and proven track record in training professionals.",
   rating: 4.3,
-  students: 1905,
+  students: 190,
   featured: false,
   curriculum: [
     {

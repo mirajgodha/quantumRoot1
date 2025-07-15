@@ -411,12 +411,6 @@ export default function Courses() {
               </SelectContent>
             </Select>
             <Dialog open={isAddCourseOpen} onOpenChange={setIsAddCourseOpen}>
-              <DialogTrigger asChild>
-                <Button className="h-12 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Course
-                </Button>
-              </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
                   <DialogTitle>Add New Course</DialogTitle>

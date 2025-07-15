@@ -292,7 +292,7 @@ export default function TermsOfService() {
               </p>
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <p className="text-gray-700">
-                  <strong>QuantumRoot</strong>
+                  <strong>Quantum Root</strong>
                   <br />
                   Email: info@quantumroot.in
                   <br />

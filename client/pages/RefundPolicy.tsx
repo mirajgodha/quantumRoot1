@@ -104,7 +104,7 @@ export default function RefundPolicy() {
                       You have attended less than 10% of the course content
                     </li>
                     <li>
-                      The course is cancelled by QuantumRoot due to insufficient
+                      The course is cancelled by Quantum Root due to insufficient
                       enrollment
                     </li>
                     <li>

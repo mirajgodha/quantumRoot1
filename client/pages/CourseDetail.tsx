@@ -103,7 +103,9 @@ export default function CourseDetail() {
     ...priceInfo,
     instructor: {
       name: foundCourse.instructor,
-      bio: "Expert instructor with years of industry experience and proven track record in training professionals.",
+      //If bio is there in foundCourse use that otherwise use default
+      bio: foundCourse.bio || "Expert instructor with years of industry experience and proven track record in training professionals.",
+      //bio: "Expert instructor with years of industry experience and proven track record in training professionals.",
       image: "/api/placeholder/100/100",
     },
     whatYouLearn: [

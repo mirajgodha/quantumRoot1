@@ -27,6 +27,7 @@ export interface Course {
   image?: string;
   tags: string[];
   instructor: string;
+  bio: string
   rating: number;
   students: number;
   featured?: boolean;
