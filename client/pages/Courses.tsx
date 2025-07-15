@@ -174,6 +174,7 @@ export default function Courses() {
       tags: newCourse.tags,
       rating: 0,
       students: 0,
+      bio: "",
     };
 
     setCourses([...courses, course]);
