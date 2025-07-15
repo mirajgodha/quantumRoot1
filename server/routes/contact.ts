@@ -74,13 +74,13 @@ Submitted at: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
       });
 
       // Temporarily comment out actual email sending for debugging
-      // await transporter.sendMail({
-      //   from: process.env.EMAIL_USER,
-      //   to: "info@quantumroot.in",
-      //   subject: emailSubject,
-      //   text: emailBody,
-      //   replyTo: contactData.email,
-      // });
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: "info@quantumroot.in",
+        subject: emailSubject,
+        text: emailBody,
+        replyTo: contactData.email,
+      });
 
       console.log(
         "[Email] Would send email with nodemailer (disabled for debugging)",
