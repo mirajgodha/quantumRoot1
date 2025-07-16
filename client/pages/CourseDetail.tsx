@@ -113,7 +113,10 @@ export default function CourseDetail() {
   }
 
   // Extended course data with additional details
-  const priceInfo = calculateDiscountedPrice(foundCourse.price);
+  const priceInfo = calculateDiscountedPrice(
+    foundCourse.price,
+    foundCourse.slug,
+  );
 
   // Default global whatYouLearn and prerequisites
   const defaultWhatYouLearn = [
@@ -423,7 +426,7 @@ export default function CourseDetail() {
     description: course.description,
     provider: "QuantumRoot",
     duration: course.duration,
-    price: calculateDiscountedPrice(course.price).discountedPrice,
+    price: calculateDiscountedPrice(course.price, course.slug).discountedPrice,
     currency: "INR",
     category: course.category,
   });

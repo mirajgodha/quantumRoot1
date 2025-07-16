@@ -20,7 +20,7 @@ export const mockCourses: Course[] = [
     category: "Generative AI",
     duration: "5 weeks",
     difficulty: "Beginner",
-    price: 34999,
+    price: 39995,
     image:
       "https://plus.unsplash.com/premium_photo-1725907643701-9ba38affe7bb?w=400&h=250&fit=crop&crop=center",
     tags: [

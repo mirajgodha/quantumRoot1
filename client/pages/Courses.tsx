@@ -658,8 +658,10 @@ export default function Courses() {
                         <div className="flex items-center gap-2">
                           <div className="text-2xl font-bold text-brand-600">
                             {formatPrice(
-                              calculateDiscountedPrice(course.price)
-                                .discountedPrice,
+                              calculateDiscountedPrice(
+                                course.price,
+                                course.slug,
+                              ).discountedPrice,
                             )}
                           </div>
                           <div className="text-lg text-gray-400 line-through">
@@ -668,13 +670,15 @@ export default function Courses() {
                         </div>
                         <div className="flex items-center gap-2">
                           <Badge className="bg-green-100 text-green-800 text-xs">
-                            {getDiscountPercentage()}% OFF
+                            {getDiscountPercentage(course.slug)}% OFF
                           </Badge>
                           <span className="text-xs text-green-600">
                             Save{" "}
                             {formatPrice(
-                              calculateDiscountedPrice(course.price)
-                                .savingsAmount,
+                              calculateDiscountedPrice(
+                                course.price,
+                                course.slug,
+                              ).savingsAmount,
                             )}
                           </span>
                         </div>
