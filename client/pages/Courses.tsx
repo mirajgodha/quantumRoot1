@@ -60,7 +60,11 @@ export default function Courses() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [isAddCourseOpen, setIsAddCourseOpen] = useState(false);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState("");
+  const [selectedCourseForQR, setSelectedCourseForQR] = useState<Course | null>(
+    null,
+  );
   const [newCourse, setNewCourse] = useState<CreateCourseRequest>({
     title: "",
     slug: "",
@@ -280,6 +284,15 @@ export default function Courses() {
     setSelectedCourse(courseName);
     setEnrollmentForm((prev) => ({ ...prev, courseName }));
     setIsEnrollmentOpen(true);
+  };
+
+  const handleEnrollClick = (course: Course) => {
+    if (course.showPaymentQR) {
+      setSelectedCourseForQR(course);
+      setIsQRModalOpen(true);
+    } else {
+      openEnrollmentModal(course.title);
+    }
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -695,9 +708,9 @@ export default function Courses() {
                       </Link>
                       <Button
                         className="bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700"
-                        onClick={() => openEnrollmentModal(course.title)}
+                        onClick={() => handleEnrollClick(course)}
                       >
-                        Enroll Now
+                        {course.showPaymentQR ? "Pay Now" : "Enroll Now"}
                       </Button>
                     </div>
                   </div>
@@ -820,6 +833,88 @@ export default function Courses() {
                 By submitting this form, you agree to be contacted by our team
                 regarding your enrollment.
               </p>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* QR Code Payment Modal */}
+        <Dialog open={isQRModalOpen} onOpenChange={setIsQRModalOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Complete Your Payment</DialogTitle>
+              <DialogDescription>
+                Scan the QR code below to make your payment for:{" "}
+                <strong>{selectedCourseForQR?.title}</strong>
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              {selectedCourseForQR?.paymentQRImage && (
+                <div className="flex flex-col items-center">
+                  <img
+                    src={selectedCourseForQR.paymentQRImage}
+                    alt="Payment QR Code"
+                    className="w-64 h-64 object-contain border rounded-lg"
+                  />
+                  <p className="text-sm text-gray-600 mt-2 text-center">
+                    Scan this QR code with your UPI app to complete the payment
+                  </p>
+                </div>
+              )}
+              {selectedCourseForQR && (
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    Payment Details:
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    <strong>Course:</strong> {selectedCourseForQR.title}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <strong>Amount:</strong>{" "}
+                    {formatPrice(
+                      calculateDiscountedPrice(
+                        selectedCourseForQR.price,
+                        selectedCourseForQR.slug,
+                      ).discountedPrice,
+                    )}{" "}
+                    <span className="line-through text-gray-400">
+                      {formatPrice(selectedCourseForQR.price)}
+                    </span>
+                  </p>
+                  <p className="text-sm text-green-600">
+                    <strong>You Save:</strong>{" "}
+                    {formatPrice(
+                      calculateDiscountedPrice(
+                        selectedCourseForQR.price,
+                        selectedCourseForQR.slug,
+                      ).savingsAmount,
+                    )}{" "}
+                    ({getDiscountPercentage(selectedCourseForQR.slug)}% OFF)
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <strong>Duration:</strong> {selectedCourseForQR.duration}
+                  </p>
+                </div>
+              )}
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>After Payment:</strong> Please send a screenshot of
+                  your payment confirmation to{" "}
+                  <a
+                    href="mailto:info@quantumroot.in"
+                    className="text-brand-600 hover:underline"
+                  >
+                    info@quantumroot.in
+                  </a>{" "}
+                  with your name and course details to confirm enrollment.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => setIsQRModalOpen(false)}
+              >
+                Close
+              </Button>
             </div>
           </DialogContent>
         </Dialog>

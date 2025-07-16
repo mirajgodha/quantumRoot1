@@ -41,6 +41,8 @@ export interface Course {
   whatYouLearn?: string[];
   prerequisites?: string[];
   faqs?: FAQ[];
+  showPaymentQR?: boolean;
+  paymentQRImage?: string;
 }
 
 export interface CourseCategory {

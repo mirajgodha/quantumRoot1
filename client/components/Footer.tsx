@@ -70,10 +70,13 @@ export default function Footer() {
               the future workplace.
             </p>
             <div className="flex space-x-4">
-              <Facebook className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
+              <Facebook
+                className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"
+                onClick={() => window.open("https://www.facebook.com/DesignPathshala/", "_blank")}/>
               <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
               <Linkedin className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-              <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
+              <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" 
+              onClick={() => window.open("https://www.youtube.com/@designpathshala4807", "_blank")}/>
             </div>
           </div>
           <div>

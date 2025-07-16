@@ -20,7 +20,7 @@ export const mockCourses: Course[] = [
     category: "Generative AI",
     duration: "5 weeks",
     difficulty: "Beginner",
-    price: 39995,
+    price: 34999,
     image:
       "https://plus.unsplash.com/premium_photo-1725907643701-9ba38affe7bb?w=400&h=250&fit=crop&crop=center",
     tags: [
@@ -44,6 +44,8 @@ export const mockCourses: Course[] = [
     rating: 4.8,
     students: 1500,
     featured: true,
+    showPaymentQR: true,
+    paymentQRImage: "/images/Quantum Root_QR_9999.png",
     whatYouLearn: [
       "Understand Generative AI, tokens, and LLMs without any coding knowledge",
       "Master prompt engineering techniques to get the best responses from AI",

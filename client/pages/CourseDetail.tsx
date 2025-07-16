@@ -65,6 +65,7 @@ export default function CourseDetail() {
   const { slug } = useParams();
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const [enquiryForm, setEnquiryForm] = useState({
     name: "",
     email: "",
@@ -387,6 +388,14 @@ export default function CourseDetail() {
     setIsEnrollmentOpen(true);
   };
 
+  const handleEnrollClick = () => {
+    if (course.showPaymentQR) {
+      setIsQRModalOpen(true);
+    } else {
+      openEnrollmentModal();
+    }
+  };
+
   const handleShareCourse = async () => {
     const shareData = {
       title: `${course.title} - QuantumRoot`,
@@ -591,9 +600,9 @@ export default function CourseDetail() {
                     </div>
                     <Button
                       className="w-full mb-3 bg-brand-500 hover:bg-brand-600"
-                      onClick={openEnrollmentModal}
+                      onClick={handleEnrollClick}
                     >
-                      Enroll Now
+                      {course.showPaymentQR ? "Pay Now" : "Enroll Now"}
                     </Button>
                     <Dialog
                       open={isEnquiryOpen}
@@ -1030,6 +1039,74 @@ export default function CourseDetail() {
                 By submitting this form, you agree to be contacted by our team
                 regarding your enrollment.
               </p>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* QR Code Payment Modal */}
+        <Dialog open={isQRModalOpen} onOpenChange={setIsQRModalOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Complete Your Payment</DialogTitle>
+              <DialogDescription>
+                Scan the QR code below to make your payment for:{" "}
+                <strong>{course.title}</strong>
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              {course.paymentQRImage && (
+                <div className="flex flex-col items-center">
+                  <img
+                    src={course.paymentQRImage}
+                    alt="Payment QR Code"
+                    className="w-64 h-64 object-contain border rounded-lg"
+                  />
+                  <p className="text-sm text-gray-600 mt-2 text-center">
+                    Scan this QR code with your UPI app to complete the payment
+                  </p>
+                </div>
+              )}
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-gray-900 mb-2">
+                  Payment Details:
+                </h4>
+                <p className="text-sm text-gray-600">
+                  <strong>Course:</strong> {course.title}
+                </p>
+                <p className="text-sm text-gray-600">
+                  <strong>Amount:</strong> {formatPrice(course.discountedPrice)}{" "}
+                  <span className="line-through text-gray-400">
+                    {formatPrice(course.originalPrice)}
+                  </span>
+                </p>
+                <p className="text-sm text-green-600">
+                  <strong>You Save:</strong> {formatPrice(course.savingsAmount)}{" "}
+                  ({course.discountPercentage}% OFF)
+                </p>
+                <p className="text-sm text-gray-600">
+                  <strong>Duration:</strong> {course.duration}
+                </p>
+              </div>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>After Payment:</strong> Please send a screenshot of
+                  your payment confirmation to{" "}
+                  <a
+                    href="mailto:info@quantumroot.in"
+                    className="text-brand-600 hover:underline"
+                  >
+                    info@quantumroot.in
+                  </a>{" "}
+                  with your name and course details to confirm enrollment.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => setIsQRModalOpen(false)}
+              >
+                Close
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
