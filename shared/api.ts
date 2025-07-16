@@ -21,6 +21,12 @@ export interface FAQ {
   answer: string;
 }
 
+export interface BatchDetail {
+  name: string;
+  schedule: string;
+  timing: string;
+}
+
 export interface Course {
   id: string;
   slug: string;
@@ -43,6 +49,7 @@ export interface Course {
   faqs?: FAQ[];
   showPaymentQR?: boolean;
   paymentQRImage?: string;
+  batchDetails?: BatchDetail[];
 }
 
 export interface CourseCategory {

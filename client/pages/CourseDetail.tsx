@@ -54,6 +54,7 @@ import {
   EnquiryRequest,
   EnquiryResponse,
   FAQ,
+  BatchDetail,
 } from "@shared/api";
 import { mockCourses } from "@shared/courseData";
 import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
@@ -900,6 +901,44 @@ export default function CourseDetail() {
                       </div>
                     </CardContent>
                   </Card>
+
+                  {/* Batch Details */}
+                  {course.batchDetails && course.batchDetails.length > 0 && (
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Batch Details</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {course.batchDetails.map((batch, index) => (
+                          <div
+                            key={index}
+                            className="p-4 border border-gray-200 rounded-lg bg-gray-50"
+                          >
+                            <h4 className="font-semibold text-gray-900 mb-2">
+                              {batch.name}
+                            </h4>
+                            <div className="space-y-2">
+                              <div className="flex items-center text-sm text-gray-600">
+                                <Calendar className="w-4 h-4 mr-2 text-brand-500" />
+                                <span>{batch.schedule}</span>
+                              </div>
+                              <div className="flex items-center text-sm text-gray-600">
+                                <Clock className="w-4 h-4 mr-2 text-brand-500" />
+                                <span>{batch.timing}</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        <div className="bg-blue-50 p-3 rounded-lg">
+                          <p className="text-sm text-blue-800">
+                            <strong>Note:</strong> You can choose your preferred
+                            batch during enrollment. All batches cover the same
+                            comprehensive curriculum.
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
 
                   {/* Share Course */}
                   <Card>

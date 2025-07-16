@@ -45,7 +45,19 @@ export const mockCourses: Course[] = [
     students: 1500,
     featured: true,
     showPaymentQR: true,
-    paymentQRImage: "/images/Quantum Root_QR_9999.png",
+    paymentQRImage: "/images/payment-qr-generative-ai.webp",
+    batchDetails: [
+      {
+        name: "Weekend Batch",
+        schedule: "Saturday and Sunday",
+        timing: "9:00 AM to 11:00 AM IST",
+      },
+      {
+        name: "Weekday Batch",
+        schedule: "Tuesday and Thursday",
+        timing: "7:30 PM to 9:30 PM IST",
+      },
+    ],
     whatYouLearn: [
       "Understand Generative AI, tokens, and LLMs without any coding knowledge",
       "Master prompt engineering techniques to get the best responses from AI",
