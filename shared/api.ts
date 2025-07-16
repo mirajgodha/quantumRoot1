@@ -16,6 +16,11 @@ export interface CurriculumModule {
   lessons: string[];
 }
 
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
 export interface Course {
   id: string;
   title: string;
@@ -27,11 +32,14 @@ export interface Course {
   image?: string;
   tags: string[];
   instructor: string;
-  bio: string
+  bio: string;
   rating: number;
   students: number;
   featured?: boolean;
   curriculum?: CurriculumModule[];
+  whatYouLearn?: string[];
+  prerequisites?: string[];
+  faqs?: FAQ[];
 }
 
 export interface CourseCategory {

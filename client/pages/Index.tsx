@@ -65,7 +65,11 @@ import {
   EnquiryRequest,
   EnquiryResponse,
 } from "@shared/api";
-import { calculateDiscountedPrice, formatPrice, getDiscountPercentage } from "@/lib/pricing";
+import {
+  calculateDiscountedPrice,
+  formatPrice,
+  getDiscountPercentage,
+} from "@/lib/pricing";
 import {
   InfiniteScrollTicker,
   type TestimonialItem,
@@ -79,8 +83,6 @@ import Footer from "@/components/Footer";
 import { useAnalytics, useTimeTracking } from "@/hooks/use-analytics";
 import SEO from "@/components/SEO";
 import { generateOrganizationStructuredData } from "@/lib/seo";
-
-
 
 export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -667,7 +669,7 @@ export default function Index() {
                 {featuredCourses.map((course) => (
                   <Card
                     key={course.id}
-                    className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg"
+                    className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg h-full flex flex-col"
                   >
                     <div className="aspect-video rounded-t-lg overflow-hidden relative">
                       <img
@@ -712,7 +714,7 @@ export default function Index() {
                         {course.description}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="flex-grow flex flex-col justify-between">
                       <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
                         <div className="flex items-center">
                           <Clock className="w-4 h-4 mr-1" />

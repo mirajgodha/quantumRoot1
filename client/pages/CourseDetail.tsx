@@ -47,7 +47,12 @@ import {
   Share,
   ChevronRight,
 } from "lucide-react";
-import { Course, EnrollmentRequest, EnrollmentResponse } from "@shared/api";
+import {
+  Course,
+  EnrollmentRequest,
+  EnrollmentResponse,
+  FAQ,
+} from "@shared/api";
 import { mockCourses } from "@shared/courseData";
 import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
 import Footer from "@/components/Footer";
@@ -100,35 +105,80 @@ export default function CourseDetail() {
 
   // Extended course data with additional details
   const priceInfo = calculateDiscountedPrice(foundCourse.price);
+
+  // Default global whatYouLearn and prerequisites
+  const defaultWhatYouLearn = [
+    `Master ${foundCourse.title} fundamentals`,
+    "Hands-on practical projects",
+    "Industry best practices",
+    "Real-world applications",
+    "Advanced techniques and patterns",
+    "Performance optimization",
+    "Troubleshooting and debugging",
+    "Career development guidance",
+  ];
+
+  const defaultPrerequisites = [
+    "Basic computer knowledge",
+    foundCourse.difficulty === "Beginner"
+      ? "No prior experience required"
+      : "Basic programming knowledge recommended",
+    "Enthusiasm to learn",
+  ];
+
+  const defaultFaqs: FAQ[] = [
+    {
+      question: `Is this ${foundCourse.title} course suitable for beginners?`,
+      answer:
+        foundCourse.difficulty === "Beginner"
+          ? "Yes, this course is designed for complete beginners with no prior experience. We start from the very basics."
+          : "This course requires some basic knowledge. We recommend having fundamental understanding before starting.",
+    },
+    {
+      question: "What kind of support do I get during the course?",
+      answer:
+        "You get 24/7 support through our learning platform, weekly live Q&A sessions with instructors, and access to our student community forum.",
+    },
+    {
+      question: "Do I get a certificate upon completion?",
+      answer:
+        "Yes, you receive a verified certificate of completion that you can add to your LinkedIn profile and resume.",
+    },
+    {
+      question: "Can I access the course materials after completion?",
+      answer:
+        "Yes, you get lifetime access to all course materials, including future updates and additional resources.",
+    },
+    {
+      question: "What is the format of this course?",
+      answer:
+        "The course includes video lectures, hands-on coding exercises, real-world projects, and interactive quizzes. All content is available online with flexible scheduling.",
+    },
+    {
+      question: "Is there a money-back guarantee?",
+      answer:
+        "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with the course within the first 30 days, we'll provide a full refund.",
+    },
+  ];
+
   const course = {
     ...foundCourse,
     ...priceInfo,
     instructor: {
       name: foundCourse.instructor,
-      //If bio is there in foundCourse use that otherwise use default
       bio:
         foundCourse.bio ||
         "Expert instructor with years of industry experience and proven track record in training professionals.",
-      //bio: "Expert instructor with years of industry experience and proven track record in training professionals.",
       image: "/api/placeholder/100/100",
     },
-    whatYouLearn: [
-      `Master ${foundCourse.title} fundamentals`,
-      "Hands-on practical projects",
-      "Industry best practices",
-      "Real-world applications",
-      "Advanced techniques and patterns",
-      "Performance optimization",
-      "Troubleshooting and debugging",
-      "Career development guidance",
-    ],
-    prerequisites: [
-      "Basic computer knowledge",
-      foundCourse.difficulty === "Beginner"
-        ? "No prior experience required"
-        : "Basic programming knowledge recommended",
-      "Enthusiasm to learn",
-    ],
+    // Use course-specific whatYouLearn if available, otherwise use defaults
+    whatYouLearn: foundCourse.whatYouLearn || defaultWhatYouLearn,
+    // Use course-specific prerequisites if available, otherwise use defaults
+    prerequisites: foundCourse.prerequisites || defaultPrerequisites,
+    // Display both course-specific FAQs and global FAQs
+    faqs: foundCourse.faqs
+      ? [...foundCourse.faqs, ...defaultFaqs]
+      : defaultFaqs,
     curriculum: foundCourse.curriculum || [
       {
         module: "Module 1: Fundamentals",
@@ -165,30 +215,6 @@ export default function CourseDetail() {
           "Testing and debugging",
           "Deployment and monitoring",
         ],
-      },
-    ],
-    faqs: [
-      {
-        question: `Is this ${foundCourse.title} course suitable for beginners?`,
-        answer:
-          foundCourse.difficulty === "Beginner"
-            ? "Yes, this course is designed for complete beginners with no prior experience. We start from the very basics."
-            : "This course requires some basic knowledge. We recommend having fundamental understanding before starting.",
-      },
-      {
-        question: "What kind of support do I get during the course?",
-        answer:
-          "You get 24/7 support through our learning platform, weekly live Q&A sessions with instructors, and access to our student community forum.",
-      },
-      {
-        question: "Do I get a certificate upon completion?",
-        answer:
-          "Yes, you receive a verified certificate of completion that you can add to your LinkedIn profile and resume.",
-      },
-      {
-        question: "Can I access the course materials after completion?",
-        answer:
-          "Yes, you get lifetime access to all course materials, including future updates and additional resources.",
       },
     ],
   };
@@ -272,6 +298,40 @@ export default function CourseDetail() {
   const openEnrollmentModal = () => {
     setEnrollmentForm((prev) => ({ ...prev, courseName: course.title }));
     setIsEnrollmentOpen(true);
+  };
+
+  const handleShareCourse = async () => {
+    const shareData = {
+      title: `${course.title} - QuantumRoot`,
+      text: `Check out this amazing course: ${course.title}. ${course.description}`,
+      url: window.location.href,
+    };
+
+    try {
+      // Try to use Web Share API if available
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare(shareData)
+      ) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback to copying URL to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Course URL copied to clipboard! You can now share it anywhere.");
+      }
+    } catch (error) {
+      // Final fallback if clipboard API also fails
+      console.error("Error sharing:", error);
+      // Create a temporary textarea to copy the URL
+      const textarea = document.createElement("textarea");
+      textarea.value = window.location.href;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      alert("Course URL copied to clipboard! You can now share it anywhere.");
+    }
   };
 
   const courseStructuredData = generateCourseStructuredData({
@@ -695,9 +755,7 @@ export default function CourseDetail() {
                       <Button
                         variant="outline"
                         className="w-full"
-                        onClick={() =>
-                          navigator.share?.({ title: course.title })
-                        }
+                        onClick={handleShareCourse}
                       >
                         <Share className="w-4 h-4 mr-2" />
                         Share Course

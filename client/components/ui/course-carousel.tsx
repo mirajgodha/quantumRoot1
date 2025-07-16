@@ -142,7 +142,7 @@ export function CourseCarousel({
           {children.map((child, index) => (
             <div
               key={index}
-              className="flex-none"
+              className="flex-none flex"
               style={{
                 width: `calc(${100 / responsiveItemsToShow}% - ${(gap * (responsiveItemsToShow - 1)) / responsiveItemsToShow}px)`,
               }}
