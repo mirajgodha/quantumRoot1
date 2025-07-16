@@ -64,6 +64,7 @@ export function CorporateClientsTicker({
                 src={client.logo}
                 alt={`${client.name} logo`}
                 className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                loading="lazy"
                 onError={(e) => {
                   const target = e.currentTarget;
                   target.style.display = "none";
@@ -136,6 +137,7 @@ export function CompactCorporateClientsTicker({
                 src={client.logo}
                 alt={`${client.name} logo`}
                 className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                loading="lazy"
                 onError={(e) => {
                   const target = e.currentTarget;
                   target.style.display = "none";

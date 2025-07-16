@@ -22,14 +22,57 @@ export function CourseCarousel({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoRotate);
   const [isHovered, setIsHovered] = useState(false);
+  const [responsiveItemsToShow, setResponsiveItemsToShow] =
+    useState(itemsToShow);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Responsive itemsToShow logic
+  useEffect(() => {
+    const updateItemsToShow = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        // Mobile: show 1 item
+        setResponsiveItemsToShow(1);
+      } else if (width < 1024) {
+        // Tablet: show 2 items
+        setResponsiveItemsToShow(2);
+      } else if (width < 1280) {
+        // Small desktop: show 3 items
+        setResponsiveItemsToShow(3);
+      } else {
+        // Large desktop: use original itemsToShow
+        setResponsiveItemsToShow(itemsToShow);
+      }
+    };
+
+    // Set initial value
+    updateItemsToShow();
+
+    // Add resize listener
+    window.addEventListener("resize", updateItemsToShow);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", updateItemsToShow);
+  }, [itemsToShow]);
+
   const totalItems = children.length;
-  const maxIndex = Math.max(0, totalItems - itemsToShow);
+  const maxIndex = Math.max(0, totalItems - responsiveItemsToShow);
+
+  // Reset currentIndex when responsiveItemsToShow changes to prevent out of bounds
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(Math.max(0, maxIndex));
+    }
+  }, [maxIndex, currentIndex]);
 
   // Auto-rotation logic
   useEffect(() => {
-    if (isPlaying && !isHovered && autoRotate && totalItems > itemsToShow) {
+    if (
+      isPlaying &&
+      !isHovered &&
+      autoRotate &&
+      totalItems > responsiveItemsToShow
+    ) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) => {
           // Seamless loop: when reaching the end, go back to start
@@ -53,7 +96,7 @@ export function CourseCarousel({
     isHovered,
     autoRotate,
     totalItems,
-    itemsToShow,
+    responsiveItemsToShow,
     maxIndex,
     autoRotateInterval,
   ]);
@@ -70,11 +113,11 @@ export function CourseCarousel({
     setIsPlaying(!isPlaying);
   };
 
-  // If we have fewer items than itemsToShow, don't use carousel
-  if (totalItems <= itemsToShow) {
+  // If we have fewer items than responsiveItemsToShow, show a responsive grid
+  if (totalItems <= responsiveItemsToShow) {
     return (
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${Math.min(itemsToShow, totalItems)} gap-8 ${className}`}
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-${Math.min(itemsToShow, totalItems)} gap-8 ${className}`}
       >
         {children}
       </div>
@@ -92,7 +135,7 @@ export function CourseCarousel({
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
-            transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`,
+            transform: `translateX(-${currentIndex * (100 / responsiveItemsToShow)}%)`,
             gap: `${gap}px`,
           }}
         >
@@ -101,7 +144,7 @@ export function CourseCarousel({
               key={index}
               className="flex-none"
               style={{
-                width: `calc(${100 / itemsToShow}% - ${(gap * (itemsToShow - 1)) / itemsToShow}px)`,
+                width: `calc(${100 / responsiveItemsToShow}% - ${(gap * (responsiveItemsToShow - 1)) / responsiveItemsToShow}px)`,
               }}
             >
               {child}

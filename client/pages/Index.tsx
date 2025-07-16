@@ -77,6 +77,8 @@ import {
 import { CourseCarousel } from "@/components/ui/course-carousel";
 import Footer from "@/components/Footer";
 import { useAnalytics, useTimeTracking } from "@/hooks/use-analytics";
+import SEO from "@/components/SEO";
+import { generateOrganizationStructuredData } from "@/lib/seo";
 
 export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -517,694 +519,749 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white border-b shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800"
-                alt="QuantumRoot Logo"
-                className="w-10 h-10 object-contain"
-              />
-              <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
-                  Quantum Root
-                </span>
-                <span className="text-xs text-gray-600 italic -mt-1">
-                  Grow from the root, scale to quantum
-                </span>
-              </div>
-            </Link>
+    <>
+      <SEO
+        config={{
+          title:
+            "QuantumRoot | Hands-On AI, Big Data & Cloud Training Programs",
+          description:
+            "QuantumRoot offers career-focused training in AI, ML, Cloud & Big Data—featuring real-world projects, expert-led sessions, and modern tech stacks.",
+          keywords:
+            "AI training, Machine Learning courses, Big Data certification, Cloud computing, Programming bootcamp, Data Science, Python courses, Tech training",
+          url: "https://mirajgodha.github.io/quantumRoot1",
+        }}
+        structuredData={generateOrganizationStructuredData()}
+      />
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <header className="bg-white border-b shadow-sm sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              {/* Logo */}
+              <Link to="/" className="flex items-center space-x-3">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800"
+                  alt="QuantumRoot Logo - AI, Big Data & Cloud Training"
+                  className="w-10 h-10 object-contain"
+                  loading="eager"
+                />
+                <div className="flex flex-col">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                    Quantum Root
+                  </span>
+                  <span className="text-xs text-gray-600 italic -mt-1">
+                    Grow from the root, scale to quantum
+                  </span>
+                </div>
+              </Link>
 
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className="text-brand-600 font-medium hover:text-brand-700 transition-colors"
+              {/* Navigation */}
+              <nav
+                className="hidden md:flex items-center space-x-8"
+                aria-label="Main navigation"
               >
-                Home
-              </Link>
-              <Link
-                to="/courses"
-                className="text-gray-700 hover:text-brand-600 transition-colors"
-              >
-                Courses
-              </Link>
-              <Link
-                to="/live-classes"
-                className="text-gray-700 hover:text-brand-600 transition-colors"
-              >
-                Live Classes
-              </Link>
-              <Link
-                to="/about"
-                className="text-gray-700 hover:text-brand-600 transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                to="/blog"
-                className="text-gray-700 hover:text-brand-600 transition-colors"
-              >
-                Blog
-              </Link>
-              <Link
-                to="/careers"
-                className="text-gray-700 hover:text-brand-600 transition-colors"
-              >
-                Careers
-              </Link>
-              <Link
-                to="/contact"
-                className="text-gray-700 hover:text-brand-600 transition-colors"
-              >
-                Contact
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-brand-500 via-brand-600 to-blue-700 text-white py-20">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-              Master Tech Skills with
-              <br />
-              <span className="text-yellow-300">Hands-On Training</span>
-            </h1>
-            <div className="text-lg md:text-xl font-medium text-purple-200 mb-6 italic">
-              "Grow from the root, scale to quantum"
-            </div>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Courses in Coding, Robotics, Cloud, Data & More
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="h-14 px-8 text-lg font-semibold bg-yellow-400 text-gray-900 hover:bg-yellow-300"
-                asChild
-              >
-                <Link to="/courses">Browse Courses</Link>
-              </Button>
+                <Link
+                  to="/"
+                  className="text-brand-600 font-medium hover:text-brand-700 transition-colors"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/courses"
+                  className="text-gray-700 hover:text-brand-600 transition-colors"
+                >
+                  Courses
+                </Link>
+                <Link
+                  to="/live-classes"
+                  className="text-gray-700 hover:text-brand-600 transition-colors"
+                >
+                  Live Classes
+                </Link>
+                <Link
+                  to="/about"
+                  className="text-gray-700 hover:text-brand-600 transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  to="/blog"
+                  className="text-gray-700 hover:text-brand-600 transition-colors"
+                >
+                  Blog
+                </Link>
+                <Link
+                  to="/careers"
+                  className="text-gray-700 hover:text-brand-600 transition-colors"
+                >
+                  Careers
+                </Link>
+                <Link
+                  to="/contact"
+                  className="text-gray-700 hover:text-brand-600 transition-colors"
+                >
+                  Contact
+                </Link>
+              </nav>
             </div>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* Featured Courses */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Featured Courses
-            </h2>
-            <p className="text-xl text-gray-600">
-              Start your journey with our most popular courses
-            </p>
-          </div>
-          <CourseCarousel
-            autoRotate={true}
-            autoRotateInterval={4000}
-            itemsToShow={4}
-            gap={32}
-            className="w-full"
+        {/* Hero Section */}
+        <main>
+          <section
+            className="relative bg-gradient-to-br from-brand-500 via-brand-600 to-blue-700 text-white py-20"
+            aria-labelledby="hero-heading"
           >
-            {featuredCourses.map((course) => (
-              <Card
-                key={course.id}
-                className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg"
-              >
-                <div className="aspect-video rounded-t-lg overflow-hidden relative">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                  <div className="absolute top-3 right-3">
-                    {course.category === "Generative AI" && (
-                      <Brain className="w-6 h-6 text-white" />
-                    )}
-                    {course.category === "Big Data" && (
-                      <Database className="w-6 h-6 text-white" />
-                    )}
-                    {course.category === "NoSQL" && (
-                      <Database className="w-6 h-6 text-white" />
-                    )}
-                    {course.category === "Search & Analytics" && (
-                      <Search className="w-6 h-6 text-white" />
-                    )}
-                  </div>
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-4xl mx-auto">
+                <h1
+                  id="hero-heading"
+                  className="text-4xl md:text-6xl font-bold mb-4 leading-tight"
+                >
+                  Master Tech Skills with
+                  <br />
+                  <span className="text-yellow-300">Hands-On Training</span>
+                </h1>
+                <div className="text-lg md:text-xl font-medium text-purple-200 mb-6 italic">
+                  "Grow from the root, scale to quantum"
                 </div>
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge
-                      variant="secondary"
-                      className="bg-brand-100 text-brand-700"
-                    >
-                      {course.category}
-                    </Badge>
-                    <div className="flex items-center text-sm text-yellow-500">
-                      <Star className="w-4 h-4 fill-current mr-1" />
-                      {course.rating}
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg group-hover:text-brand-600 transition-colors">
-                    {course.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-gray-600">
-                    {course.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-1" />
-                      {course.duration}
-                    </div>
-                    <div className="flex items-center">
-                      <Users className="w-4 h-4 mr-1" />
-                      {course.students.toLocaleString()}
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <div className="text-2xl font-bold text-brand-600">
-                          {formatPrice(
-                            calculateDiscountedPrice(course.price)
-                              .discountedPrice,
-                          )}
-                        </div>
-                        <div className="text-lg text-gray-400 line-through">
-                          {formatPrice(course.price)}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge className="bg-green-100 text-green-800 text-xs">
-                          55% OFF
-                        </Badge>
-                        <span className="text-xs text-green-600">
-                          Save{" "}
-                          {formatPrice(
-                            calculateDiscountedPrice(course.price)
-                              .savingsAmount,
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex gap-2 w-full">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="text-xs flex-1"
-                        asChild
-                      >
-                        <Link to={`/courses/${course.id}`}>View Details</Link>
-                      </Button>
-                      <Button
-                        size="sm"
-                        className="text-xs bg-brand-500 hover:bg-brand-600 flex-1"
-                        onClick={() => openEnrollmentModal(course.title)}
-                      >
-                        Enroll Now
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </CourseCarousel>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose QuantumRoot?
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Code className="w-8 h-8 text-brand-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Hands-on Projects</h3>
-              <p className="text-gray-600">
-                Learn by building real-world projects with industry mentors
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-brand-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">
-                Top Industry Mentors
-              </h3>
-              <p className="text-gray-600">
-                Learn from experts working at top companies
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-brand-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Placement Support</h3>
-              <p className="text-gray-600">
-                Get job assistance and interview preparation
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-8 h-8 text-brand-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Flexible Schedule</h3>
-              <p className="text-gray-600">
-                Weekend and weekday batches available
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Course Categories */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Course Categories
-            </h2>
-            <p className="text-xl text-gray-600">
-              Explore courses across different technology domains
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {[
-              { name: "Programming", icon: Code, count: 25 },
-              { name: "Robotics", icon: Cpu, count: 2 },
-              { name: "Cloud", icon: Cloud, count: 18 },
-              { name: "Data Engineering", icon: Database, count: 15 },
-              { name: "AI/ML", icon: Brain, count: 20 },
-              { name: "DevOps", icon: Award, count: 10 },
-            ].map((category) => (
-              <Card
-                key={category.name}
-                className="text-center p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group"
-              >
-                <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-500 transition-colors">
-                  <category.icon className="w-8 h-8 text-brand-600 group-hover:text-white" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{category.name}</h3>
-                <p className="text-sm text-gray-600">
-                  {category.count} courses
+                <p className="text-xl md:text-2xl mb-8 text-blue-100">
+                  Courses in Coding, Robotics, Cloud, Data & More
                 </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="h-14 px-8 text-lg font-semibold bg-yellow-400 text-gray-900 hover:bg-yellow-300"
+                    asChild
+                  >
+                    <Link to="/courses">Browse Courses</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      {/* Testimonials */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Student Success Stories
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Hear from our graduates who transformed their careers
-            </p>
-          </div>
-        </div>
-
-        {/* Infinite Scroll Ticker */}
-        <InfiniteScrollTicker
-          items={testimonials as TestimonialItem[]}
-          speed="medium"
-          pauseOnHover={true}
-          className="py-8"
-        />
-      </section>
-
-      {/* Corporate Clients */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              Corporate Clients
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Trusted by leading organizations worldwide
-            </p>
-          </div>
-        </div>
-
-        {/* Infinite Scroll Ticker for Corporate Clients */}
-        <CorporateClientsTicker
-          clients={corporateClients as CorporateClient[]}
-          speed="medium"
-          pauseOnHover={true}
-          className="py-8"
-        />
-      </section>
-
-      {/* Drop Enquiry Section */}
-      <section className="py-16 bg-brand-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Start Your Journey?
-          </h2>
-          <p className="text-xl mb-8 text-brand-100">
-            Get personalized course recommendations and career guidance
-          </p>
-          <Dialog open={isEnquiryOpen} onOpenChange={setIsEnquiryOpen}>
-            <DialogTrigger asChild>
-              <Button
-                size="lg"
-                variant="secondary"
-                className="bg-white text-brand-600 hover:bg-gray-100"
+          {/* Featured Courses */}
+          <section className="py-16 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Featured Courses
+                </h2>
+                <p className="text-xl text-gray-600">
+                  Start your journey with our most popular courses
+                </p>
+              </div>
+              <CourseCarousel
+                autoRotate={true}
+                autoRotateInterval={4000}
+                itemsToShow={4}
+                gap={32}
+                className="w-full"
               >
-                Drop Us an Enquiry
-              </Button>
-            </DialogTrigger>
+                {featuredCourses.map((course) => (
+                  <Card
+                    key={course.id}
+                    className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg"
+                  >
+                    <div className="aspect-video rounded-t-lg overflow-hidden relative">
+                      <img
+                        src={course.image}
+                        alt={`${course.title} - ${course.category} course`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                      <div className="absolute top-3 right-3">
+                        {course.category === "Generative AI" && (
+                          <Brain className="w-6 h-6 text-white" />
+                        )}
+                        {course.category === "Big Data" && (
+                          <Database className="w-6 h-6 text-white" />
+                        )}
+                        {course.category === "NoSQL" && (
+                          <Database className="w-6 h-6 text-white" />
+                        )}
+                        {course.category === "Search & Analytics" && (
+                          <Search className="w-6 h-6 text-white" />
+                        )}
+                      </div>
+                    </div>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge
+                          variant="secondary"
+                          className="bg-brand-100 text-brand-700"
+                        >
+                          {course.category}
+                        </Badge>
+                        <div className="flex items-center text-sm text-yellow-500">
+                          <Star className="w-4 h-4 fill-current mr-1" />
+                          {course.rating}
+                        </div>
+                      </div>
+                      <CardTitle className="text-lg group-hover:text-brand-600 transition-colors">
+                        {course.title}
+                      </CardTitle>
+                      <CardDescription className="text-sm text-gray-600">
+                        {course.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                        <div className="flex items-center">
+                          <Clock className="w-4 h-4 mr-1" />
+                          {course.duration}
+                        </div>
+                        <div className="flex items-center">
+                          <Users className="w-4 h-4 mr-1" />
+                          {course.students.toLocaleString()}
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <div className="text-2xl font-bold text-brand-600">
+                              {formatPrice(
+                                calculateDiscountedPrice(course.price)
+                                  .discountedPrice,
+                              )}
+                            </div>
+                            <div className="text-lg text-gray-400 line-through">
+                              {formatPrice(course.price)}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge className="bg-green-100 text-green-800 text-xs">
+                              55% OFF
+                            </Badge>
+                            <span className="text-xs text-green-600">
+                              Save{" "}
+                              {formatPrice(
+                                calculateDiscountedPrice(course.price)
+                                  .savingsAmount,
+                              )}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex gap-2 w-full">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-xs flex-1"
+                            asChild
+                          >
+                            <Link to={`/courses/${course.id}`}>
+                              View Details
+                            </Link>
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="text-xs bg-brand-500 hover:bg-brand-600 flex-1"
+                            onClick={() => openEnrollmentModal(course.title)}
+                          >
+                            Enroll Now
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </CourseCarousel>
+            </div>
+          </section>
+
+          {/* Why Choose Us */}
+          <section className="py-16 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Why Choose QuantumRoot?
+                </h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Code className="w-8 h-8 text-brand-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Hands-on Projects
+                  </h3>
+                  <p className="text-gray-600">
+                    Learn by building real-world projects with industry mentors
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Award className="w-8 h-8 text-brand-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Top Industry Mentors
+                  </h3>
+                  <p className="text-gray-600">
+                    Learn from experts working at top companies
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-8 h-8 text-brand-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Placement Support
+                  </h3>
+                  <p className="text-gray-600">
+                    Get job assistance and interview preparation
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Clock className="w-8 h-8 text-brand-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Flexible Schedule
+                  </h3>
+                  <p className="text-gray-600">
+                    Weekend and weekday batches available
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Course Categories */}
+          <section className="py-16 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Course Categories
+                </h2>
+                <p className="text-xl text-gray-600">
+                  Explore courses across different technology domains
+                </p>
+              </div>
+              <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+                {[
+                  { name: "Programming", icon: Code, count: 25 },
+                  { name: "Robotics", icon: Cpu, count: 2 },
+                  { name: "Cloud", icon: Cloud, count: 18 },
+                  { name: "Data Engineering", icon: Database, count: 15 },
+                  { name: "AI/ML", icon: Brain, count: 20 },
+                  { name: "DevOps", icon: Award, count: 10 },
+                ].map((category) => (
+                  <Card
+                    key={category.name}
+                    className="text-center p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                  >
+                    <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-500 transition-colors">
+                      <category.icon className="w-8 h-8 text-brand-600 group-hover:text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      {category.count} courses
+                    </p>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Testimonials */}
+          <section className="py-16 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Student Success Stories
+                </h2>
+                <p className="text-xl text-gray-600 mb-8">
+                  Hear from our graduates who transformed their careers
+                </p>
+              </div>
+            </div>
+
+            {/* Infinite Scroll Ticker */}
+            <InfiniteScrollTicker
+              items={testimonials as TestimonialItem[]}
+              speed="medium"
+              pauseOnHover={true}
+              className="py-8"
+            />
+          </section>
+
+          {/* Corporate Clients */}
+          <section className="py-16 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                  Corporate Clients
+                </h2>
+                <p className="text-lg text-gray-600 mb-8">
+                  Trusted by leading organizations worldwide
+                </p>
+              </div>
+            </div>
+
+            {/* Infinite Scroll Ticker for Corporate Clients */}
+            <CorporateClientsTicker
+              clients={corporateClients as CorporateClient[]}
+              speed="medium"
+              pauseOnHover={true}
+              className="py-8"
+            />
+          </section>
+
+          {/* Drop Enquiry Section */}
+          <section className="py-16 bg-brand-600 text-white">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Ready to Start Your Journey?
+              </h2>
+              <p className="text-xl mb-8 text-brand-100">
+                Get personalized course recommendations and career guidance
+              </p>
+              <Dialog open={isEnquiryOpen} onOpenChange={setIsEnquiryOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="bg-white text-brand-600 hover:bg-gray-100"
+                  >
+                    Drop Us an Enquiry
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Drop Us an Enquiry</DialogTitle>
+                    <DialogDescription>
+                      Fill out the form below and our experts will get back to
+                      you.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input
+                        id="name"
+                        value={enquiryForm.name}
+                        onChange={(e) => {
+                          setEnquiryForm({
+                            ...enquiryForm,
+                            name: e.target.value,
+                          });
+                          if (enquiryErrors.name) {
+                            setEnquiryErrors({ ...enquiryErrors, name: "" });
+                          }
+                        }}
+                        placeholder="Your full name"
+                        className={
+                          enquiryErrors.name ? "border-red-500 bg-red-50" : ""
+                        }
+                      />
+                      {enquiryErrors.name && (
+                        <p className="mt-1 text-sm text-red-600">
+                          {enquiryErrors.name}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={enquiryForm.email}
+                        onChange={(e) => {
+                          setEnquiryForm({
+                            ...enquiryForm,
+                            email: e.target.value,
+                          });
+                          if (enquiryErrors.email) {
+                            setEnquiryErrors({ ...enquiryErrors, email: "" });
+                          }
+                        }}
+                        placeholder="your.email@example.com"
+                        className={
+                          enquiryErrors.email ? "border-red-500 bg-red-50" : ""
+                        }
+                      />
+                      {enquiryErrors.email && (
+                        <p className="mt-1 text-sm text-red-600">
+                          {enquiryErrors.email}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Label htmlFor="phone">Phone *</Label>
+                      <Input
+                        id="phone"
+                        value={enquiryForm.phone}
+                        onChange={(e) => {
+                          setEnquiryForm({
+                            ...enquiryForm,
+                            phone: e.target.value,
+                          });
+                          if (enquiryErrors.phone) {
+                            setEnquiryErrors({ ...enquiryErrors, phone: "" });
+                          }
+                        }}
+                        placeholder="Your phone number"
+                        className={
+                          enquiryErrors.phone ? "border-red-500 bg-red-50" : ""
+                        }
+                      />
+                      {enquiryErrors.phone && (
+                        <p className="mt-1 text-sm text-red-600">
+                          {enquiryErrors.phone}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Label htmlFor="course">Course Interested In *</Label>
+                      <Select
+                        value={enquiryForm.course}
+                        onValueChange={(value) => {
+                          setEnquiryForm({ ...enquiryForm, course: value });
+                          if (enquiryErrors.course) {
+                            setEnquiryErrors({ ...enquiryErrors, course: "" });
+                          }
+                        }}
+                      >
+                        <SelectTrigger
+                          className={
+                            enquiryErrors.course
+                              ? "border-red-500 bg-red-50"
+                              : ""
+                          }
+                        >
+                          <SelectValue placeholder="Select a course" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {featuredCourses.map((course) => (
+                            <SelectItem key={course.id} value={course.title}>
+                              {course.title}
+                            </SelectItem>
+                          ))}
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      {enquiryErrors.course && (
+                        <p className="mt-1 text-sm text-red-600">
+                          {enquiryErrors.course}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Label htmlFor="message">Message *</Label>
+                      <Textarea
+                        id="message"
+                        value={enquiryForm.message}
+                        onChange={(e) => {
+                          setEnquiryForm({
+                            ...enquiryForm,
+                            message: e.target.value,
+                          });
+                          if (enquiryErrors.message) {
+                            setEnquiryErrors({ ...enquiryErrors, message: "" });
+                          }
+                        }}
+                        placeholder="Any specific questions or requirements?"
+                        rows={3}
+                        className={
+                          enquiryErrors.message
+                            ? "border-red-500 bg-red-50"
+                            : ""
+                        }
+                      />
+                      {enquiryErrors.message && (
+                        <p className="mt-1 text-sm text-red-600">
+                          {enquiryErrors.message}
+                        </p>
+                      )}
+                    </div>
+                    <Button
+                      onClick={handleEnquirySubmit}
+                      disabled={isSubmittingEnquiry}
+                      className={`w-full ${
+                        isSubmittingEnquiry
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-brand-500 hover:bg-brand-600"
+                      }`}
+                    >
+                      {isSubmittingEnquiry ? "Submitting..." : "Submit Enquiry"}
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+          </section>
+
+          {/* Enrollment Modal */}
+          <Dialog open={isEnrollmentOpen} onOpenChange={setIsEnrollmentOpen}>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle>Drop Us an Enquiry</DialogTitle>
+                <DialogTitle>Enroll in Course</DialogTitle>
                 <DialogDescription>
-                  Fill out the form below and our experts will get back to you.
+                  Complete your enrollment for:{" "}
+                  <strong>{selectedCourse}</strong>
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="name">Full Name *</Label>
+                  <Label htmlFor="enrollName">Full Name *</Label>
                   <Input
-                    id="name"
-                    value={enquiryForm.name}
-                    onChange={(e) => {
-                      setEnquiryForm({ ...enquiryForm, name: e.target.value });
-                      if (enquiryErrors.name) {
-                        setEnquiryErrors({ ...enquiryErrors, name: "" });
-                      }
-                    }}
-                    placeholder="Your full name"
-                    className={
-                      enquiryErrors.name ? "border-red-500 bg-red-50" : ""
+                    id="enrollName"
+                    value={enrollmentForm.name}
+                    onChange={(e) =>
+                      setEnrollmentForm({
+                        ...enrollmentForm,
+                        name: e.target.value,
+                      })
                     }
+                    placeholder="Your full name"
+                    required
                   />
-                  {enquiryErrors.name && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {enquiryErrors.name}
-                    </p>
-                  )}
                 </div>
                 <div>
-                  <Label htmlFor="email">Email *</Label>
+                  <Label htmlFor="enrollEmail">Email Address *</Label>
                   <Input
-                    id="email"
+                    id="enrollEmail"
                     type="email"
-                    value={enquiryForm.email}
+                    value={enrollmentForm.email}
                     onChange={(e) => {
-                      setEnquiryForm({ ...enquiryForm, email: e.target.value });
-                      if (enquiryErrors.email) {
-                        setEnquiryErrors({ ...enquiryErrors, email: "" });
+                      setEnrollmentForm({
+                        ...enrollmentForm,
+                        email: e.target.value,
+                      });
+                      if (validationErrors.email) {
+                        setValidationErrors({ ...validationErrors, email: "" });
                       }
                     }}
                     placeholder="your.email@example.com"
-                    className={
-                      enquiryErrors.email ? "border-red-500 bg-red-50" : ""
-                    }
+                    required
+                    className={validationErrors.email ? "border-red-500" : ""}
                   />
-                  {enquiryErrors.email && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {enquiryErrors.email}
+                  {validationErrors.email && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {validationErrors.email}
                     </p>
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="phone">Phone *</Label>
+                  <Label htmlFor="enrollPhone">Phone Number *</Label>
                   <Input
-                    id="phone"
-                    value={enquiryForm.phone}
+                    id="enrollPhone"
+                    type="tel"
+                    value={enrollmentForm.phone}
                     onChange={(e) => {
-                      setEnquiryForm({ ...enquiryForm, phone: e.target.value });
-                      if (enquiryErrors.phone) {
-                        setEnquiryErrors({ ...enquiryErrors, phone: "" });
+                      setEnrollmentForm({
+                        ...enrollmentForm,
+                        phone: e.target.value,
+                      });
+                      if (validationErrors.phone) {
+                        setValidationErrors({ ...validationErrors, phone: "" });
                       }
                     }}
-                    placeholder="Your phone number"
-                    className={
-                      enquiryErrors.phone ? "border-red-500 bg-red-50" : ""
-                    }
+                    placeholder="+91 9876543210"
+                    required
+                    className={validationErrors.phone ? "border-red-500" : ""}
                   />
-                  {enquiryErrors.phone && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {enquiryErrors.phone}
+                  {validationErrors.phone && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {validationErrors.phone}
                     </p>
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="course">Course Interested In *</Label>
+                  <Label htmlFor="classType">Preferred Class Type *</Label>
                   <Select
-                    value={enquiryForm.course}
-                    onValueChange={(value) => {
-                      setEnquiryForm({ ...enquiryForm, course: value });
-                      if (enquiryErrors.course) {
-                        setEnquiryErrors({ ...enquiryErrors, course: "" });
-                      }
-                    }}
+                    value={enrollmentForm.classType}
+                    onValueChange={(value) =>
+                      setEnrollmentForm({ ...enrollmentForm, classType: value })
+                    }
                   >
-                    <SelectTrigger
-                      className={
-                        enquiryErrors.course ? "border-red-500 bg-red-50" : ""
-                      }
-                    >
-                      <SelectValue placeholder="Select a course" />
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select class type" />
                     </SelectTrigger>
                     <SelectContent>
-                      {featuredCourses.map((course) => (
-                        <SelectItem key={course.id} value={course.title}>
-                          {course.title}
-                        </SelectItem>
-                      ))}
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="online">Online Classes</SelectItem>
+                      <SelectItem value="offline">Offline Classes</SelectItem>
+                      <SelectItem value="hybrid">
+                        Hybrid (Online + Offline)
+                      </SelectItem>
                     </SelectContent>
                   </Select>
-                  {enquiryErrors.course && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {enquiryErrors.course}
-                    </p>
-                  )}
                 </div>
-                <div>
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea
-                    id="message"
-                    value={enquiryForm.message}
-                    onChange={(e) => {
-                      setEnquiryForm({
-                        ...enquiryForm,
-                        message: e.target.value,
-                      });
-                      if (enquiryErrors.message) {
-                        setEnquiryErrors({ ...enquiryErrors, message: "" });
-                      }
-                    }}
-                    placeholder="Any specific questions or requirements?"
-                    rows={3}
-                    className={
-                      enquiryErrors.message ? "border-red-500 bg-red-50" : ""
-                    }
-                  />
-                  {enquiryErrors.message && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {enquiryErrors.message}
-                    </p>
-                  )}
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    Course Details:
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    <strong>Course:</strong> {selectedCourse}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <strong>Contact Email:</strong> mirajgodha@gmail.com
+                  </p>
                 </div>
                 <Button
-                  onClick={handleEnquirySubmit}
-                  disabled={isSubmittingEnquiry}
-                  className={`w-full ${
-                    isSubmittingEnquiry
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-brand-500 hover:bg-brand-600"
-                  }`}
+                  onClick={handleEnrollmentSubmit}
+                  className="w-full bg-brand-500 hover:bg-brand-600"
+                  disabled={
+                    !enrollmentForm.name ||
+                    !enrollmentForm.email ||
+                    !enrollmentForm.phone ||
+                    !validateEmail(enrollmentForm.email) ||
+                    !validatePhone(enrollmentForm.phone)
+                  }
                 >
-                  {isSubmittingEnquiry ? "Submitting..." : "Submit Enquiry"}
+                  Submit Enrollment
+                </Button>
+                <p className="text-xs text-gray-500 text-center">
+                  By submitting this form, you agree to be contacted by our team
+                  regarding your enrollment.
+                </p>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </main>
+
+        <Footer />
+
+        {/* Floating Chat Button */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <Dialog open={isChatPopupOpen} onOpenChange={setIsChatPopupOpen}>
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                className="rounded-full w-14 h-14 bg-brand-500 hover:bg-brand-600 shadow-lg"
+              >
+                <MessageCircle className="w-6 h-6" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle>Need Help?</DialogTitle>
+                <DialogDescription>
+                  Chat with our experts for course guidance and support.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="text-center py-8">
+                <p className="text-gray-600 mb-4">
+                  Our chat support is coming soon!
+                </p>
+                <Button
+                  onClick={() => setIsEnquiryOpen(true)}
+                  className="bg-brand-500 hover:bg-brand-600"
+                >
+                  Drop an Enquiry Instead
                 </Button>
               </div>
             </DialogContent>
           </Dialog>
         </div>
-      </section>
-
-      {/* Enrollment Modal */}
-      <Dialog open={isEnrollmentOpen} onOpenChange={setIsEnrollmentOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Enroll in Course</DialogTitle>
-            <DialogDescription>
-              Complete your enrollment for: <strong>{selectedCourse}</strong>
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="enrollName">Full Name *</Label>
-              <Input
-                id="enrollName"
-                value={enrollmentForm.name}
-                onChange={(e) =>
-                  setEnrollmentForm({ ...enrollmentForm, name: e.target.value })
-                }
-                placeholder="Your full name"
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="enrollEmail">Email Address *</Label>
-              <Input
-                id="enrollEmail"
-                type="email"
-                value={enrollmentForm.email}
-                onChange={(e) => {
-                  setEnrollmentForm({
-                    ...enrollmentForm,
-                    email: e.target.value,
-                  });
-                  if (validationErrors.email) {
-                    setValidationErrors({ ...validationErrors, email: "" });
-                  }
-                }}
-                placeholder="your.email@example.com"
-                required
-                className={validationErrors.email ? "border-red-500" : ""}
-              />
-              {validationErrors.email && (
-                <p className="text-red-500 text-sm mt-1">
-                  {validationErrors.email}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor="enrollPhone">Phone Number *</Label>
-              <Input
-                id="enrollPhone"
-                type="tel"
-                value={enrollmentForm.phone}
-                onChange={(e) => {
-                  setEnrollmentForm({
-                    ...enrollmentForm,
-                    phone: e.target.value,
-                  });
-                  if (validationErrors.phone) {
-                    setValidationErrors({ ...validationErrors, phone: "" });
-                  }
-                }}
-                placeholder="+91 9876543210"
-                required
-                className={validationErrors.phone ? "border-red-500" : ""}
-              />
-              {validationErrors.phone && (
-                <p className="text-red-500 text-sm mt-1">
-                  {validationErrors.phone}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor="classType">Preferred Class Type *</Label>
-              <Select
-                value={enrollmentForm.classType}
-                onValueChange={(value) =>
-                  setEnrollmentForm({ ...enrollmentForm, classType: value })
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select class type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="online">Online Classes</SelectItem>
-                  <SelectItem value="offline">Offline Classes</SelectItem>
-                  <SelectItem value="hybrid">
-                    Hybrid (Online + Offline)
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Course Details:
-              </h4>
-              <p className="text-sm text-gray-600">
-                <strong>Course:</strong> {selectedCourse}
-              </p>
-              <p className="text-sm text-gray-600">
-                <strong>Contact Email:</strong> mirajgodha@gmail.com
-              </p>
-            </div>
-            <Button
-              onClick={handleEnrollmentSubmit}
-              className="w-full bg-brand-500 hover:bg-brand-600"
-              disabled={
-                !enrollmentForm.name ||
-                !enrollmentForm.email ||
-                !enrollmentForm.phone ||
-                !validateEmail(enrollmentForm.email) ||
-                !validatePhone(enrollmentForm.phone)
-              }
-            >
-              Submit Enrollment
-            </Button>
-            <p className="text-xs text-gray-500 text-center">
-              By submitting this form, you agree to be contacted by our team
-              regarding your enrollment.
-            </p>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      <Footer />
-
-      {/* Floating Chat Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Dialog open={isChatPopupOpen} onOpenChange={setIsChatPopupOpen}>
-          <DialogTrigger asChild>
-            <Button
-              size="lg"
-              className="rounded-full w-14 h-14 bg-brand-500 hover:bg-brand-600 shadow-lg"
-            >
-              <MessageCircle className="w-6 h-6" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader>
-              <DialogTitle>Need Help?</DialogTitle>
-              <DialogDescription>
-                Chat with our experts for course guidance and support.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="text-center py-8">
-              <p className="text-gray-600 mb-4">
-                Our chat support is coming soon!
-              </p>
-              <Button
-                onClick={() => setIsEnquiryOpen(true)}
-                className="bg-brand-500 hover:bg-brand-600"
-              >
-                Drop an Enquiry Instead
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
-    </div>
+    </>
   );
 }
