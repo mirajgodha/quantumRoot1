@@ -5,13 +5,14 @@ export interface PriceInfo {
   savingsAmount: number;
 }
 
+  const discountPercentage = 35;
 /**
- * Calculate discounted price with 55% discount
+ * Calculate discounted price with 35% discount
  * @param originalPrice - The original price
  * @returns PriceInfo object with pricing details
  */
 export function calculateDiscountedPrice(originalPrice: number): PriceInfo {
-  const discountPercentage = 55;
+
   const discountedPrice = Math.round(
     originalPrice * (1 - discountPercentage / 100),
   );
@@ -23,6 +24,11 @@ export function calculateDiscountedPrice(originalPrice: number): PriceInfo {
     discountPercentage,
     savingsAmount,
   };
+}
+
+/** Return discount % */
+export function getDiscountPercentage(): number {
+  return discountPercentage;
 }
 
 /**

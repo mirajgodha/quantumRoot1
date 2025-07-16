@@ -65,7 +65,7 @@ import {
   EnquiryRequest,
   EnquiryResponse,
 } from "@shared/api";
-import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
+import { calculateDiscountedPrice, formatPrice, getDiscountPercentage } from "@/lib/pricing";
 import {
   InfiniteScrollTicker,
   type TestimonialItem,
@@ -79,6 +79,8 @@ import Footer from "@/components/Footer";
 import { useAnalytics, useTimeTracking } from "@/hooks/use-analytics";
 import SEO from "@/components/SEO";
 import { generateOrganizationStructuredData } from "@/lib/seo";
+
+
 
 export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -736,7 +738,7 @@ export default function Index() {
                           </div>
                           <div className="flex items-center gap-2">
                             <Badge className="bg-green-100 text-green-800 text-xs">
-                              55% OFF
+                              {getDiscountPercentage()}% OFF
                             </Badge>
                             <span className="text-xs text-green-600">
                               Save{" "}

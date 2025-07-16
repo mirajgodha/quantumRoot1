@@ -49,6 +49,7 @@ import { mockCourses } from "@shared/courseData";
 import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { getDiscountPercentage } from "@/lib/pricing";
 
 export default function Courses() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -654,7 +655,7 @@ export default function Courses() {
                         </div>
                         <div className="flex items-center gap-2">
                           <Badge className="bg-green-100 text-green-800 text-xs">
-                            55% OFF
+                            {getDiscountPercentage()}% OFF
                           </Badge>
                           <span className="text-xs text-green-600">
                             Save{" "}
