@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NewsletterRequest, NewsletterResponse } from "@shared/api";
 import {
   Card,
   CardContent,
@@ -41,6 +42,11 @@ export default function Blog() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("date-desc");
+
+  // Newsletter subscription state
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
+  const [newsletterMessage, setNewsletterMessage] = useState("");
 
   useEffect(() => {
     setPosts(blogPosts);
@@ -92,6 +98,46 @@ export default function Blog() {
 
     setFilteredPosts(filtered);
   }, [posts, searchTerm, selectedCategory, sortBy]);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!newsletterEmail.trim()) {
+      setNewsletterMessage("Please enter your email address");
+      return;
+    }
+
+    setIsNewsletterLoading(true);
+    setNewsletterMessage("");
+
+    try {
+      const requestData: NewsletterRequest = { email: newsletterEmail.trim() };
+
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data: NewsletterResponse = await response.json();
+
+      if (data.success) {
+        setNewsletterEmail("");
+        setNewsletterMessage("Successfully subscribed to our newsletter!");
+      } else {
+        setNewsletterMessage(
+          data.message || "Something went wrong. Please try again.",
+        );
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      setNewsletterMessage("Something went wrong. Please try again.");
+    } finally {
+      setIsNewsletterLoading(false);
+    }
+  };
 
   const featuredPosts = posts.filter((post) => post.featured);
   const recentPosts = posts.slice(0, 3);
@@ -437,11 +483,34 @@ export default function Blog() {
                     Get the latest tech insights delivered to your inbox
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <Input placeholder="Enter your email" />
-                  <Button className="w-full bg-brand-600 hover:bg-brand-700">
-                    Subscribe
-                  </Button>
+                <CardContent>
+                  <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+                    <Input
+                      type="email"
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      disabled={isNewsletterLoading}
+                    />
+                    <Button
+                      type="submit"
+                      className="w-full bg-brand-600 hover:bg-brand-700"
+                      disabled={isNewsletterLoading}
+                    >
+                      {isNewsletterLoading ? "Subscribing..." : "Subscribe"}
+                    </Button>
+                    {newsletterMessage && (
+                      <p
+                        className={`text-sm ${
+                          newsletterMessage.includes("Successfully")
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        {newsletterMessage}
+                      </p>
+                    )}
+                  </form>
                 </CardContent>
               </Card>
             </div>

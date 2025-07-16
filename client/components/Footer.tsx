@@ -2,8 +2,51 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
+import { useState } from "react";
+import { NewsletterRequest, NewsletterResponse } from "@shared/api";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email.trim()) {
+      setMessage("Please enter your email address");
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      const requestData: NewsletterRequest = { email: email.trim() };
+
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data: NewsletterResponse = await response.json();
+
+      if (data.success) {
+        setEmail("");
+        setMessage("Successfully subscribed to our newsletter!");
+      } else {
+        setMessage(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      setMessage("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,15 +160,36 @@ export default function Footer() {
             <p className="text-gray-400 mb-4">
               Stay updated with our latest courses and offers
             </p>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Enter your email"
-                className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-400"
-              />
-              <Button className="bg-brand-500 hover:bg-brand-600">
-                Subscribe
-              </Button>
-            </div>
+            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+              <div className="flex gap-2">
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-400"
+                  disabled={isLoading}
+                />
+                <Button
+                  type="submit"
+                  className="bg-brand-500 hover:bg-brand-600"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "..." : "Subscribe"}
+                </Button>
+              </div>
+              {message && (
+                <p
+                  className={`text-sm ${
+                    message.includes("Successfully")
+                      ? "text-green-400"
+                      : "text-red-400"
+                  }`}
+                >
+                  {message}
+                </p>
+              )}
+            </form>
           </div>
         </div>
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">

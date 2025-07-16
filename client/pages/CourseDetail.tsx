@@ -51,6 +51,8 @@ import {
   Course,
   EnrollmentRequest,
   EnrollmentResponse,
+  EnquiryRequest,
+  EnquiryResponse,
   FAQ,
 } from "@shared/api";
 import { mockCourses } from "@shared/courseData";
@@ -69,6 +71,13 @@ export default function CourseDetail() {
     phone: "",
     message: "",
   });
+  const [enquiryErrors, setEnquiryErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isEnquiryLoading, setIsEnquiryLoading] = useState(false);
   const [enrollmentForm, setEnrollmentForm] = useState({
     name: "",
     email: "",
@@ -157,7 +166,7 @@ export default function CourseDetail() {
     {
       question: "Is there a money-back guarantee?",
       answer:
-        "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with the course within the first 30 days, we'll provide a full refund.",
+        "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with the course within the first 30 days, we'll provide a full refund. Please read our Refund Policy for details.",
     },
   ];
 
@@ -219,11 +228,86 @@ export default function CourseDetail() {
     ],
   };
 
-  const handleEnquirySubmit = () => {
-    console.log("Enquiry submitted:", enquiryForm);
-    setIsEnquiryOpen(false);
-    setEnquiryForm({ name: "", email: "", phone: "", message: "" });
-    alert("Thank you for your enquiry! We'll get back to you soon.");
+  const validateEnquiryForm = () => {
+    const errors = {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    };
+
+    // Validate name
+    if (!enquiryForm.name.trim()) {
+      errors.name = "Full name is required";
+    } else if (enquiryForm.name.trim().length < 2) {
+      errors.name = "Name must be at least 2 characters";
+    }
+
+    // Validate email
+    if (!enquiryForm.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!validateEmail(enquiryForm.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+
+    // Validate phone
+    if (!enquiryForm.phone.trim()) {
+      errors.phone = "Phone number is required";
+    } else if (enquiryForm.phone.trim().length < 10) {
+      errors.phone = "Phone number must be at least 10 digits";
+    }
+
+    // Validate message
+    if (!enquiryForm.message.trim()) {
+      errors.message = "Message is required";
+    } else if (enquiryForm.message.trim().length < 10) {
+      errors.message = "Message must be at least 10 characters";
+    }
+
+    setEnquiryErrors(errors);
+    return !errors.name && !errors.email && !errors.phone && !errors.message;
+  };
+
+  const handleEnquirySubmit = async () => {
+    if (!validateEnquiryForm()) {
+      return;
+    }
+
+    setIsEnquiryLoading(true);
+
+    try {
+      const requestData: EnquiryRequest = {
+        name: enquiryForm.name.trim(),
+        email: enquiryForm.email.trim(),
+        phone: enquiryForm.phone.trim(),
+        course: course?.title || "Course Details",
+        message: enquiryForm.message.trim(),
+      };
+
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data: EnquiryResponse = await response.json();
+
+      if (data.success) {
+        setIsEnquiryOpen(false);
+        setEnquiryForm({ name: "", email: "", phone: "", message: "" });
+        setEnquiryErrors({ name: "", email: "", phone: "", message: "" });
+        alert(data.message);
+      } else {
+        alert(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Enquiry submission error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsEnquiryLoading(false);
+    }
   };
 
   const validateEmail = (email: string) => {
@@ -530,14 +614,28 @@ export default function CourseDetail() {
                             <Input
                               id="name"
                               value={enquiryForm.name}
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 setEnquiryForm({
                                   ...enquiryForm,
                                   name: e.target.value,
-                                })
-                              }
+                                });
+                                if (enquiryErrors.name) {
+                                  setEnquiryErrors({
+                                    ...enquiryErrors,
+                                    name: "",
+                                  });
+                                }
+                              }}
                               placeholder="Your full name"
+                              className={
+                                enquiryErrors.name ? "border-red-500" : ""
+                              }
                             />
+                            {enquiryErrors.name && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {enquiryErrors.name}
+                              </p>
+                            )}
                           </div>
                           <div>
                             <Label htmlFor="email">Email</Label>
@@ -545,49 +643,94 @@ export default function CourseDetail() {
                               id="email"
                               type="email"
                               value={enquiryForm.email}
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 setEnquiryForm({
                                   ...enquiryForm,
                                   email: e.target.value,
-                                })
-                              }
+                                });
+                                if (enquiryErrors.email) {
+                                  setEnquiryErrors({
+                                    ...enquiryErrors,
+                                    email: "",
+                                  });
+                                }
+                              }}
                               placeholder="your.email@example.com"
+                              className={
+                                enquiryErrors.email ? "border-red-500" : ""
+                              }
                             />
+                            {enquiryErrors.email && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {enquiryErrors.email}
+                              </p>
+                            )}
                           </div>
                           <div>
                             <Label htmlFor="phone">Phone</Label>
                             <Input
                               id="phone"
                               value={enquiryForm.phone}
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 setEnquiryForm({
                                   ...enquiryForm,
                                   phone: e.target.value,
-                                })
-                              }
+                                });
+                                if (enquiryErrors.phone) {
+                                  setEnquiryErrors({
+                                    ...enquiryErrors,
+                                    phone: "",
+                                  });
+                                }
+                              }}
                               placeholder="Your phone number"
+                              className={
+                                enquiryErrors.phone ? "border-red-500" : ""
+                              }
                             />
+                            {enquiryErrors.phone && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {enquiryErrors.phone}
+                              </p>
+                            )}
                           </div>
                           <div>
                             <Label htmlFor="message">Message</Label>
                             <Textarea
                               id="message"
                               value={enquiryForm.message}
-                              onChange={(e) =>
+                              onChange={(e) => {
                                 setEnquiryForm({
                                   ...enquiryForm,
                                   message: e.target.value,
-                                })
-                              }
+                                });
+                                if (enquiryErrors.message) {
+                                  setEnquiryErrors({
+                                    ...enquiryErrors,
+                                    message: "",
+                                  });
+                                }
+                              }}
                               placeholder="Any specific questions?"
                               rows={3}
+                              className={
+                                enquiryErrors.message ? "border-red-500" : ""
+                              }
                             />
+                            {enquiryErrors.message && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {enquiryErrors.message}
+                              </p>
+                            )}
                           </div>
                           <Button
                             onClick={handleEnquirySubmit}
+                            disabled={isEnquiryLoading}
                             className="w-full bg-brand-500 hover:bg-brand-600"
                           >
-                            Submit Enquiry
+                            {isEnquiryLoading
+                              ? "Submitting..."
+                              : "Submit Enquiry"}
                           </Button>
                         </div>
                       </DialogContent>

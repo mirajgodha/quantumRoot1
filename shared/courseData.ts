@@ -1,98 +1,207 @@
 import { Course } from "./api";
 
 export const mockCourses: Course[] = [
-  {
-    id: "8",
-    title: "Introduction to Generative AI for Business Leaders",
-    description:
-      "Master AI tools like ChatGPT, Gemini, and more to boost productivity. Use AI to excel at office work, projects, research, and job hunting.",
-    category: "Generative AI",
-    duration: "5 weeks",
-    difficulty: "Beginner",
-    price: 34999,
-    image:
-      "https://plus.unsplash.com/premium_photo-1725907643701-9ba38affe7bb?w=400&h=250&fit=crop&crop=center",
-    tags: [
-      "Generative AI",
-      "ChatGPT",
-      "Gemini",
-      "Prompt Engineering",
-      "AI Productivity",
-      "Job Hunting",
-      "Excel & PPT with AI",
-      "No-Code AI",
-      "AI for Research",
-      "Side Hustles",
-      "Personal Branding",
-      "Efficiency Hacks",
-    ],
-    instructor: "Miraj Godha",
-    bio: "Ex-Oracle | RBS | Apple | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
-    rating: 4.8,
-    students: 1500,
-    featured: true,
-    curriculum: [
-      {
-        module: "Module 1: AI Fundamentals for Business",
-        lessons: [
-          "Understanding generative AI and its business applications",
-          "Overview of popular AI tools: ChatGPT, Gemini, Claude, and more",
-          "Setting up and getting started with AI platforms",
-          "Basic prompt writing and AI interaction principles",
-        ],
-      },
-      {
-        module: "Module 2: Prompt Engineering Mastery",
-        lessons: [
-          "The science of effective prompt engineering",
-          "Advanced prompting techniques and frameworks",
-          "Context setting and role-based prompting",
-          "Prompt chaining and multi-step reasoning",
-        ],
-      },
-      {
-        module: "Module 3: AI for Productivity and Office Work",
-        lessons: [
-          "Email writing and communication with AI",
-          "Creating presentations and documents with AI assistance",
-          "Excel automation and data analysis using AI",
-          "Meeting summaries and note-taking optimization",
-        ],
-      },
-      {
-        module: "Module 4: AI for Research and Analysis",
-        lessons: [
-          "Research methodology with AI assistance",
-          "Market analysis and competitive intelligence",
-          "Content creation and ideation processes",
-          "Fact-checking and information verification",
-        ],
-      },
-      {
-        module: "Module 5: AI for Career and Business Growth",
-        lessons: [
-          "Resume optimization and job hunting with AI",
-          "Personal branding and LinkedIn content creation",
-          "Client proposal writing and project management",
-          "Identifying and developing AI-powered side hustles",
-        ],
-      },
-      {
-        module: "Module 6: Advanced Applications and Future Trends",
-        lessons: [
-          "No-code AI tools and automation platforms",
-          "Building simple AI-powered workflows",
-          "Ethics and responsible AI usage in business",
-          "Staying updated with AI trends and opportunities",
-        ],
-      },
-    ],
-  },
+{
+  "id": "8",
+  "title": "Generative AI Made Simple: For Everyone in Business",
+  "description": "Master AI tools like ChatGPT, Gemini, and more to boost productivity. Use AI to excel at office work, projects, research, and job hunting.",
+  "category": "Generative AI",
+  "duration": "5 weeks",
+  "difficulty": "Beginner",
+  "price": 34999,
+  "image": "https://plus.unsplash.com/premium_photo-1725907643701-9ba38affe7bb?w=400&h=250&fit=crop&crop=center",
+  "tags": [
+    "Generative AI",
+    "ChatGPT",
+    "Gemini",
+    "Prompt Engineering",
+    "AI Productivity",
+    "Job Hunting",
+    "Excel & PPT with AI",
+    "No-Code AI",
+    "AI for Research",
+    "Side Hustles",
+    "Personal Branding",
+    "Efficiency Hacks",
+    "Hugging Face",
+    "Stock Market with AI"
+  ],
+  "instructor": "Miraj Godha",
+  "bio": "Ex-Oracle | RBS | Apple | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
+  "rating": 4.8,
+  "students": 1500,
+  "featured": true,
+  "whatYouLearn": [
+    "Understand Generative AI, tokens, and LLMs without any coding knowledge",
+    "Master prompt engineering techniques to get the best responses from AI",
+    "Use AI for daily office work like emails, presentations, reports, and data analysis",
+    "Automate tasks using no-code AI tools to save time and effort",
+    "Conduct market research, competitor analysis, and generate client-ready content",
+    "Ace your job hunt by building optimized resumes, preparing for interviews, and negotiating offers",
+    "Learn to code without prior coding knowledge using AI tools",
+    "Build and launch your website and marketing material with AI in under an hour",
+    "Boost productivity and efficiency across roles like business analysts, students, sales professionals, and more",
+    "Use Hugging Face Spaces and leaderboards to discover top LLMs",
+    "Analyze stock market news and generate trade ideas using LLMs"
+  ],
+  "prerequisites": [
+    "Basic computer and internet usage skills",
+    "No prior coding or AI knowledge required",
+    "Curiosity to explore how AI can help in business or career"
+  ],
+  "faqs": [
+    {
+      "question": "Do I need technical skills to join this course?",
+      "answer": "Not at all. This course is designed for non-technical professionals like students, housewives, MBAs, sales executives, and business analysts."
+    },
+    {
+      "question": "Will I be able to apply AI in my current job?",
+      "answer": "Yes. You’ll learn practical AI applications for tasks like writing emails, creating presentations, doing research, and automating repetitive work."
+    },
+    {
+      "question": "What tools will be covered?",
+      "answer": "You’ll use tools like ChatGPT, Gemini, Bard, Claude, Hugging Face, and various no-code platforms for content creation, coding, research, and automation."
+    },
+    {
+      "question": "Can AI help me get a better job?",
+      "answer": "Absolutely. Learn how to use AI to build ATS-optimized resumes, search hidden job openings, personalize job applications, and negotiate better salaries."
+    },
+    {
+      "question": "Is this course future-ready?",
+      "answer": "Yes, we update content regularly with the latest AI tools and trends, ensuring you're always ahead in the AI race."
+    }
+  ],
+  "curriculum": [
+    {
+      "module": "Module 1: AI Fundamentals for Business",
+      "lessons": [
+        "Understanding generative AI and its business applications",
+        "What are tokens and how they affect prompt output",
+        "What is LLM, tokenization, and inference in simple terms",
+        "Overview of popular AI tools: ChatGPT, Gemini, Claude, and more",
+        "Setting up and getting started with AI platforms"
+      ]
+    },
+    {
+      "module": "Module 2: Mastering ChatGPT for Daily Use",
+      "lessons": [
+        "How ChatGPT works and what makes it powerful",
+        "Best ways to use ChatGPT for professional and personal growth",
+        "Limitations and hallucination handling in ChatGPT",
+        "Useful browser extensions and tools to enhance ChatGPT",
+        "Teach ChatGPT your tone, language, and goals"
+      ]
+    },
+    {
+      "module": "Module 3: Prompt Engineering Mastery",
+      "lessons": [
+        "Prompt engineering explained for non-tech users",
+        "Prompt frameworks: what works and why",
+        "Prompt priming and iterative prompting",
+        "Teach me, ask for advice, and write-like-me prompts",
+        "Advanced prompting for complex scenarios"
+      ]
+    },
+    {
+      "module": "Module 4: AI for Productivity and Office Work",
+      "lessons": [
+        "Summarizing text and information quickly",
+        "Writing emails, documents, and memos with AI",
+        "Using AI for presentations and speech prep",
+        "Data analysis, Excel support, and automation",
+        "Setting up AI-powered email auto-responders"
+      ]
+    },
+    {
+      "module": "Module 5: AI for Research and Analysis",
+      "lessons": [
+        "Generating research ideas and curating insights",
+        "Fact-checking and validating information",
+        "Understanding your audience with AI",
+        "Market research and competitor analysis",
+        "Creating detailed product and business writeups"
+      ]
+    },
+    {
+      "module": "Module 6: AI for Career Growth & Job Hunting",
+      "lessons": [
+        "Creating irresistible resumes using AI",
+        "Writing cover letters and personalized applications",
+        "Finding hidden job opportunities with LLMs",
+        "Preparing for interviews using roleplay prompts",
+        "Salary negotiation strategies and market benchmarking"
+      ]
+    },
+    {
+      "module": "Module 7: Personal Branding with AI",
+      "lessons": [
+        "Updating your CV to beat ATS filters",
+        "Writing impactful LinkedIn posts",
+        "Creating logos and pamphlets in minutes",
+        "Improving your online presence using AI",
+        "Reviewing and refining your work using ChatGPT"
+      ]
+    },
+    {
+      "module": "Module 8: Build & Launch a Website in Under 30 Minutes",
+      "lessons": [
+        "Using AI to define your business idea",
+        "Generating website content instantly",
+        "Building a no-code landing page",
+        "Creating visuals like banners, icons, and CTAs",
+        "Going live with minimal effort"
+      ]
+    },
+    {
+      "module": "Module 9: Coding Using AI – Even If You’re Not a Coder",
+      "lessons": [
+        "Writing and debugging code using ChatGPT & Bard",
+        "Generating code snippets for automation",
+        "Converting logic into reusable functions",
+        "Translating code from one language to another",
+        "Developing no-code apps from scratch"
+      ]
+    },
+    {
+      "module": "Module 10: Hugging Face for Everyone",
+      "lessons": [
+        "Introduction to Hugging Face platform",
+        "Using Hugging Face Spaces to try AI tools",
+        "Exploring Hugging Face Leaderboards to find top models",
+        "Discovering community models and sharing your own",
+        "Useful free tools and hosted APIs for rapid experimentation"
+      ]
+    },
+    {
+      "module": "Module 11: Using Hugging Face Models in Google Colab",
+      "lessons": [
+        "Overview of Google Colab environment",
+        "Loading and running Hugging Face models with minimal code",
+        "Text generation and summarization using prebuilt models",
+        "How to modify prompts and inputs in Colab",
+        "Very high-level walkthrough for beginners—light coding, high results"
+      ]
+    },
+    {
+      "module": "Module 12: Stock Market & Sentiment Analysis with AI",
+      "lessons": [
+        "Using LLMs for stock market news understanding",
+        "Sentiment analysis of financial headlines and social media",
+        "Generating dummy trade ideas and narratives",
+        "Risks and limitations of financial predictions from AI",
+        "Visualizing stock trends and charts using AI prompts",
+        "Understanding and summarizing company financials, annual reports in seconds"
+      ]
+    }
+  ]
+},
+
+
   {
     id: "1",
-    title: "Generative AI & Large Language Models",
+    title: "Generative AI & Large Language Models with Langchain and Huggingface",
     description:
-      "Master the latest in AI technology with hands-on experience in GPT, ChatGPT, and building AI applications.",
+      "Become an LLM Engineer: Build and deploy 8 LLM apps, mastering Generative AI, RAG, LoRA and AI Agents.",
     category: "Generative AI",
     duration: "12 weeks",
     difficulty: "Advanced",

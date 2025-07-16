@@ -9,6 +9,7 @@ import {
 import { handleEnrollmentSubmit } from "./routes/enrollment";
 import { handleContactSubmit } from "./routes/contact";
 import { handleEnquirySubmit } from "./routes/enquiry";
+import { handleNewsletterSubscription } from "./routes/newsletter";
 
 export function createServer() {
   const app = express();
@@ -73,6 +74,9 @@ export function createServer() {
 
   // Enquiry API routes
   app.post("/api/enquiry", handleEnquirySubmit);
+
+  // Newsletter API routes
+  app.post("/api/newsletter", handleNewsletterSubscription);
 
   return app;
 }
