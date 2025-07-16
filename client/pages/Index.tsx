@@ -758,7 +758,7 @@ export default function Index() {
                             className="text-xs flex-1"
                             asChild
                           >
-                            <Link to={`/courses/${course.id}`}>
+                            <Link to={`/courses/${course.slug}`}>
                               View Details
                             </Link>
                           </Button>

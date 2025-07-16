@@ -23,6 +23,7 @@ export interface FAQ {
 
 export interface Course {
   id: string;
+  slug: string;
   title: string;
   description: string;
   category: string;
@@ -58,6 +59,7 @@ export interface CoursesResponse {
 
 export interface CreateCourseRequest {
   title: string;
+  slug?: string;
   description: string;
   category: string;
   duration: string;

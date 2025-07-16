@@ -66,9 +66,21 @@ export const handleCreateCourse: RequestHandler = (req, res) => {
   try {
     const courseData = req.body as CreateCourseRequest;
 
+    // Generate URL-friendly slug from course title
+    const generateSlug = (title: string): string => {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+        .replace(/\s+/g, "-") // Replace spaces with hyphens
+        .replace(/-+/g, "-") // Replace multiple hyphens with single
+        .trim(); // Remove leading/trailing whitespace
+    };
+
     const newCourse: Course = {
       id: Date.now().toString(),
+      slug: courseData.slug || generateSlug(courseData.title),
       ...courseData,
+      bio: "", // Default empty bio
       rating: 0,
       students: 0,
     };

@@ -62,7 +62,7 @@ import SEO from "@/components/SEO";
 import { generateCourseStructuredData } from "@/lib/seo";
 
 export default function CourseDetail() {
-  const { courseId } = useParams();
+  const { slug } = useParams();
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
   const [enquiryForm, setEnquiryForm] = useState({
@@ -90,8 +90,8 @@ export default function CourseDetail() {
     phone: "",
   });
 
-  // Find the course by ID from shared mock data
-  const foundCourse = mockCourses.find((c) => c.id === courseId);
+  // Find the course by slug from shared mock data
+  const foundCourse = mockCourses.find((c) => c.slug === slug);
 
   // If course not found, redirect to 404 or show error
   if (!foundCourse) {
@@ -435,7 +435,7 @@ export default function CourseDetail() {
           title: `${course.title} - Course Details`,
           description: `Learn ${course.title} with QuantumRoot. ${course.description}. Duration: ${course.duration}. Expert instructors and hands-on projects.`,
           keywords: `${course.title}, ${course.category}, ${course.tags.join(", ")}, online course, tech training`,
-          url: `https://mirajgodha.github.io/quantumRoot1/courses/${course.id}`,
+          url: `https://mirajgodha.github.io/quantumRoot1/courses/${course.slug}`,
           image: course.image,
         }}
         structuredData={courseStructuredData}

@@ -63,6 +63,7 @@ export default function Courses() {
   const [selectedCourse, setSelectedCourse] = useState("");
   const [newCourse, setNewCourse] = useState<CreateCourseRequest>({
     title: "",
+    slug: "",
     description: "",
     category: "",
     duration: "",
@@ -165,6 +166,16 @@ export default function Courses() {
     setFilteredCourses(filtered);
   }, [courses, searchTerm, selectedCategory, selectedDifficulty]);
 
+  // Generate URL-friendly slug from course title
+  const generateSlug = (title: string): string => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/-+/g, "-") // Replace multiple hyphens with single
+      .trim(); // Remove leading/trailing whitespace
+  };
+
   const handleAddCourse = () => {
     if (!newCourse.title || !newCourse.description || !newCourse.category) {
       return;
@@ -172,6 +183,7 @@ export default function Courses() {
 
     const course: Course = {
       id: Date.now().toString(),
+      slug: newCourse.slug || generateSlug(newCourse.title),
       ...newCourse,
       tags: newCourse.tags,
       rating: 0,
@@ -182,6 +194,7 @@ export default function Courses() {
     setCourses([...courses, course]);
     setNewCourse({
       title: "",
+      slug: "",
       description: "",
       category: "",
       duration: "",
@@ -671,7 +684,7 @@ export default function Courses() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Link to={`/courses/${course.id}`}>
+                      <Link to={`/courses/${course.slug}`}>
                         <Button variant="outline" className="w-full">
                           View Details
                         </Button>
