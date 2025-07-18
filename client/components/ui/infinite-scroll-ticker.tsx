@@ -1,6 +1,12 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export interface TestimonialItem {
   name: string;
@@ -80,9 +86,18 @@ export function InfiniteScrollTicker({
                     ))}
                   </div>
                 </div>
-                <p className="text-gray-700 text-xs leading-relaxed line-clamp-3">
-                  "{item.review}"
-                </p>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <p className="text-gray-700 text-xs leading-relaxed line-clamp-3 cursor-help">
+                        "{item.review}"
+                      </p>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="max-w-md p-4">
+                      <p className="text-sm leading-relaxed">"{item.review}"</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </div>
           </div>
@@ -150,9 +165,18 @@ export function CompactInfiniteScrollTicker({
                   ))}
                 </div>
               </div>
-              <div className="text-gray-600 text-sm italic max-w-xs truncate">
-                "{item.review}"
-              </div>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="text-gray-600 text-sm italic max-w-xs truncate cursor-help">
+                      "{item.review}"
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent side="top" className="max-w-md p-4">
+                    <p className="text-sm leading-relaxed">"{item.review}"</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
         ))}

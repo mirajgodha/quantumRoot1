@@ -24,12 +24,12 @@ export const handleEnquirySubmit: RequestHandler = async (req, res) => {
       !enquiryData.email ||
       !enquiryData.phone ||
       !enquiryData.course ||
-      !enquiryData.message
+      enquiryData.message
     ) {
       const response: EnquiryResponse = {
         success: false,
         message:
-          "Missing required fields. Please fill in all required information.",
+          `Missing required fields. Please fill in all required information. ${enquiryData.name}, ${enquiryData.email}, ${enquiryData.phone}, ${enquiryData.course}, ${enquiryData.message}`,
       };
       return res.status(400).json(response);
     }
