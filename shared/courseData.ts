@@ -148,17 +148,7 @@ export const mockCourses: Course[] = [
         ],
       },
       {
-        module: "Module 5: AI for Research and Analysis",
-        lessons: [
-          "Generating research ideas and curating insights",
-          "Fact-checking and validating information",
-          "Understanding your audience with AI",
-          "Market research and competitor analysis",
-          "Creating detailed product and business writeups",
-        ],
-      },
-      {
-        module: "Module 6: AI for Career Growth & Job Hunting",
+        module: "Module 5: AI for Career Growth & Job Hunting",
         lessons: [
           "Creating irresistible resumes using AI",
           "Writing cover letters and personalized applications",
@@ -168,7 +158,7 @@ export const mockCourses: Course[] = [
         ],
       },
       {
-        module: "Module 7: Personal Branding with AI",
+        module: "Module 6: Personal Branding with AI",
         lessons: [
           "Updating your CV to beat ATS filters",
           "Writing impactful LinkedIn posts",
@@ -178,7 +168,7 @@ export const mockCourses: Course[] = [
         ],
       },
       {
-        module: "Module 8: Build & Launch a Website in Under 30 Minutes",
+        module: "Module 7: Build & Launch a Website in Under 30 Minutes",
         lessons: [
           "Using AI to define your business idea",
           "Generating website content instantly",
@@ -188,7 +178,7 @@ export const mockCourses: Course[] = [
         ],
       },
       {
-        module: "Module 9: Coding Using AI – Even If You're Not a Coder",
+        module: "Module 8: Coding Using AI – Even If You're Not a Coder",
         lessons: [
           "Writing and debugging code using ChatGPT & Bard",
           "Generating code snippets for automation",
@@ -198,7 +188,7 @@ export const mockCourses: Course[] = [
         ],
       },
       {
-        module: "Module 10: Hugging Face for Everyone",
+        module: "Module 9: Hugging Face for Everyone",
         lessons: [
           "Introduction to Hugging Face platform",
           "Using Hugging Face Spaces to try AI tools",
@@ -208,7 +198,7 @@ export const mockCourses: Course[] = [
         ],
       },
       {
-        module: "Module 11: Using Hugging Face Models in Google Colab",
+        module: "Module 10: Using Hugging Face Models in Google Colab",
         lessons: [
           "Overview of Google Colab environment",
           "Loading and running Hugging Face models with minimal code",
@@ -218,7 +208,7 @@ export const mockCourses: Course[] = [
         ],
       },
       {
-        module: "Module 12: Stock Market & Sentiment Analysis with AI",
+        module: "Module 11: Stock Market & Sentiment Analysis with AI",
         lessons: [
           "Using LLMs for stock market news understanding",
           "Sentiment analysis of financial headlines and social media",

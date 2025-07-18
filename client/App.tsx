@@ -6,6 +6,8 @@ import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { usePageTracking, useScrollTracking } from "@/hooks/use-analytics";
 import { initializeAnalytics } from "@/lib/analytics";
+import FloatingCallButton from "@/components/FloatingCallButton";
+import FloatingChatButton from "@/components/FloatingChatButton";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
@@ -64,6 +66,8 @@ const App = () => {
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              <FloatingCallButton />
+              <FloatingChatButton />
             </AnalyticsWrapper>
           </TooltipProvider>
         </BrowserRouter>

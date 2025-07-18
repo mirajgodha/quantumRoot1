@@ -50,7 +50,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="flex items-start space-x-3 mb-4">
               <img
@@ -72,11 +72,24 @@ export default function Footer() {
             <div className="flex space-x-4">
               <Facebook
                 className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"
-                onClick={() => window.open("https://www.facebook.com/DesignPathshala/", "_blank")}/>
+                onClick={() =>
+                  window.open(
+                    "https://www.facebook.com/DesignPathshala/",
+                    "_blank",
+                  )
+                }
+              />
               <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
               <Linkedin className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-              <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" 
-              onClick={() => window.open("https://www.youtube.com/@designpathshala4807", "_blank")}/>
+              <Youtube
+                className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"
+                onClick={() =>
+                  window.open(
+                    "https://www.youtube.com/@designpathshala4807",
+                    "_blank",
+                  )
+                }
+              />
             </div>
           </div>
           <div>
@@ -157,6 +170,16 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-4">Company Info</h3>
+            <div className="space-y-2 text-gray-400 text-sm">
+              <p className="font-medium text-white">
+                EDHI CONSULTING PRIVATE LIMITED
+              </p>
+              <p>CIN: U93000RJ2016PTC056241</p>
+              <p>GST: 08AAECE4211G2Z0</p>
+            </div>
           </div>
           <div>
             <h3 className="font-semibold mb-4">Newsletter</h3>

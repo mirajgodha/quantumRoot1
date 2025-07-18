@@ -137,7 +137,7 @@ export default function About() {
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
                   With over <strong>12 years of experience</strong> in tech
-                  education, we've trained <strong>1,100+ students</strong>{" "}
+                  education, we've trained <strong>11,000+ students</strong>{" "}
                   across the globe under our former brand Design Pathshala. Now
                   reborn as Quantum Root, we're doubling down on our mission: to
                   make cutting-edge tech skills accessible, practical, and
