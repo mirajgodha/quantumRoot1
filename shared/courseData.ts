@@ -20,7 +20,7 @@ export const mockCourses: Course[] = [
     category: "Generative AI",
     duration: "5 weeks",
     difficulty: "Beginner",
-    price: 34999,
+    price: 39997,
     image:
       "https://plus.unsplash.com/premium_photo-1725907643701-9ba38affe7bb?w=400&h=250&fit=crop&crop=center",
     tags: [
@@ -42,10 +42,11 @@ export const mockCourses: Course[] = [
     instructor: "Miraj Godha",
     bio: "Ex-Oracle | RBS | Apple | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
     rating: 4.8,
-    students: 1500,
+    students: 450,
     featured: true,
     showPaymentQR: true,
-    paymentQRImage: "/images/payment-qr-generative-ai.webp",
+    paymentQRImage: "/images/QR25998.png",
+    //paymentQRImage: "/images/QR9999.png",
     batchDetails: [
       {
         name: "Weekend Batch",
