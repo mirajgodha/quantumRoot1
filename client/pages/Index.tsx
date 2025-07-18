@@ -545,7 +545,7 @@ export default function Index() {
             "QuantumRoot offers career-focused training in AI, ML, Cloud & Big Data—featuring real-world projects, expert-led sessions, and modern tech stacks.",
           keywords:
             "AI training, Machine Learning courses, Big Data certification, Cloud computing, Programming bootcamp, Data Science, Python courses, Tech training",
-          url: "https://mirajgodha.github.io/quantumRoot1",
+          url: "https://https://quantumroot.in/",
         }}
         structuredData={generateOrganizationStructuredData()}
       />
@@ -1223,7 +1223,7 @@ export default function Index() {
                     <strong>Course:</strong> {selectedCourse}
                   </p>
                   <p className="text-sm text-gray-600">
-                    <strong>Contact Email:</strong> mirajgodha@gmail.com
+                    <strong>Contact Email:</strong> info@quantumroot.in
                   </p>
                 </div>
                 <Button

@@ -13,7 +13,7 @@ export default function About() {
             "Learn about QuantumRoot's mission to provide hands-on AI, Big Data, and Cloud training. Discover our expert-led approach to tech education and career transformation.",
           keywords:
             "About QuantumRoot, AI training company, Big Data education, Cloud computing courses, tech training mission",
-          url: "https://mirajgodha.github.io/quantumRoot1/about",
+          url: "https://quantumroot.in/about",
         }}
       />
       <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">

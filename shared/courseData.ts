@@ -61,6 +61,7 @@ export const mockCourses: Course[] = [
     whatYouLearn: [
       "Understand Generative AI, tokens, and LLMs without any coding knowledge",
       "Master prompt engineering techniques to get the best responses from AI",
+      "Setting Up LLM for Local LLM Deployment on Windows and Mac",
       "Use AI for daily office work like emails, presentations, reports, and data analysis",
       "Automate tasks using no-code AI tools to save time and effort",
       "Conduct market research, competitor analysis, and generate client-ready content",
@@ -132,6 +133,7 @@ export const mockCourses: Course[] = [
           "Prompt priming and iterative prompting",
           "Teach me, ask for advice, and write-like-me prompts",
           "Advanced prompting for complex scenarios",
+          "Setting Up LLM for Local LLM Deployment on Windows and Mac",
         ],
       },
       {

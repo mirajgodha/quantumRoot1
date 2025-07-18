@@ -136,7 +136,7 @@ export default function BlogPostDetail() {
           title: post.title,
           description: post.excerpt,
           keywords: `${post.category}, blog, QuantumRoot, ${post.readTime}, tech article`,
-          url: `https://mirajgodha.github.io/quantumRoot1/blog/${post.id}`,
+          url: `https://quantumroot.in/blog/${post.id}`,
           image: post.image,
           type: "article",
           article: {

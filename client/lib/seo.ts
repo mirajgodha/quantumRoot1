@@ -29,7 +29,7 @@ export const DEFAULT_SEO: SEOConfig = {
   keywords:
     "AI training, Machine Learning courses, Big Data certification, Cloud computing, Programming bootcamp, Data Science, Python courses, Tech training",
   image: "/images/quantum-root-og-image.jpg",
-  url: "https://mirajgodha.github.io/quantumRoot1",
+  url: "https://quantumroot.in",
   type: "website",
 };
 
@@ -128,9 +128,9 @@ export const generateOrganizationStructuredData = () => {
     description: DEFAULT_SEO.description,
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-9876543210",
+      telephone: "+91-9650219962",
       contactType: "customer service",
-      email: "mirajgodha@gmail.com",
+      email: "info@quantumroot.in",
     },
     sameAs: [
       "https://www.linkedin.com/company/quantumroot",

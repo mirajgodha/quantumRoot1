@@ -16,7 +16,7 @@ User-agent: LinkedInBot
 Allow: /
 
 # Sitemap reference
-Sitemap: https://mirajgodha.github.io/quantumRoot1/sitemap.xml
+Sitemap: https://quantumroot.in/sitemap.xml
 
 # Crawl delay (optional - 1 second delay between requests)
 Crawl-delay: 1
