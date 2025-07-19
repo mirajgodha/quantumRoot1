@@ -45,8 +45,8 @@ export const mockCourses: Course[] = [
     students: 450,
     featured: true,
     showPaymentQR: true,
-    paymentQRImage: "/images/QR25998.png",
-    //paymentQRImage: "/images/QR9999.png",
+    // paymentQRImage: "/images/QR25998.png",
+    paymentQRImage: "/images/QR9999.png",
     batchDetails: [
       {
         name: "Weekend Batch",
