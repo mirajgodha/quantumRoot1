@@ -503,9 +503,9 @@ export default function Index() {
   };
 
   const handleEnrollClick = (course: Course) => {
-    if (course.showPaymentQR) {
-      setSelectedCourseForQR(course);
-      setIsQRModalOpen(true);
+    if (course.enablePayment) {
+      // Redirect to course detail page for payment
+      window.location.href = `/courses/${course.slug}`;
     } else {
       openEnrollmentModal(course.title);
     }
@@ -760,7 +760,7 @@ export default function Index() {
                             className="text-xs bg-brand-500 hover:bg-brand-600 flex-1"
                             onClick={() => handleEnrollClick(course)}
                           >
-                            {course.showPaymentQR ? "Pay Now" : "Enroll Now"}
+                            {course.enablePayment ? "Pay Now" : "Enroll Now"}
                           </Button>
                         </div>
                       </div>
@@ -1234,19 +1234,14 @@ export default function Index() {
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4">
-                {selectedCourseForQR?.paymentQRImage && (
-                  <div className="flex flex-col items-center">
-                    <img
-                      src={selectedCourseForQR.paymentQRImage}
-                      alt="Payment QR Code"
-                      className="w-64 h-64 object-contain border rounded-lg"
-                    />
-                    <p className="text-sm text-gray-600 mt-2 text-center">
-                      Scan this QR code with your UPI app to complete the
-                      payment
-                    </p>
+                <div className="flex flex-col items-center">
+                  <div className="w-64 h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <p className="text-gray-500">Payment processing...</p>
                   </div>
-                )}
+                  <p className="text-sm text-gray-600 mt-2 text-center">
+                    Redirecting to secure payment gateway
+                  </p>
+                </div>
                 {selectedCourseForQR && (
                   <div className="bg-gray-50 p-4 rounded-lg">
                     <h4 className="font-semibold text-gray-900 mb-2">

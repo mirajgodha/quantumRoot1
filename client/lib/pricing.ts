@@ -9,7 +9,7 @@ const defaultDiscountPercentage = 35;
 
 // Course-specific discount overrides
 const courseSpecificDiscounts: Record<string, number> = {
-  "generative-ai-made-simple-for-everyone-in-business": 75,
+  "generative-ai-made-simple-for-everyone-in-business": 35,
 };
 
 /**

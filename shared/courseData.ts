@@ -40,13 +40,11 @@ export const mockCourses: Course[] = [
       "Stock Market with AI",
     ],
     instructor: "Miraj Godha",
-    bio: "Ex-Oracle | RBS | Apple | Speaker at IITs & NITs | VP – AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
+    bio: "Ex-Oracle | RBS | Apple | Speaker at IITs & NITs | VP ��� AI, Generative AI & Data Engineering | Expert in LLMs, Big Data, ML, NoSQL, Analytics & Data Visualization",
     rating: 4.8,
     students: 450,
     featured: true,
-    showPaymentQR: true,
-    // paymentQRImage: "/images/QR25998.png",
-    paymentQRImage: "/images/QR9999.png",
+    enablePayment: true,
     batchDetails: [
       {
         name: "Weekend Batch",

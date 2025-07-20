@@ -47,8 +47,7 @@ export interface Course {
   whatYouLearn?: string[];
   prerequisites?: string[];
   faqs?: FAQ[];
-  showPaymentQR?: boolean;
-  paymentQRImage?: string;
+  enablePayment?: boolean;
   batchDetails?: BatchDetail[];
 }
 
@@ -124,6 +123,40 @@ export interface NewsletterRequest {
 }
 
 export interface NewsletterResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface CreateRazorpayOrderRequest {
+  courseId: string;
+  amount: number;
+  courseName: string;
+  userEmail: string;
+  userName: string;
+  userPhone: string;
+}
+
+export interface CreateRazorpayOrderResponse {
+  success: boolean;
+  orderId?: string;
+  amount?: number;
+  currency?: string;
+  message?: string;
+}
+
+export interface VerifyPaymentRequest {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+  courseId: string;
+  userDetails: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+}
+
+export interface VerifyPaymentResponse {
   success: boolean;
   message: string;
 }

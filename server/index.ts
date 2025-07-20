@@ -10,6 +10,7 @@ import { handleEnrollmentSubmit } from "./routes/enrollment";
 import { handleContactSubmit } from "./routes/contact";
 import { handleEnquirySubmit } from "./routes/enquiry";
 import { handleNewsletterSubscription } from "./routes/newsletter";
+import { createRazorpayOrder, verifyRazorpayPayment } from "./routes/razorpay";
 
 export function createServer() {
   const app = express();
@@ -24,8 +25,12 @@ export function createServer() {
   // Add logging middleware after body parsing
   app.use((req, res, next) => {
     if (req.path.startsWith("/api/")) {
-      console.log(`[Express] ${req.method} ${req.path}`);
-      console.log(`[Express] Body:`, req.body);
+      const requestId = Math.random().toString(36).substring(7);
+      console.log(`[Express] ${requestId} ${req.method} ${req.path}`);
+      // Only log body for non-sensitive endpoints and if body exists
+      if (req.body && Object.keys(req.body).length > 0) {
+        console.log(`[Express] ${requestId} Body:`, req.body);
+      }
     }
     next();
   });
@@ -53,6 +58,10 @@ export function createServer() {
 
   // Newsletter API routes
   app.post("/api/newsletter", handleNewsletterSubscription);
+
+  // Razorpay payment API routes
+  app.post("/api/payment/create-order", createRazorpayOrder);
+  app.post("/api/payment/verify", verifyRazorpayPayment);
 
   return app;
 }

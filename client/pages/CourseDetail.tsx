@@ -61,12 +61,24 @@ import { calculateDiscountedPrice, formatPrice } from "@/lib/pricing";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { generateCourseStructuredData } from "@/lib/seo";
+import { useRazorpay } from "@/hooks/use-razorpay";
+import { toast } from "@/hooks/use-toast";
 
 export default function CourseDetail() {
   const { slug } = useParams();
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
-  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [paymentUserDetails, setPaymentUserDetails] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [paymentValidationErrors, setPaymentValidationErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
   const [enquiryForm, setEnquiryForm] = useState({
     name: "",
     email: "",
@@ -91,6 +103,58 @@ export default function CourseDetail() {
     email: "",
     phone: "",
   });
+  const { initiatePayment, loading: paymentLoading } = useRazorpay();
+
+  const resetPaymentForm = () => {
+    setPaymentUserDetails({
+      name: "",
+      email: "",
+      phone: "",
+    });
+    setPaymentValidationErrors({
+      name: "",
+      email: "",
+      phone: "",
+    });
+  };
+
+  const validatePaymentForm = () => {
+    const errors = {
+      name: "",
+      email: "",
+      phone: "",
+    };
+
+    // Name validation
+    if (!paymentUserDetails.name.trim()) {
+      errors.name = "Full name is required";
+    } else if (paymentUserDetails.name.trim().length < 2) {
+      errors.name = "Name must be at least 2 characters";
+    }
+
+    // Email validation
+    if (!paymentUserDetails.email.trim()) {
+      errors.email = "Email address is required";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(paymentUserDetails.email.trim())) {
+        errors.email = "Please enter a valid email address";
+      }
+    }
+
+    // Phone validation
+    if (!paymentUserDetails.phone.trim()) {
+      errors.phone = "Phone number is required";
+    } else {
+      const phoneDigits = paymentUserDetails.phone.replace(/\D/g, "");
+      if (phoneDigits.length < 10) {
+        errors.phone = "Phone number must be at least 10 digits";
+      }
+    }
+
+    setPaymentValidationErrors(errors);
+    return !errors.name && !errors.email && !errors.phone;
+  };
 
   // Find the course by slug from shared mock data
   const foundCourse = mockCourses.find((c) => c.slug === slug);
@@ -389,9 +453,51 @@ export default function CourseDetail() {
     setIsEnrollmentOpen(true);
   };
 
+  const handlePaymentSubmit = async () => {
+    // Prevent multiple simultaneous submissions
+    if (paymentLoading) {
+      console.log("Payment already in progress, ignoring duplicate submission");
+      return;
+    }
+
+    // Validate payment form with inline error display
+    if (!validatePaymentForm()) {
+      toast({
+        title: "Please fix the errors below",
+        description: "Check the form fields and try again",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const priceInfo = calculateDiscountedPrice(course.price, course.slug);
+
+    await initiatePayment({
+      courseId: course.id,
+      courseName: course.title,
+      amount: priceInfo.discountedPrice,
+      userDetails: paymentUserDetails,
+      onSuccess: (message) => {
+        setIsPaymentModalOpen(false);
+        toast({
+          title: "Payment Successful!",
+          description: message,
+        });
+      },
+      onError: (error) => {
+        toast({
+          title: "Payment Failed",
+          description: error,
+          variant: "destructive",
+        });
+      },
+    });
+  };
+
   const handleEnrollClick = () => {
-    if (course.showPaymentQR) {
-      setIsQRModalOpen(true);
+    if (course.enablePayment) {
+      resetPaymentForm();
+      setIsPaymentModalOpen(true);
     } else {
       openEnrollmentModal();
     }
@@ -603,7 +709,7 @@ export default function CourseDetail() {
                       className="w-full mb-3 bg-brand-500 hover:bg-brand-600"
                       onClick={handleEnrollClick}
                     >
-                      {course.showPaymentQR ? "Pay Now" : "Enroll Now"}
+                      {course.enablePayment ? "Pay Now" : "Enroll Now"}
                     </Button>
                     <Dialog
                       open={isEnquiryOpen}
@@ -1082,29 +1188,17 @@ export default function CourseDetail() {
           </DialogContent>
         </Dialog>
 
-        {/* QR Code Payment Modal */}
-        <Dialog open={isQRModalOpen} onOpenChange={setIsQRModalOpen}>
+        {/* Payment Modal */}
+        <Dialog open={isPaymentModalOpen} onOpenChange={setIsPaymentModalOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>Complete Your Payment</DialogTitle>
               <DialogDescription>
-                Scan the QR code below to make your payment for:{" "}
+                Enter your details to proceed with payment for:{" "}
                 <strong>{course.title}</strong>
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
-              {course.paymentQRImage && (
-                <div className="flex flex-col items-center">
-                  <img
-                    src={course.paymentQRImage}
-                    alt="Payment QR Code"
-                    className="w-64 h-64 object-contain border rounded-lg"
-                  />
-                  <p className="text-sm text-gray-600 mt-2 text-center">
-                    Scan this QR code with your UPI app to complete the payment
-                  </p>
-                </div>
-              )}
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h4 className="font-semibold text-gray-900 mb-2">
                   Payment Details:
@@ -1113,39 +1207,139 @@ export default function CourseDetail() {
                   <strong>Course:</strong> {course.title}
                 </p>
                 <p className="text-sm text-gray-600">
-                  <strong>Amount:</strong> {formatPrice(course.discountedPrice)}{" "}
+                  <strong>Amount:</strong>{" "}
+                  {formatPrice(
+                    calculateDiscountedPrice(course.price, course.slug)
+                      .discountedPrice,
+                  )}{" "}
                   <span className="line-through text-gray-400">
-                    {formatPrice(course.originalPrice)}
+                    {formatPrice(course.price)}
                   </span>
                 </p>
                 <p className="text-sm text-green-600">
-                  <strong>You Save:</strong> {formatPrice(course.savingsAmount)}{" "}
-                  ({course.discountPercentage}% OFF)
+                  <strong>You Save:</strong>{" "}
+                  {formatPrice(
+                    calculateDiscountedPrice(course.price, course.slug)
+                      .savingsAmount,
+                  )}
                 </p>
                 <p className="text-sm text-gray-600">
                   <strong>Duration:</strong> {course.duration}
                 </p>
               </div>
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-sm text-blue-800">
-                  <strong>After Payment:</strong> Please send a screenshot of
-                  your payment confirmation to{" "}
-                  <a
-                    href="mailto:info@quantumroot.in"
-                    className="text-brand-600 hover:underline"
-                  >
-                    info@quantumroot.in
-                  </a>{" "}
-                  with your name and course details to confirm enrollment.
-                </p>
+
+              <div className="space-y-3">
+                <div>
+                  <Label htmlFor="payment-name">Full Name *</Label>
+                  <Input
+                    id="payment-name"
+                    value={paymentUserDetails.name}
+                    onChange={(e) => {
+                      setPaymentUserDetails((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }));
+                      // Clear error when user starts typing
+                      if (paymentValidationErrors.name) {
+                        setPaymentValidationErrors((prev) => ({
+                          ...prev,
+                          name: "",
+                        }));
+                      }
+                    }}
+                    placeholder="Enter your full name"
+                    required
+                    className={
+                      paymentValidationErrors.name ? "border-red-500" : ""
+                    }
+                  />
+                  {paymentValidationErrors.name && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {paymentValidationErrors.name}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="payment-email">Email Address *</Label>
+                  <Input
+                    id="payment-email"
+                    type="email"
+                    value={paymentUserDetails.email}
+                    onChange={(e) => {
+                      setPaymentUserDetails((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }));
+                      // Clear error when user starts typing
+                      if (paymentValidationErrors.email) {
+                        setPaymentValidationErrors((prev) => ({
+                          ...prev,
+                          email: "",
+                        }));
+                      }
+                    }}
+                    placeholder="Enter your email address"
+                    required
+                    className={
+                      paymentValidationErrors.email ? "border-red-500" : ""
+                    }
+                  />
+                  {paymentValidationErrors.email && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {paymentValidationErrors.email}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="payment-phone">Phone Number *</Label>
+                  <Input
+                    id="payment-phone"
+                    type="tel"
+                    value={paymentUserDetails.phone}
+                    onChange={(e) => {
+                      setPaymentUserDetails((prev) => ({
+                        ...prev,
+                        phone: e.target.value,
+                      }));
+                      // Clear error when user starts typing
+                      if (paymentValidationErrors.phone) {
+                        setPaymentValidationErrors((prev) => ({
+                          ...prev,
+                          phone: "",
+                        }));
+                      }
+                    }}
+                    placeholder="Enter your phone number"
+                    required
+                    className={
+                      paymentValidationErrors.phone ? "border-red-500" : ""
+                    }
+                  />
+                  {paymentValidationErrors.phone && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {paymentValidationErrors.phone}
+                    </p>
+                  )}
+                </div>
               </div>
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => setIsQRModalOpen(false)}
-              >
-                Close
-              </Button>
+
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setIsPaymentModalOpen(false)}
+                  disabled={paymentLoading}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  className="flex-1 bg-brand-500 hover:bg-brand-600"
+                  onClick={handlePaymentSubmit}
+                  disabled={paymentLoading}
+                >
+                  {paymentLoading ? "Processing..." : "Pay Now"}
+                </Button>
+              </div>
             </div>
           </DialogContent>
         </Dialog>
