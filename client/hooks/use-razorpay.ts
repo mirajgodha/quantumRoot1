@@ -159,7 +159,7 @@ export const useRazorpay = () => {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "", // You'll need to set this
         amount: orderResponse.amount,
         currency: orderResponse.currency,
-        name: "QuantumRoot Learning",
+        name: "Quantum Root",
         description: `Payment for ${options.courseName}`,
         order_id: orderResponse.orderId,
         prefill: {
@@ -198,16 +198,44 @@ export const useRazorpay = () => {
             );
           }
         },
-        modal: {
+                                modal: {
           ondismiss: () => {
             console.log("Payment modal dismissed");
           },
         },
       };
 
-      // Open Razorpay checkout
+                        // Open Razorpay checkout
       const razorpay = new window.Razorpay(razorpayOptions);
       razorpay.open();
+
+      // Fix for backdrop and interaction issues
+      setTimeout(() => {
+        // Find and fix the Razorpay backdrop/overlay issues
+        const razorpayBackdrop = document.querySelector('.razorpay-backdrop, .razorpay-overlay') as HTMLElement;
+        if (razorpayBackdrop) {
+          razorpayBackdrop.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // Fix black background
+          razorpayBackdrop.style.pointerEvents = 'auto';
+        }
+
+        // Find and activate the main Razorpay container
+        const razorpayContainer = document.querySelector('#razorpay-container, .razorpay-container') as HTMLElement;
+        if (razorpayContainer) {
+          razorpayContainer.style.pointerEvents = 'auto';
+          razorpayContainer.style.zIndex = '999999';
+
+          // Trigger a synthetic click to activate interaction
+          const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
+          razorpayContainer.dispatchEvent(clickEvent);
+        }
+
+        // Find the iframe and ensure it's interactive
+        const iframe = document.querySelector('iframe[name="razorpay_checkout_frame"]') as HTMLIFrameElement;
+        if (iframe) {
+          iframe.style.pointerEvents = 'auto';
+          iframe.focus();
+        }
+      }, 100);
     } catch (error) {
       console.error("Payment initiation error:", error);
       options.onError("Failed to initiate payment. Please try again.");
