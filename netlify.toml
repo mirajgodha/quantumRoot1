@@ -5,7 +5,7 @@
 
 # Allow Razorpay key ID in build output (it's public and safe)
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "VITE_RAZORPAY_KEY_ID"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_RAZORPAY_KEY_ID,RAZORPAY_KEY_ID"
 
 
 [functions]
