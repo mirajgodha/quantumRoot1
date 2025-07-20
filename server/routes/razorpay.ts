@@ -49,7 +49,13 @@ export const createRazorpayOrder: RequestHandler = async (req, res) => {
       return res.status(400).json(response);
     }
 
-    // Validate Razorpay credentials
+        // Validate Razorpay credentials
+    console.log("Environment check:", {
+      hasKeyId: !!process.env.RAZORPAY_KEY_ID,
+      hasKeySecret: !!process.env.RAZORPAY_KEY_SECRET,
+      keyIdPrefix: process.env.RAZORPAY_KEY_ID?.substring(0, 8) + "...",
+    });
+
     if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
       console.error("Razorpay credentials not configured");
       const response: CreateRazorpayOrderResponse = {
