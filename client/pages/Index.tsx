@@ -521,7 +521,7 @@ export default function Index() {
             "QuantumRoot offers career-focused training in AI, ML, Cloud & Big Data—featuring real-world projects, expert-led sessions, and modern tech stacks.",
           keywords:
             "AI training, Machine Learning courses, Big Data certification, Cloud computing, Programming bootcamp, Data Science, Python courses, Tech training",
-          url: "https://https://quantumroot.in/",
+                              url: "https://quantumroot.in/",
         }}
         structuredData={generateOrganizationStructuredData()}
       />

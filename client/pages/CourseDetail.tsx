@@ -554,7 +554,7 @@ export default function CourseDetail() {
           title: `${course.title} - Course Details`,
           description: `Learn ${course.title} with QuantumRoot. ${course.description}. Duration: ${course.duration}. Expert instructors and hands-on projects.`,
           keywords: `${course.title}, ${course.category}, ${course.tags.join(", ")}, online course, tech training`,
-          url: `https://quantumroot.in/courses/${course.slug}`,
+                              url: `https://quantumroot.in/courses/${course.slug}`,
           image: course.image,
         }}
         structuredData={courseStructuredData}

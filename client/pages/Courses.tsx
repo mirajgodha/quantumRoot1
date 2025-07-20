@@ -317,7 +317,7 @@ export default function Courses() {
             "Explore QuantumRoot's comprehensive catalog of AI, Machine Learning, Big Data, and Cloud computing courses. Hands-on training with expert instructors.",
           keywords:
             "AI courses, Machine Learning training, Big Data certification, Cloud computing courses, Programming bootcamp, Data Science courses",
-          url: "https://mirajgodha.github.io/quantumRoot1/courses",
+          url: "https://quantumroot.in/courses",
         }}
       />
       <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">

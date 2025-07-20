@@ -20,6 +20,9 @@ export default function SEO({ config = {}, structuredData }: SEOProps) {
     config.keywords ? config.keywords.split(", ") : undefined,
   );
 
+  // Ensure canonical URL is properly set
+  const canonicalUrl = config.url || DEFAULT_SEO.url;
+
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -77,8 +80,16 @@ export default function SEO({ config = {}, structuredData }: SEOProps) {
         </>
       )}
 
-      {/* Canonical URL */}
-      <link rel="canonical" href={seoConfig.url || DEFAULT_SEO.url} />
+            {/* Canonical URL */}
+      <link rel="canonical" href={canonicalUrl} />
+
+      {/* Additional meta tags for SEO */}
+      <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+      {/* Prevent duplicate content issues */}
+      <meta property="og:url" content={canonicalUrl} />
+      <link rel="alternate" hrefLang="en" href={canonicalUrl} />
 
       {/* Structured Data */}
       {structuredData && (
