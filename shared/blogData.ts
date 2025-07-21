@@ -469,8 +469,8 @@ export const blogPosts: BlogPost[] = [
   author: "Quantum Root Editorial Team",
   publishDate: "2024-07-21",
   readTime: 6,
-  image:
-    "https://quantumroot.in/images/blog/ai-ml/9-from-llms-to-agentic-ai-the-next-big-thing.gif",
+    image:
+    "/images/blog/9-from-llms-to-agentic-ai-the-next-big-thing.gif",
   featured: true
 },
 
