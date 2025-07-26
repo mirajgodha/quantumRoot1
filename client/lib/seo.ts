@@ -123,9 +123,14 @@ export const generateArticleStructuredData = (
 export const generateOrganizationStructuredData = () => {
   return generateStructuredData("Organization", {
     name: "QuantumRoot",
+    alternateName: "Quantum Root",
     url: DEFAULT_SEO.url,
     logo: "https://cdn.builder.io/api/v1/image/assets%2F0564a85c933e429398df35ea14c820a0%2Ff4ea57609337402396ccbc232eb068dc?format=webp&width=800",
     description: DEFAULT_SEO.description,
+    slogan: "Grow from the root, scale to quantum",
+    foundingDate: "2020",
+    industry: "Education Technology",
+    publishingPrinciples: DEFAULT_SEO.url + "/about",
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+91-9650219962",
@@ -137,5 +142,12 @@ export const generateOrganizationStructuredData = () => {
       "https://www.facebook.com/quantumroot",
       "https://twitter.com/quantumroot",
     ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Pune",
+      addressRegion: "Maharashtra",
+      postalCode: "411036",
+      addressCountry: "IN"
+    }
   });
 };

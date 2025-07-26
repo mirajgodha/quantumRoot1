@@ -45,6 +45,13 @@ export default function SEO({ config = {}, structuredData }: SEOProps) {
       <meta property="og:site_name" content="QuantumRoot" />
       <meta property="og:locale" content="en_US" />
 
+      {/* Publisher Information */}
+      <meta name="publisher" content="QuantumRoot" />
+      <meta name="application-name" content="QuantumRoot" />
+      <meta name="msapplication-TileColor" content="#7c3aed" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-title" content="QuantumRoot" />
+
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
