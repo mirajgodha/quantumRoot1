@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import { BookOpen } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function Signup() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
+    <>
+      <SEO
+        config={{
+          title: "Sign Up",
+          description:
+            "Create your QuantumRoot account to access hands-on AI, Machine Learning, Big Data, and Cloud computing training programs.",
+          keywords:
+            "Sign up, register, QuantumRoot registration, join courses, create account",
+          url: "https://quantumroot.in/signup",
+        }}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
       {/* Navigation */}
       <nav className="border-b bg-background/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,5 +99,6 @@ export default function Signup() {
         </div>
       </div>
     </div>
+    </>
   );
 }

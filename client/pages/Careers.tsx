@@ -43,6 +43,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 interface JobOpening {
   id: string;
@@ -319,7 +320,18 @@ export default function Careers() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
+    <>
+      <SEO
+        config={{
+          title: "Careers",
+          description:
+            "Join QuantumRoot's mission to revolutionize tech education. Explore career opportunities in AI, Big Data, Cloud computing education and training.",
+          keywords:
+            "QuantumRoot careers, tech education jobs, AI training jobs, Big Data instructor positions, Cloud computing careers",
+          url: "https://quantumroot.in/careers",
+        }}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
       {/* Navigation */}
       <nav className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -694,5 +706,6 @@ export default function Careers() {
 
       <Footer />
     </div>
+    </>
   );
 }

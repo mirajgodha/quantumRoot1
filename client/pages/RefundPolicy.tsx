@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 export default function RefundPolicy() {
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <SEO
+        config={{
+          title: "Refund Policy",
+          description:
+            "Understand QuantumRoot's refund policy for our AI, Machine Learning, Big Data, and Cloud computing training programs and courses.",
+          keywords:
+            "Refund policy, money back guarantee, course refunds, QuantumRoot refunds, training program refunds",
+          url: "https://quantumroot.in/refund-policy",
+        }}
+      />
+      <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="border-b bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -390,5 +402,6 @@ export default function RefundPolicy() {
 
       <Footer />
     </div>
+    </>
   );
 }

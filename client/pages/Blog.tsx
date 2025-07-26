@@ -34,6 +34,7 @@ import {
   blogCategories,
 } from "@shared/blogData";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 export default function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -151,7 +152,18 @@ export default function Blog() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
+    <>
+      <SEO
+        config={{
+          title: "Blog",
+          description:
+            "Read the latest insights, tutorials, and industry updates on AI, Machine Learning, Big Data, and Cloud computing from QuantumRoot experts.",
+          keywords:
+            "Tech blog, AI tutorials, Machine Learning insights, Big Data articles, Cloud computing news, QuantumRoot blog",
+          url: "https://quantumroot.in/blog",
+        }}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
       {/* Navigation */}
       <nav className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -519,6 +531,7 @@ export default function Blog() {
       </div>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }

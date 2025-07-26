@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <SEO
+        config={{
+          title: "Terms of Service",
+          description:
+            "Read QuantumRoot's terms of service to understand the rules and guidelines for using our AI, Big Data, and Cloud training programs.",
+          keywords:
+            "Terms of service, user agreement, QuantumRoot terms, training program terms, service conditions",
+          url: "https://quantumroot.in/terms-of-service",
+        }}
+      />
+      <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="border-b bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -306,5 +318,6 @@ export default function TermsOfService() {
 
       <Footer />
     </div>
+    </>
   );
 }

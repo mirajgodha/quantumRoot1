@@ -2,10 +2,22 @@ import { Link } from "react-router-dom";
 import { GraduationCap, Calendar, Video, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 export default function LiveClasses() {
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <SEO
+        config={{
+          title: "Live Classes",
+          description:
+            "Join interactive live classes with QuantumRoot experts. Experience real-time learning in AI, Machine Learning, Big Data, and Cloud computing.",
+          keywords:
+            "Live classes, interactive learning, AI live sessions, Big Data workshops, Cloud computing webinars, QuantumRoot live training",
+          url: "https://quantumroot.in/live-classes",
+        }}
+      />
+      <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,6 +123,7 @@ export default function LiveClasses() {
         </div>
       </div>
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }

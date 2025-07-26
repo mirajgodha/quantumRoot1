@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { ContactRequest, ContactResponse } from "@shared/api";
 
 interface FormData {
@@ -166,7 +167,18 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
+    <>
+      <SEO
+        config={{
+          title: "Contact Us",
+          description:
+            "Get in touch with QuantumRoot for course guidance, support, or any questions about our AI, Big Data, and Cloud training programs.",
+          keywords:
+            "Contact QuantumRoot, course support, training guidance, AI courses contact, Big Data training support",
+          url: "https://quantumroot.in/contact",
+        }}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-brand-50">
       {/* Navigation */}
       <nav className="border-b bg-background/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -486,6 +498,7 @@ export default function Contact() {
       </div>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }

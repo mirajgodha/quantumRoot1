@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <SEO
+        config={{
+          title: "Privacy Policy",
+          description:
+            "Read QuantumRoot's privacy policy to understand how we collect, use, and protect your personal information when you use our training services.",
+          keywords:
+            "Privacy policy, data protection, personal information, QuantumRoot privacy, GDPR compliance",
+          url: "https://quantumroot.in/privacy-policy",
+        }}
+      />
+      <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="border-b bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -269,5 +281,6 @@ export default function PrivacyPolicy() {
 
       <Footer />
     </div>
+    </>
   );
 }
